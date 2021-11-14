@@ -3,5 +3,5 @@ Personal study notes for RHCA exams.
 
 ## Exams
 
-* EX447 - Advanced Automation - Ansible Best Practices
-* EX415 - Security
+1. EX447 - Advanced Automation - Ansible Best Practices
+2. EX415 - Security
