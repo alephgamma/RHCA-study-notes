@@ -1,7 +1,7 @@
 # EX447 - Summary
 
 ## 1. Configure ansible to manage nodes
-Using the **control-node**, use ansible to create a wheel user **svc.ansible** that uses SSH-keys without a **sudo** password requirement. The provisioned (target) **managed-nodes** only have **a_user** account with sudo password.
+Using the **control-node**, use ansible to create a wheel user **svc.ansible** that uses SSH-keys without a **sudo** password requirement. The provisioned (target) **managed-nodes** only have **a_user** account that can sudo with a password.
 
 ### Task breakdown
 1. Validate the ansible installation on the **control-node**. Install if needed.
