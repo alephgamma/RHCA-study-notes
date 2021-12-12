@@ -59,6 +59,12 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
 10. Validate
   ```
   [control-node ~]$ ansible all -a whoami
+  node1 | CHANGED | rc=0 >>
+  root
+  node2 | CHANGED | rc=0 >>
+  root 
+  node3 | CHANGED | rc=0 >>
+  root
   ```
 ## 2. Configure Ansible Tower
 Install and configure **Ansible Tower** on a RHEL 8 server.
