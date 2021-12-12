@@ -17,9 +17,21 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   node1 ansible_ssh=10.0.1.1
   ```
 4. Is the **svc.ansible** user on the **control-node**? Create if needed.
-5. Create a key-pair for the **svc.ansible** user.
-6. Create **svc.ansible** user and copy the pub-key to the **managed-nodes**.
-7. Update the **/etc/ansible/ansible.cfg** file:
+  ```
+  useradd -G 10 svc.ansible
+  ```
+6. Create a key-pair for the **svc.ansible** user.
+  ```
+  sudo su - svc.ansible
+  ssh-keygen
+  ```
+8. Create **svc.ansible** user and copy the pub-key to the **managed-nodes**.
+  ```
+  sudo 
+  ansible -u a_user -i node1, -m user -a "name=svc.ansible group=wheel" -b
+  ssh-copy-id node1 
+  ```
+10. Update the **/etc/ansible/ansible.cfg** file:
   ```
   [defaults]
   inventory = /etc/ansible/inventory
