@@ -29,9 +29,9 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   ```
 6. Create **svc.ansible** user and copy the pub-key to the **managed-nodes**.
   ```
-  [control-node ~]$ sudo su
+  [control-node ~]$ sudo su -
   [control-node ~]# ansible -u a_user -i node1, -m user -a "name=svc.ansible group=wheel" -b
-  [control-node ~]$ sudo su - svc.ansible
+  [control-node ~]# sudo su - svc.ansible
   [control-node ~]$ ssh-copy-id node1 
   ```
 7. Update the **/etc/ansible/ansible.cfg** file:
