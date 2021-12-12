@@ -8,16 +8,15 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   ```
   ping node1
   ```
-2. Update the inventory file if needed.
+2. Update the inventory file if needed: **/etc/ansible/inventory**
   ```
-  vi inventory
   node1 ansible_ssh=10.0.1.1
   ```
-4. Validate the ansible installation on the **control-node**. Install if needed.
-5. Is the **svc.ansible** user on the **control-node**? Create if needed.
-6. Create a key-pair for the **svc.ansible** user.
-7. Create **svc.ansible** user and copy the pub-key to the **managed-nodes**.
-8. Update the **/etc/ansible/ansible.cfg** file:
+3. Validate the ansible installation on the **control-node**. Install if needed.
+4. Is the **svc.ansible** user on the **control-node**? Create if needed.
+5. Create a key-pair for the **svc.ansible** user.
+6. Create **svc.ansible** user and copy the pub-key to the **managed-nodes**.
+7. Update the **/etc/ansible/ansible.cfg** file:
   ```
   [defaults]
   inventory = /etc/ansible/inventory
