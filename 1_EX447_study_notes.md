@@ -52,7 +52,7 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   ```
   cp /etc/ansible/inventory /etc/svc.ansible/inventory
   ```
-10. Update the sudoers file on the **managed-nodes**.
+9. Update the sudoers file on the **managed-nodes**.
   ```
   ansible all -m lineinfile -a "dest=/etc/sudoers line='svc.ansible ALL=(ALL) NOPASSWD: ALL'"
   ```
