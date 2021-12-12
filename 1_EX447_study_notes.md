@@ -37,7 +37,7 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
 10. Update the **/etc/ansible/ansible.cfg** file:
   ```
   [defaults]
-  inventory = /etc/ansible/inventory
+  inventory = /etc/svc.ansible/inventory
   remote_user = svc.ansible
   host_key_checking = False
   private_key_file = /home/svc.ansible/.ssh/id_rsa
