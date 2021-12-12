@@ -6,8 +6,8 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
 ### Task breakdown
 1. How are the **managed-nodes** reachable? Update the inventory file if needed.
 2. Validate the ansible installation on the **control-node**. Install if needed.
-3. Is the **svc.ansible** user on the **control-node**. Create if needed.
-4. Create a key-pair for **svc.ansible**
+3. Is the **svc.ansible** user on the **control-node**? Create if needed.
+4. Create a key-pair for the **svc.ansible** user.
 5. Create **svc.ansible** user and copy the pub-key to the **managed-nodes**.
 6. Update the **/etc/ansible/ansible.cfg** file:
   ```
@@ -23,9 +23,7 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   become_method = sudo
   become_ask_pass = false
   ```
-4. Validate user **a_user**. Create ssh keypair if needed.
-5. Validate that **a_user** can login and sudo on the **target1** node. Copy ssh-key to the **target1** node.
-6. Create inventory file. 
+7. Update the inventory file? 
 
 ## 2. Configure Ansible Tower
 Install and configure **Ansible Tower** on a RHEL 8 server.
