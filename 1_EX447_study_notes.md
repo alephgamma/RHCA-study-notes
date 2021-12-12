@@ -15,6 +15,8 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
 3. Update the inventory file if needed: **/etc/ansible/inventory**
   ```
   node1 ansible_ssh=10.0.1.1
+  node2 ansible_ssh=10.0.1.2
+  node3 ansible_ssh=10.0.1.3
   ```
 4. Is the **svc.ansible** user on the **control-node**? Create if needed.
   ```
@@ -27,15 +29,16 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   ```
 8. Create **svc.ansible** user and copy the pub-key to the **managed-nodes**.
   ```
-  sudo 
+  sudo su
   ansible -u a_user -i node1, -m user -a "name=svc.ansible group=wheel" -b
+  sudo su - svc.ansible
   ssh-copy-id node1 
   ```
 10. Update the **/etc/ansible/ansible.cfg** file:
   ```
   [defaults]
   inventory = /etc/ansible/inventory
-  remote_user = ansible
+  remote_user = svc.ansible
   host_key_checking = False
   private_key_file = /home/svc.ansible/.ssh/id_rsa
 
@@ -45,7 +48,9 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   become_method = sudo
   become_ask_pass = false
   ```
-7. Update the inventory file? 
-
+11. Update the sudoers file on the **managed-nodes**.
+  ```
+  ansible all -m lineinfile -a "dest=/etc/sudoers line='svc.ansible ALL=(ALL) NOPASSWD: ALL'"
+  ```
 ## 2. Configure Ansible Tower
 Install and configure **Ansible Tower** on a RHEL 8 server.
