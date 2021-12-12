@@ -6,7 +6,20 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
 ### Task breakdown
 1. How are the **managed-nodes** reachable? Update the inventory file if needed
 2. Validate the ansible installation on the **control-node**. Install if needed.
-3. Update the **/etc/ansible/ansible.cfg***
+3. Update the **/etc/ansible/ansible.cfg** file
+  ```
+  [defaults]
+  inventory = /etc/ansible/inventory
+  remote_user = ansible
+  host_key_checking = False
+  private_key_file = /home/ansible/.ssh/private_key
+
+  [privilege_escalation]
+  become = true
+  become_user = root
+  become_method = sudo
+  become_ask_pass = false
+  ```
 4. Validate user **a_user**. Create ssh keypair if needed.
 5. Validate that **a_user** can login and sudo on the **target1** node. Copy ssh-key to the **target1** node.
 6. Create inventory file. 
