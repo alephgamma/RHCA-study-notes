@@ -5,7 +5,7 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
 
 ### Task breakdown
 #### 1. How are the **managed-nodes** reachable?
- - Update the inventory file if needed
+##### - Update the inventory file if needed
 2. Validate the ansible installation on the **control-node**. 
  - Install if needed.
 3. Validate user **a_user**. Create ssh keypair if needed.
