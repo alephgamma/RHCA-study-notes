@@ -56,5 +56,9 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   ```
   [control-node ~]$ ansible all -m lineinfile -a "dest=/etc/sudoers line='svc.ansible ALL=(ALL) NOPASSWD: ALL'"
   ```
+10. Validate
+  ```
+  [control-node ~]$ ansible all -a whoami
+  ```
 ## 2. Configure Ansible Tower
 Install and configure **Ansible Tower** on a RHEL 8 server.
