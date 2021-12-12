@@ -6,11 +6,11 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
 ### Task breakdown
 1. Validate the ansible installation on the **control-node**. Install if needed.
   ```
-  yum install ansible -y
+  [control-node ~]# yum install ansible -y
   ```
 2. How are the **managed-nodes** reachable? IP, hostname, DNS? 
   ```
-  ping node1
+  [control-node ~]# ping node1
   ```
 3. Update the default inventory file if needed: **/etc/ansible/inventory**
   ```
@@ -20,19 +20,19 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   ```
 4. Is the **svc.ansible** user on the **control-node**? Create if needed.
   ```
-  useradd -G 10 svc.ansible
+  [control-node ~]# useradd -G 10 svc.ansible
   ```
 5. Create a key-pair for the **svc.ansible** user.
   ```
-  sudo su - svc.ansible
-  ssh-keygen
+  [control-node ~]# sudo su - svc.ansible
+  [control-node ~]$ ssh-keygen
   ```
 6. Create **svc.ansible** user and copy the pub-key to the **managed-nodes**.
   ```
-  sudo su
-  ansible -u a_user -i node1, -m user -a "name=svc.ansible group=wheel" -b
-  sudo su - svc.ansible
-  ssh-copy-id node1 
+  [control-node ~]$ sudo su
+  [control-node ~]# ansible -u a_user -i node1, -m user -a "name=svc.ansible group=wheel" -b
+  [control-node ~]$ sudo su - svc.ansible
+  [control-node ~]$ ssh-copy-id node1 
   ```
 7. Update the **/etc/ansible/ansible.cfg** file:
   ```
@@ -50,11 +50,11 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   ```
 8. Copy the default inventory file to **/etc/svc.ansible/inventory**
   ```
-  cp /etc/ansible/inventory /etc/svc.ansible/inventory
+  [control-node ~]$ cp /etc/ansible/inventory /etc/svc.ansible/inventory
   ```
 9. Update the sudoers file on the **managed-nodes**.
   ```
-  ansible all -m lineinfile -a "dest=/etc/sudoers line='svc.ansible ALL=(ALL) NOPASSWD: ALL'"
+  [control-node ~]$ ansible all -m lineinfile -a "dest=/etc/sudoers line='svc.ansible ALL=(ALL) NOPASSWD: ALL'"
   ```
 ## 2. Configure Ansible Tower
 Install and configure **Ansible Tower** on a RHEL 8 server.
