@@ -4,12 +4,16 @@
 Using the **control-node**, use ansible to create a wheel user **svc.ansible** that uses SSH-keys without a **sudo** password requirement. The provisioned (target) **managed-nodes** only have **a_user** account that can sudo with a password.
 
 ### Task breakdown
-1. How are the **managed-nodes** reachable? Update the inventory file if needed.
-2. Validate the ansible installation on the **control-node**. Install if needed.
-3. Is the **svc.ansible** user on the **control-node**? Create if needed.
-4. Create a key-pair for the **svc.ansible** user.
-5. Create **svc.ansible** user and copy the pub-key to the **managed-nodes**.
-6. Update the **/etc/ansible/ansible.cfg** file:
+1. How are the **managed-nodes** reachable? IP, hostname, DNS? 
+  ```
+  ping node1
+  ```
+Update the inventory file if needed.
+4. Validate the ansible installation on the **control-node**. Install if needed.
+5. Is the **svc.ansible** user on the **control-node**? Create if needed.
+6. Create a key-pair for the **svc.ansible** user.
+7. Create **svc.ansible** user and copy the pub-key to the **managed-nodes**.
+8. Update the **/etc/ansible/ansible.cfg** file:
   ```
   [defaults]
   inventory = /etc/ansible/inventory
