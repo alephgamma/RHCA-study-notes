@@ -108,6 +108,7 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   alias2 ansible_host=10.2.3.2 ansible_ssh_port=2122 ansible_user=sandy
   ```
 3. Set up directories containing multiple host variable files for some of your managed hosts
+4. Override the name used in the inventory file with a different name or IP address
 
 ## 4. Manage task execution
 
