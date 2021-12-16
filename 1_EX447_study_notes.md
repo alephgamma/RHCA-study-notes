@@ -119,6 +119,7 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
     dyn_inv.py   Dynamic inventory script
     hosts.ini    Static inventory file
     group_vars/  Additional directory for group variables
+      all.yml    Variables for all hosts
   ```
 4. Override the name used in the inventory file with a different name or IP address
 
