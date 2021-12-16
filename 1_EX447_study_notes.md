@@ -66,5 +66,9 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   node3 | CHANGED | rc=0 >>
   root
   ```
-## 2. Configure Ansible Tower
+## 2. Basic git 
+
+### Task breakdown
+
+## 6. Configure Ansible Tower
 Install and configure **Ansible Tower** on a RHEL 8 server.
