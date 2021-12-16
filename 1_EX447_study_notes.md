@@ -70,6 +70,15 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
 
 ### Task breakdown
 
+1. Clone a git repo
+   ```
+   yum install git -y
+   git clone https://github.com/ex447/repo.git
+   ```
+2. Update, modify and create files in a Git repository
+
+3. Add those modified files back into the Git repository
+
 ## 3. Manage inventory variables
 
 ### Task breakdown
