@@ -72,12 +72,12 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
 
 1. Clone a git repo
    ```
-   yum install git -y
-   git clone https://github.com/ex447/repo.git
+   [control-node ~]$ yum install git -y
+   [control-node ~]$ git clone https://github.com/ex447/repo.git
    ```
 2. Update, modify and create files in a Git repository
    ```
-   cd ex447
+   [control-node ~]$ cd ex447
    ```
 3. Add those modified files back into the Git repository
 
