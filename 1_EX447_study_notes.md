@@ -158,9 +158,26 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   **become** at the task level?
 
 2. Run selected tasks
+  ```
+  ---
+  - name: First
+    hosts: webservers
+    tasks:
+      - name: Install c-shell
+        yum: name=csh state=latest
+        tags: install-software
 
-  tags
+      - name: Install and ensure apache is at the latest version
+        yum: name=httpd state=latest
+        tags: install-software
 
+      - name: Create an archive
+        archive: path=/var/log/messages format=gz dest=/opt/backup/messages.tgz
+        tags: backup
+  ```
+  ```
+  [control-node ~]$ ansible-playbook -i inventory software.yml --tags install-software
+  ```
 ## 5. Transform data with filters and plugins
 
 ### Task breakdown
