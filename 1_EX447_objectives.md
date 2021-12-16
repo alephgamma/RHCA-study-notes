@@ -1,8 +1,8 @@
 ## EX447 Objectives
 
-1 Understand and use Git
-  1 Clone a Git repository
-Update, modify and create files in a Git repository
+1. Understand and use Git
+   1. Clone a Git repository
+   2. Update, modify and create files in a Git repository
 Add those modified files back into the Git repository
 Manage inventory variables
 Structure host and group variables using multiple files per host or group
