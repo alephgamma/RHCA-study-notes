@@ -188,7 +188,15 @@ Use multiple inventory files.
 ```
 lookup('file','/path/to/file')
 ```
-
+```
+---
+- hosts: all
+  tasks:
+    - name: Add a public key to a user
+      authorized_key: 
+        user: svc.ansible
+        key: "{{ lookup('file','/home/svc.ansible/.ssh/id_rsa.pub') }}"
+```
 2. Use lookup and query functions to template data from external sources into playbooks and deployed template files
 3. Implement loops using structures other than simple lists using lookup plugins and filters
 4. Inspect, validate, and manipulate variables containing networking information with filters
