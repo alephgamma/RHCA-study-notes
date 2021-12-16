@@ -250,8 +250,18 @@ lookup('file','/path/to/file')
 
 ### Task breakdown
 1. Write an API scriptlet to launch a job
+  ```
+  $ sudo yum install jq -y
+  $ curl -k -H 'Content-Type: application/json' -X POST --user username:password http://$tower-ip.api/v2/job_templates/1/launch
 
+  ```
 ## 13. Back up Ansible Tower
 
 ### Task breakdown
 1. Back up an instance of Ansible Tower
+
+In the ansible installation directory, example: ansible-automation-platform-setup-bundle-1.2.1-1
+  ```
+  $ setup.sh -b 
+  ```
+Craeats a **tar.gz** file 
