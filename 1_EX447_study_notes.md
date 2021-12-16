@@ -130,27 +130,7 @@ Use multiple inventory files.
   ```
 4. Override the name used in the **inventory** file with a different name or IP address
   ```
-  [backup_servers]
-  backup1 ansible_user=cloud_user streams=192
-  backup2 ansible_user=cloud_user streams=384
   ```
- - install_streams.yml
-  ```
-  ---
-  hosts: all
-  become: yes
-  tasks:
-  - name: Create required directory
-    file:
-      path: "/opt/backup"
-      state: directory
-  - name: Populate required file
-    copy:
-      dest: /opt/backup/streams
-      content: |
-        {{ streams }}
-  ```
- - ansible-playbook -i inventory install_streams.yml
   
 ## 4. Manage task execution
 
@@ -331,4 +311,9 @@ In the ansible installation directory, example: ansible-automation-platform-setu
   ```
   $ setup.sh -b 
   ```
-Craeats a **tar.gz** file 
+Creates a backup file in the format: **tar.gz** 
+
+2. Restore from a backup
+```
+$ setup.sh -r -e 'restore_backup_file=/path/to/tar-gz-file'
+```
