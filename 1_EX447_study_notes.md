@@ -183,3 +183,36 @@ lookup('file','/path/to/file')
 
 ### Task breakdown
 1. Install and configure **Ansible Tower** on a RHEL 8 server.
+
+## 8. Manage access for Ansible Tower
+
+### Task breakdown
+1. Create Ansible Tower users and teams and make associations of one to the other
+
+## 9. Manage Ansible Tower inventories and credentials
+
+### Task breakdown
+1. Manage advanced inventories
+2. Create a dynamic inventory from an identity management server or a database server
+3. Create machine credentials to access inventory hosts
+4. Create a source control credential
+
+## 10. Manage Ansible Tower projects
+
+### Task breakdown
+1. Create a job template
+
+## 11. Manage Ansible Tower job workflows
+
+### Task breakdown
+1. Create a job workflow template
+
+## 12. Work with the Ansible Tower API
+
+### Task breakdown
+1. Write an API scriptlet to launch a job
+
+## 13. Back up Ansible Tower
+
+### Task breakdown
+1. Back up an instance of Ansible Tower
