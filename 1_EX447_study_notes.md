@@ -95,7 +95,18 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   ```
   [control-node ~]$ ansible-playbook play.yml -i webservers -i dbservers
   ```
-  
+2. Use special variables to override the host, port, or remote user Ansible uses for a specific host
+   - ansible.cfg
+  ```
+  inventory=/home/ansible/inventory
+  remote_user = centos 
+  remote_port = 20022
+  ```
+   - inventory
+  ```
+  alias1 ansible_host=10.2.3.1 ansible_ssh_port=2122 ansible_user=bob
+  alias2 ansible_host=10.2.3.2 ansible_ssh_port=2122 ansible_user=sandy
+  ```
 ## 4. Manage task execution
 
 ### Task breakdown
