@@ -155,7 +155,7 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
 ### Task breakdown
 1. Control privilege execution
 
-  Become at the task level?
+  **become** at the task level?
 
 2. Run selected tasks
 
