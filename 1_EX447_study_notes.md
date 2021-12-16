@@ -67,7 +67,7 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   root
   ```
 ## 2. Basic git 
-Perform the following in git which clones a repo, then updates, modifies and creates a file in the repo, and then adds those files to the repo.
+Perform the following in git which clones a repo, then updates, modifies and creates files in the repo, and then adds those files to the repo.
 
 ### Task breakdown
 
@@ -76,7 +76,7 @@ Perform the following in git which clones a repo, then updates, modifies and cre
   [control-node ~]$ yum install git -y
   [control-node ~]$ git clone https://github.com/git-username/git-repo/repo.git
   ```
-2. Update, modify and create files in a Git repository
+2. Update, modify and create files in a git repository
   ```
   [control-node ~]$ cd git-repo
   [control-node git-repo]$ vi README.md
@@ -88,12 +88,13 @@ Perform the following in git which clones a repo, then updates, modifies and cre
   [control-node git-repo]$ git add play.yml
   [control-node git-repo]$ git commit -m "Added play.yml"
   ```
-3. Add those modified files back into the Git repository
+3. Add those modified files back into the git repository
   ```
   [control-node ex447]$ git push origin master
   ````
   
 ## 3. Manage inventory variables
+Use multiple inventory files. 
 
 ### Task breakdown
 
