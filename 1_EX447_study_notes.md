@@ -126,7 +126,7 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   ```
   [control-node ~]$ ansible-playbook test-play.yml -i inventory/dyn_inv.py -i inventory/hosts.ini
   ```
-4. Override the name used in the inventory file with a different name or IP address
+4. Override the name used in the **inventory** file with a different name or IP address
   ```
   [backup_servers]
   backup1 ansible_user=cloud_user streams=192
@@ -138,10 +138,6 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   hosts: all
   become: yes
   tasks:
-  - name: Install packages
-    yum:
-      state: present
-      name: csh
   - name: Create required directory
     file:
       path: "/opt/backup"
