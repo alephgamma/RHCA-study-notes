@@ -71,20 +71,20 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
 ### Task breakdown
 
 1. Clone a git repo
-   ```
-   [control-node ~]$ yum install git -y
-   [control-node ~]$ git clone https://github.com/ex447/repo.git
-   ```
+  ```
+  [control-node ~]$ yum install git -y
+  [control-node ~]$ git clone https://github.com/ex447/repo.git
+  ```
 2. Update, modify and create files in a Git repository
-   ```
-   [control-node ~]$ cd ex447
-   [control-node ~]$ git add README.md
-   [control-node ~]$ git commit -m "Added README.md"
-   ```
+  ```
+  [control-node ~]$ cd ex447
+  [control-node ~]$ git add README.md
+  [control-node ~]$ git commit -m "Added README.md"
+  ```
 3. Add those modified files back into the Git repository
-   ```
-   [control-node ~]$ git push origin master
-   ````
+  ```
+  [control-node ~]$ git push origin master
+  ````
 ## 3. Manage inventory variables
 
 ### Task breakdown
