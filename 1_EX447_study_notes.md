@@ -111,13 +111,25 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
 4. Override the name used in the inventory file with a different name or IP address
 
 ## 4. Manage task execution
+
+### Task breakdown
 1. Control privilege execution
 2. Run selected tasks
-### Task breakdown
 
 ## 5. Transform data with filters and plugins
 
-### Task breakdown
+Delegate tasks
+1. Populate variables with data from external sources using lookup plugins
+2. Use lookup and query functions to template data from external sources into playbooks and deployed template files
+3. Implement loops using structures other than simple lists using lookup plugins and filters
+4. Inspect, validate, and manipulate variables containing networking information with filters
 
-## 6. Configure Ansible Tower
-Install and configure **Ansible Tower** on a RHEL 8 server.
+## 6. Delegate tasks
+
+### Task breakdown
+1. Run a task for a managed host on a different host, then control whether facts gathered by that task are delegated to the managed host or the other host
+
+## 7. Configure Ansible Tower
+
+### Task breakdown
+1. Install and configure **Ansible Tower** on a RHEL 8 server.
