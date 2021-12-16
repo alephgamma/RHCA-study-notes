@@ -255,6 +255,7 @@ pg_port=''
 pg_database='awx'
 pg_username='awx'
 pg_password=supersecret
+...
 ```
 ## 8. Manage access for Ansible Tower
 
