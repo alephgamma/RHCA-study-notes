@@ -118,7 +118,7 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
 
 ## 5. Transform data with filters and plugins
 
-Delegate tasks
+### Task breakdown
 1. Populate variables with data from external sources using lookup plugins
 2. Use lookup and query functions to template data from external sources into playbooks and deployed template files
 3. Implement loops using structures other than simple lists using lookup plugins and filters
