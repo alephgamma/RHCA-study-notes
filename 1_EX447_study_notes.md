@@ -129,7 +129,7 @@ Delegate tasks
 ### Task breakdown
 1. Run a task for a managed host on a different host, then control whether facts gathered by that task are delegated to the managed host or the other host
 
-## 7. Configure Ansible Tower
+## 7. Install and Configure Ansible Tower
 
 ### Task breakdown
 1. Install and configure **Ansible Tower** on a RHEL 8 server.
