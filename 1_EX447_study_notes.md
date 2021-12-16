@@ -84,12 +84,18 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   ```
 3. Add those modified files back into the Git repository
   ```
-  [control-node ~]$ git push origin master
+  [control-node ex447]$ git push origin master
   ````
+  
 ## 3. Manage inventory variables
 
 ### Task breakdown
 
+1. Structure host and group variables using multiple files per host or group
+  ```
+  [control-node ~]$ ansible-playbook play.yml -i webservers -i dbservers
+  ```
+  
 ## 4. Manage task execution
 
 ### Task breakdown
