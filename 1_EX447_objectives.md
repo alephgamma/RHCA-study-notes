@@ -3,16 +3,16 @@
 1. Understand and use Git
    1. Clone a Git repository
    2. Update, modify and create files in a Git repository
-Add those modified files back into the Git repository
-Manage inventory variables
-Structure host and group variables using multiple files per host or group
-Use special variables to override the host, port, or remote user Ansible uses for a specific host
-Set up directories containing multiple host variable files for some of your managed hosts
-Override the name used in the inventory file with a different name or IP address
-Manage task execution
-Control privilege execution
-Run selected tasks
-Transform data with filters and plugins
+   3. Add those modified files back into the Git repository
+2. Manage inventory variables
+   1. Structure host and group variables using multiple files per host or group
+   2. Use special variables to override the host, port, or remote user Ansible uses for a specific host
+   3. Set up directories containing multiple host variable files for some of your managed hosts
+   4. Override the name used in the inventory file with a different name or IP address
+3. Manage task execution
+   1. Control privilege execution
+   2. Run selected tasks
+4. Transform data with filters and plugins
 Populate variables with data from external sources using lookup plugins
 Use lookup and query functions to template data from external sources into playbooks and deployed template files
 Implement loops using structures other than simple lists using lookup plugins and filters
