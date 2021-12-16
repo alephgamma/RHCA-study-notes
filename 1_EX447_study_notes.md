@@ -111,7 +111,8 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
 4. Override the name used in the inventory file with a different name or IP address
 
 ## 4. Manage task execution
-
+1. Control privilege execution
+2. Run selected tasks
 ### Task breakdown
 
 ## 5. Transform data with filters and plugins
