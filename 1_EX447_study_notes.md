@@ -78,9 +78,9 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
 2. Update, modify and create files in a Git repository
   ```
   [control-node ~]$ cd ex447
-  [control-node ~]$ vi README.md
-  [control-node ~]$ git add README.md
-  [control-node ~]$ git commit -m "Added README.md"
+  [control-node ex447]$ vi README.md
+  [control-node ex447]$ git add README.md
+  [control-node ex447]$ git commit -m "Added README.md"
   ```
 3. Add those modified files back into the Git repository
   ```
