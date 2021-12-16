@@ -195,11 +195,33 @@ lookup('file','/path/to/file')
 
 ### Task breakdown
 1. Run a task for a managed host on a different host, then control whether facts gathered by that task are delegated to the managed host or the other host
-
+  ```
+  ---
+  - hosts: all
+    become: true
+    tasks:
+    - yum:
+        name: httpd
+        state: present
+    - systemd:
+        name: httpd
+        state: started
+        enabled: yes
+    - uri:
+        url: http://{{ inventory_hostname }}
+        method: GET
+        timeout: 30
+        status_code: 200
+        return_content: yes
+      delegate_to: localhost
+      register: webresult
+    - debug:
+        var: {{ webresult }}
+  ```
 ## 7. Install and Configure Ansible Tower
 
 ### Task breakdown
-1. Install and configure **Ansible Tower** on a RHEL 8 server.
+1. Install and configure Ansible Tower on a RHEL 8 server.
 
 ## 8. Manage access for Ansible Tower
 
