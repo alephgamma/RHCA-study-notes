@@ -100,6 +100,7 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   ```
   [control-node ~]$ ansible-playbook play.yml -i webservers -i dbservers
   ```
+  If there is a host variable with the same name **myvar** in both file, the one in dbservers takes precedence. 
 2. Use special variables to override the host, port, or remote user Ansible uses for a specific host
  - **/etc/ansible/ansible.cfg**
   ```
@@ -120,6 +121,9 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
     hosts.ini    Static inventory file
     group_vars/  Additional directory for group variables
       all.yml    Variables for all hosts
+  ```
+  ```
+  [control-node ~]$ ansible-playbook test-play.yml -i inventory/dyn_inv.py -i inventory/hosts.ini
   ```
 4. Override the name used in the inventory file with a different name or IP address
 
