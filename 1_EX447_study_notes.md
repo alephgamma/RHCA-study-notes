@@ -82,6 +82,11 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   [control-node git-repo]$ git add README.md
   [control-node git-repo]$ git commit -m "Added README.md"
   ```
+  ```
+  [control-node git-repo]$ vi play.yml
+  [control-node git-repo]$ git add play.yml
+  [control-node git-repo]$ git commit -m "Added play.yml"
+  ```
 3. Add those modified files back into the Git repository
   ```
   [control-node ex447]$ git push origin master
