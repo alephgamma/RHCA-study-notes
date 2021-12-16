@@ -257,6 +257,38 @@ pg_username='awx'
 pg_password=supersecret
 ...
 ```
+4. Ensure the following rpm is installed
+```
+$ rpm -q python3-libselinux
+python3-libselinux-2.9-3.el8.x86_64
+```
+
+5. Ensure python3 is used
+```
+$ alternatives --config python
+
+There are 3 programs which provide 'python'.
+
+  Selection	Command
+-----------------------------------------------
+*  1       	/usr/libexec/no-python
+   2       	/usr/bin/python3
+ + 3       	/usr/bin/python2
+
+Enter to keep the current selection[+], or type selection number: 
+```
+
+6. Install Ansible Tower
+```
+# cd ansible-automation-platform-setup-bundle-1.2.1-1
+# ./setup.sh
+```
+
+7. Ensure Ansible Tower is started
+```
+# systemctl status ansible-tower
+```
+
 ## 8. Manage access for Ansible Tower
 
 ### Task breakdown
