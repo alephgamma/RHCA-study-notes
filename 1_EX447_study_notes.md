@@ -231,8 +231,8 @@ lookup('file','/path/to/file')
 ## 7. Install and Configure Ansible Tower
 
 ### Task breakdown
-1. Get the Ansible Tower bundle: ansible-automation-platform-setup-bundle-1.2.1-1.tar.gz
-2. Untar and cd into the directory
+1. Get the Ansible Tower bundle: **ansible-automation-platform-setup-bundle-1.2.1-1.tar.gz**
+2. Untar the bundle and cd into the directory
 ```
 # tar -xvf ansible-automation-platform-setup-bundle-1.2.1-1.tar.gz
 # cd ansible-automation-platform-setup-bundle-1.2.1-1
@@ -257,6 +257,7 @@ pg_username='awx'
 pg_password=supersecret
 ...
 ```
+
 4. Ensure the following rpm is installed
 ```
 $ rpm -q python3-libselinux
@@ -275,10 +276,10 @@ There are 3 programs which provide 'python'.
    2       	/usr/bin/python3
  + 3       	/usr/bin/python2
 
-Enter to keep the current selection[+], or type selection number: 
+Enter to keep the current selection[+], or type selection number: 2
 ```
 
-6. Install Ansible Tower
+6. Install Ansible Tower - This can take up to 20 minutes...
 ```
 # cd ansible-automation-platform-setup-bundle-1.2.1-1
 # ./setup.sh
