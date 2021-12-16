@@ -154,12 +154,22 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
 
 ### Task breakdown
 1. Control privilege execution
+
+  Become at the task level?
+
 2. Run selected tasks
+
+  tags
 
 ## 5. Transform data with filters and plugins
 
 ### Task breakdown
 1. Populate variables with data from external sources using lookup plugins
+
+```
+lookup('file','/path/to/file')
+```
+
 2. Use lookup and query functions to template data from external sources into playbooks and deployed template files
 3. Implement loops using structures other than simple lists using lookup plugins and filters
 4. Inspect, validate, and manipulate variables containing networking information with filters
