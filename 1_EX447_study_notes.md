@@ -70,5 +70,17 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
 
 ### Task breakdown
 
+## 3. Manage inventory variables
+
+### Task breakdown
+
+## 4. Manage task execution
+
+### Task breakdown
+
+## 5. Transform data with filters and plugins
+
+### Task breakdown
+
 ## 6. Configure Ansible Tower
 Install and configure **Ansible Tower** on a RHEL 8 server.
