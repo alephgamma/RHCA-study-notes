@@ -114,11 +114,11 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   ```
 3. Set up directories containing multiple host variable files for some of your managed hosts
   ```
-  inventory/    Base directory
-    AWS.yml     Inventory plugin
-    dyn_inv.py  Dynamic inventory script
-    hosts.ini   Static inventory file
-    group_vars  Additional directory for group variables
+  inventory/     Base directory
+    AWS.yml      Inventory plugin
+    dyn_inv.py   Dynamic inventory script
+    hosts.ini    Static inventory file
+    group_vars/  Additional directory for group variables
   ```
 4. Override the name used in the inventory file with a different name or IP address
 
