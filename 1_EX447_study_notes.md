@@ -67,6 +67,7 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   root
   ```
 ## 2. Basic git 
+Perform the following in git which clones a repo, then updates, modifies and creates a file in the repo, and then adds those files to the repo.
 
 ### Task breakdown
 
