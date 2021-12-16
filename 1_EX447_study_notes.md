@@ -231,8 +231,31 @@ lookup('file','/path/to/file')
 ## 7. Install and Configure Ansible Tower
 
 ### Task breakdown
-1. Install and configure Ansible Tower on a RHEL 8 server.
+1. Get the Ansible Tower bundle: ansible-automation-platform-setup-bundle-1.2.1-1.tar.gz
+2. Untar and cd into the directory
+```
+# tar -xvf ansible-automation-platform-setup-bundle-1.2.1-1.tar.gz
+# cd ansible-automation-platform-setup-bundle-1.2.1-1
+```
+3. Edit the ansible Tower inventory file to set the **admin_password** and the **pg_password**
+```
+[tower]
+localhost ansible_connection=local
 
+[automationhub]
+
+[database]
+
+[all:vars]
+admin_password=supersecret
+
+pg_host=''
+pg_port=''
+
+pg_database='awx'
+pg_username='awx'
+pg_password=supersecret
+```
 ## 8. Manage access for Ansible Tower
 
 ### Task breakdown
