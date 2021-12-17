@@ -132,9 +132,6 @@ Use multiple inventory files.
   ```
   
   ```
-[servers]
-server-1 ansible_host="{{server1}}"
-  ```
   
 ## 4. Manage task execution
 
