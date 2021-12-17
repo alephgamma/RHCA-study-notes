@@ -278,9 +278,10 @@ Enter to keep the current selection[+], or type selection number: 2
 ```
 
 ## 8. Manage access for Ansible Tower
+Create Ansible Tower users and teams and make associations of one to the other
 
 ### Task breakdown
-1. Create Ansible Tower users and teams and make associations of one to the other
+1. Clicketty click the GUI
 
 ## 9. Manage Ansible Tower inventories and credentials
 
