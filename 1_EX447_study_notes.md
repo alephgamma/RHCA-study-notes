@@ -12,21 +12,26 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   ```
   [control-node ~]# ping node1
   ```
+  Usually the **/etc/hosts** file is updated with hostnames
+  
 3. Update the default inventory file if needed: **/etc/ansible/inventory**
   ```
   node1 ansible_ssh=10.0.1.1
   node2 ansible_ssh=10.0.1.2
   node3 ansible_ssh=10.0.1.3
   ```
+  
 4. Is the **svc.ansible** user on the **control-node**? Create if needed.
   ```
   [control-node ~]# useradd -G 10 svc.ansible
   ```
+  
 5. Create a key-pair for the **svc.ansible** user.
   ```
   [control-node ~]# sudo su - svc.ansible
   [control-node ~]$ ssh-keygen
   ```
+  
 6. Create **svc.ansible** user and copy the pub-key to the **managed-nodes**.
   ```
   [control-node ~]$ sudo su -
@@ -34,6 +39,7 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   [control-node ~]# sudo su - svc.ansible
   [control-node ~]$ ssh-copy-id node1 
   ```
+  
 7. Update **/etc/ansible/ansible.cfg**
   ```
   [defaults]
@@ -48,14 +54,17 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   become_method = sudo
   become_ask_pass = false
   ```
+  
 8. Copy the default inventory file to **/etc/svc.ansible/inventory**
   ```
   [control-node ~]$ cp /etc/ansible/inventory /etc/svc.ansible/inventory
   ```
+  
 9. Update the sudoers file on the **managed-nodes**
   ```
   [control-node ~]$ ansible all -m lineinfile -a "dest=/etc/sudoers line='svc.ansible ALL=(ALL) NOPASSWD: ALL'"
   ```
+  
 10. Validate
   ```
   [control-node ~]$ ansible all -a whoami
@@ -66,6 +75,7 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   node3 | CHANGED | rc=0 >>
   root
   ```
+  
 ## 2. Basic git 
 Perform the following in git which clones a repo, then updates, modifies and creates files in the repo, and then adds those files to the repo.
 
