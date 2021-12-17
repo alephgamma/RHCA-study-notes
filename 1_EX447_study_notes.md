@@ -130,6 +130,10 @@ Use multiple inventory files.
   ```
 4. Override the name used in the **inventory** file with a different name or IP address
   ```
+  
+  ```
+[servers]
+server-1 ansible_host="{{server1}}"
   ```
   
 ## 4. Manage task execution
