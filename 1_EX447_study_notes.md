@@ -134,13 +134,17 @@ Use multiple inventory files.
   ```
   
 ## 4. Manage task execution
+Control privilege execution
 
 ### Task breakdown
 1. Control privilege execution
 
   **become** at the task level?
 
-2. Run selected tasks
+Run selected tasks
+
+### Task breakdown
+1. Use tags to specify tasks
   ```
   ---
   - name: First
@@ -162,9 +166,10 @@ Use multiple inventory files.
   [control-node ~]$ ansible-playbook -i inventory software.yml --tags install-software
   ```
 ## 5. Transform data with filters and plugins
+Populate variables with data from external sources using lookup plugins
 
 ### Task breakdown
-1. Populate variables with data from external sources using lookup plugins
+1. Use a lookup file plugin to read a file
 
 ```
 lookup('file','/path/to/file')
