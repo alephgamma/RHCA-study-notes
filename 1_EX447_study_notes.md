@@ -147,9 +147,9 @@ Use multiple inventory files.
 Control privilege execution
 
 ### Task breakdown
-1. Control privilege execution
-
-  **become** at the task level?
+1. Control privilege execution. **become** at the task level?
+```
+```
 
 Run selected tasks
 
