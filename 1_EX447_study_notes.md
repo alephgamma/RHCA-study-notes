@@ -303,8 +303,10 @@ Create Ansible Tower users and teams and make associations of one to the other
 1. Manage advanced inventories
 2. Create a dynamic inventory from an identity management server or a database server
 3. Create machine credentials to access inventory hosts
-4. Create a source control credential
-
+   1. Clicketty click the GUI
+5. Create a source control credential
+   1. Clicketty click the GUI
+   
 ## 10. Manage Ansible Tower projects
 Create a project and then a job template
 
@@ -332,6 +334,7 @@ Create a project and then a job template
 
 ### Task breakdown
 1. Create a job workflow template
+   1. Clicketty click the GUI
 
 ## 12. Work with the Ansible Tower API
 Write an API scriptlet to launch a job
