@@ -325,7 +325,25 @@ In the ansible installation directory, example: **ansible-automation-platform-se
   $ ./setup.sh -b 
   ```
 Creates a backup file in the format: **tar.gz** 
+```
+[ansible-automation-platform-setup-bundle-1.2.1-1]# ls -l
+total 184
+-rw-r--r--.  1 28845 28845    626 Jan 13  2021 backup.yml
+drwxr-xr-x.  4 28845 28845     28 Jan 13  2021 bundle
+drwxr-xr-x.  3 28845 28845     33 Jan 13  2021 collections
+drwxr-xr-x.  2 28845 28845     17 Jan 13  2021 group_vars
+-rw-r--r--.  1 28845 28845   8521 Jan 13  2021 install.yml
+-rw-r--r--.  1 28845 28845   2924 Dec 13 19:18 inventory
+drwxr-xr-x.  3 28845 28845   8192 Jan 13  2021 licenses
+-rw-r--r--.  1 28845 28845   2506 Jan 13  2021 README.md
+-rw-r--r--.  1 28845 28845   1335 Jan 13  2021 rekey.yml
+-rw-r--r--.  1 28845 28845   3492 Jan 13  2021 restore.yml
+drwxr-xr-x. 21 28845 28845   4096 Jan 13  2021 roles
+-rwxr-xr-x.  1 28845 28845  10819 Jan 13  2021 setup.sh
+-rw-------.  1 root  root  123551 Dec 17 00:58 tower-backup-2021-12-17-00:57:56.tar.gz
+lrwxrwxrwx.  1 root  root     105 Dec 17 00:58 tower-backup-latest.tar.gz -> /home/cloud_user/ansible-automation-platform-setup-bundle-1.2.1-1/tower-backup-2021-12-17-00:57:56.tar.gz
 
+```
 2. Restore from a backup
 ```
 $ ./setup.sh -r -e 'restore_backup_file=/path/to/tar-gz-file'
