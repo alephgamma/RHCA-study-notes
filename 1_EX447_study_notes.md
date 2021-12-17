@@ -228,7 +228,8 @@ lookup('file','/path/to/file')
     - debug:
         var: {{ webresult }}
   ```
-## 7. Install and Configure Ansible Tower
+## 7. Ansible Tower
+Install and Configure Ansible Tower
 
 ### Task breakdown
 1. Get the Ansible Tower bundle: **ansible-automation-platform-setup-bundle-1.2.1-1.tar.gz**
@@ -301,11 +302,13 @@ Create Ansible Tower users and teams and make associations of one to the other
 
 ### Task breakdown
 1. Manage advanced inventories
-2. Create a dynamic inventory from an identity management server or a database server
-3. Create machine credentials to access inventory hosts
-   1. Clicketty click the GUI
+   - Clicketty click the GUI
+3. Create a dynamic inventory from an identity management server or a database server
+   - Clicketty click the GUI
+4. Create machine credentials to access inventory hosts
+   - Clicketty click the GUI
 5. Create a source control credential
-   1. Clicketty click the GUI
+   - Clicketty click the GUI
    
 ## 10. Manage Ansible Tower projects
 Create a project and then a job template
@@ -317,7 +320,7 @@ Create a project and then a job template
    - SCM URL: `https://github.com/git-username/git-repo/repo.git`
    - SCM CREDENTIAL: Must be created as a Credential of type Source Control
    - SCM UPDATE OPTIONS
-     [x] Update Revision on Launch
+     - Update Revision on Launch
 
 2. Create a job template
    - New Job Template
