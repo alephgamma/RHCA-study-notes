@@ -212,7 +212,7 @@ lookup('file','/path/to/file')
 
 ### Task breakdown
 1. Get the Ansible Tower bundle: **ansible-automation-platform-setup-bundle-1.2.1-1.tar.gz**
-2. Untar the bundle and cd into the directory
+2. Untar the bundle and cd into a directory. Example: **/home/cloud_user/**
 ```
 # tar -xvf ansible-automation-platform-setup-bundle-1.2.1-1.tar.gz
 # cd ansible-automation-platform-setup-bundle-1.2.1-1
@@ -320,13 +320,13 @@ $ sudo yum install jq -y
 ### Task breakdown
 1. Back up an instance of Ansible Tower
 
-In the ansible installation directory, example: ansible-automation-platform-setup-bundle-1.2.1-1
+In the ansible installation directory, example: **ansible-automation-platform-setup-bundle-1.2.1-1**
   ```
-  $ setup.sh -b 
+  $ ./setup.sh -b 
   ```
 Creates a backup file in the format: **tar.gz** 
 
 2. Restore from a backup
 ```
-$ setup.sh -r -e 'restore_backup_file=/path/to/tar-gz-file'
+$ ./setup.sh -r -e 'restore_backup_file=/path/to/tar-gz-file'
 ```
