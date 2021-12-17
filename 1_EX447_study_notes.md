@@ -302,8 +302,7 @@ Write an API scriptlet to launch a job
 $ sudo yum install jq -y
 ```
 
-2. Get the job id
-Using the browser is best. Look for:
+2. Get the job id. Using the browser is best, https://$tower-ip/api/v2/job_templates/ Look for: 
   ```
   ...
   "id": 10,
@@ -311,7 +310,7 @@ Using the browser is best. Look for:
   ...
   ```
  
-  echo 'curl -k -H "Content-Type: application/json" -X POST --user username:password http://$tower-ip.api/v2/job_templates/10/launch' > api-scriptlet.sh
+  echo 'curl -k -H "Content-Type: application/json" -X POST --user username:password https://$tower-ip/api/v2/job_templates/10/launch' > api-scriptlet.sh
   chmod u+x api-scriptlet.sh
   ```
 ## 13. Back up Ansible Tower
