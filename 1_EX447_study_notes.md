@@ -147,8 +147,12 @@ Use multiple inventory files.
 Control privilege execution
 
 ### Task breakdown
-1. Control privilege execution. **become** at the task level?
+1. Control privilege execution. **become** at the task level? 
 ```
+- name: Run a command as the apache user
+  command: somecommand
+  become: yes
+  become_user: apache
 ```
 
 Run selected tasks
