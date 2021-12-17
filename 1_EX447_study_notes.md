@@ -312,7 +312,7 @@ Create a project and then a job template
 1. Create a project
    - Name: **MyProject**
    - SCM Type: **git**
-   - SCM URL: https://github.com/git-username/git-repo/repo.git
+   - SCM URL: `https://github.com/git-username/git-repo/repo.git`
    - SCM CREDENTIAL: Must be created as a Credential of type Source Control
    - SCM UPDATE OPTIONS
      [x] Update Revision on Launch
