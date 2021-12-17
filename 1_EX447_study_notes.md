@@ -212,6 +212,7 @@ lookup('file','/path/to/file')
 
 ### Task breakdown
 1. Get the Ansible Tower bundle: **ansible-automation-platform-setup-bundle-1.2.1-1.tar.gz**
+
 2. Untar the bundle and cd into a directory. Example: **/home/cloud_user/**
 ```
 # tar -xvf ansible-automation-platform-setup-bundle-1.2.1-1.tar.gz
