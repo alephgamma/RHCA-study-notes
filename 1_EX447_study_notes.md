@@ -294,13 +294,25 @@ Enter to keep the current selection[+], or type selection number: 2
 1. Create a job workflow template
 
 ## 12. Work with the Ansible Tower API
+Write an API scriptlet to launch a job
 
 ### Task breakdown
-1. Write an API scriptlet to launch a job
-  ```
-  $ sudo yum install jq -y
-  $ curl -k -H 'Content-Type: application/json' -X POST --user username:password http://$tower-ip.api/v2/job_templates/1/launch
+1. Install jq. It may be useful.
+```
+$ sudo yum install jq -y
+```
 
+2. Get the job id
+Using the browser is best. Look for:
+  ```
+  ...
+  "id": 10,
+  "type": "job_template"
+  ...
+  ```
+ 
+  echo 'curl -k -H "Content-Type: application/json" -X POST --user username:password http://$tower-ip.api/v2/job_templates/10/launch' > api-scriptlet.sh
+  chmod u+x api-scriptlet.sh
   ```
 ## 13. Back up Ansible Tower
 
