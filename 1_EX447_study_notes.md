@@ -77,7 +77,7 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   ```
   
 ## 2. Basic git 
-Perform the following using git which clones a repo, then updates, modifies and creates files in the repo, and then adds those files to the repo.
+Perform the following using **git** which clones a repo, then updates, modifies and creates files in the repo, and then adds those files to the repo.
 
 ### Task breakdown
 
@@ -108,7 +108,7 @@ Use multiple inventory files.
 
 ### Task breakdown
 
-1. Structure host and group variables using multiple files per host or group. **group_vars** or **host_vars**
+1. Structure host and group variables using multiple files per host or group. **group_vars** or **host_vars**?
   ```
   [control-node ~]$ ansible-playbook play.yml -i webservers -i dbservers
   ```
