@@ -291,9 +291,27 @@ Enter to keep the current selection[+], or type selection number: 2
 4. Create a source control credential
 
 ## 10. Manage Ansible Tower projects
+Create a project and then a job template
 
 ### Task breakdown
-1. Create a job template
+1. Create a project
+   - Name: **MyProject**
+   - SCM Type: **git**
+   - SCM URL: https://github.com/git-username/git-repo/repo.git
+   - SCM Credential: Must be created as a Credential of type Source Control
+   - SCM Update Options
+     [x] Update Revision on Launch
+
+2. Create a job template
+   - New Job Template
+   - Name: **MyJobTemplate**
+   - INVENTORY: playground
+   - PROJECT: **MyProject**
+   - Playbook: Available from the git repo
+   - Credentials:
+     - cloud_user/superscret
+   - OPTIONS
+     - ENABLE PRIVILEGE ESCALATION
 
 ## 11. Manage Ansible Tower job workflows
 
