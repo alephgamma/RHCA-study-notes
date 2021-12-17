@@ -369,7 +369,8 @@ drwxr-xr-x. 21 28845 28845   4096 Jan 13  2021 roles
 lrwxrwxrwx.  1 root  root     105 Dec 17 00:58 tower-backup-latest.tar.gz -> /home/cloud_user/ansible-automation-platform-setup-bundle-1.2.1-1/tower-backup-2021-12-17-00:57:56.tar.gz
 
 ```
-2. Restore from a backup
+### Bonus
+1. Restore from a backup
 ```
 $ ./setup.sh -r -e 'restore_backup_file=/path/to/tar-gz-file'
 ```
