@@ -298,17 +298,17 @@ Create a project and then a job template
    - Name: **MyProject**
    - SCM Type: **git**
    - SCM URL: https://github.com/git-username/git-repo/repo.git
-   - SCM Credential: Must be created as a Credential of type Source Control
-   - SCM Update Options
+   - SCM CREDENTIAL: Must be created as a Credential of type Source Control
+   - SCM UPDATE OPTIONS
      [x] Update Revision on Launch
 
 2. Create a job template
    - New Job Template
-   - Name: **MyJobTemplate**
+   - NAME: **MyJobTemplate**
    - INVENTORY: playground
    - PROJECT: **MyProject**
-   - Playbook: Available from the git repo
-   - Credentials:
+   - PLAYBOOK: Available from the git repo
+   - CREDENTIALS:
      - cloud_user/superscret
    - OPTIONS
      - ENABLE PRIVILEGE ESCALATION
