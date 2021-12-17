@@ -309,10 +309,12 @@ $ sudo yum install jq -y
   "type": "job_template"
   ...
   ```
- 
+3. The scriptlet
+  ```  
   echo 'curl -k -H "Content-Type: application/json" -X POST --user username:password https://$tower-ip/api/v2/job_templates/10/launch' > api-scriptlet.sh
   chmod u+x api-scriptlet.sh
   ```
+  
 ## 13. Back up Ansible Tower
 
 ### Task breakdown
