@@ -303,7 +303,8 @@ Write an API scriptlet to launch a job
 $ sudo yum install jq -y
 ```
 
-2. Get the job id. Using the browser is best, **https://$tower-ip/api/v2/job_templates/** Look for: 
+2. Get the job id. Using the browser is best, **https://$tower-ip/api/v2/job_templates/** 
+Look for: 
   ```
   ...
   "id": 10,
