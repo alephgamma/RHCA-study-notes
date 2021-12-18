@@ -140,7 +140,20 @@ Use multiple inventory files.
   ```
 4. Override the name used in the **inventory** file with a different name or IP address
   ```
-  
+  - hosts: localhost
+    become: false
+    vars:
+      h: "{{ inventory_hostname }}"
+      n: "newname"
+    tasks:
+    - name: inventory_hostname
+      debug:
+        msg: "The inventory_hostname: {{ inventory_hostname }}"
+    - set_fact:
+        inventory_hostname: "{{ n }}"
+    - name: inventory_hostname
+      debug:
+        msg: "The inventory_hostname: {{ inventory_hostname }}"
   ```
   
 ## 4. Manage task execution
