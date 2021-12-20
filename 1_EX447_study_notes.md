@@ -362,7 +362,7 @@ $ sudo yum install jq -y
 ```
 
 2. Get the job id. Using the browser is best, **https://$tower-ip/api/v2/job_templates/** 
-   - Look for: 
+   - Look for, and match the name...
   ```
   ...
   "id": 10,
