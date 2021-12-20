@@ -368,6 +368,7 @@ $ sudo yum install jq -y
   "id": 10,
   "type": "job_template"
   ...
+  "name": "MyProductionTemplate"
   ```
 3. The scriptlet
   ```  
