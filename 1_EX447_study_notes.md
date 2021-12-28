@@ -14,7 +14,7 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   ```
   Usually the **/etc/hosts** file is updated with hostnames
   
-3. Update the default inventory file if needed: **/etc/ansible/inventory**
+3. Update the default inventory file: **/etc/ansible/hosts** if needed. The following notes will use:  **/etc/ansible/inventory**
   ```
   node1 ansible_ssh=10.0.1.1
   node2 ansible_ssh=10.0.1.2
