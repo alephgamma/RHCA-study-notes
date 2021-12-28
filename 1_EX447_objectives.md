@@ -1,4 +1,4 @@
-## EX447 Objectives
+## Official EX447 Objectives
 
 1. Understand and use Git
    - Clone a Git repository
