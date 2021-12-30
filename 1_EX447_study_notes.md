@@ -21,6 +21,8 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   node3 ansible_ssh=10.0.1.3
   ```
   
+  Groups are not defined yet, but usually there is a **proxy**, **webservers**, **dbservers** and maybe a **prod** group
+  
 4. Is the **svc.ansible** user on the **control-node**? Create if needed.
   ```
   [control-node ~]# useradd -G 10 svc.ansible
