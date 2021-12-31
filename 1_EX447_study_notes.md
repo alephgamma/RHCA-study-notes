@@ -205,6 +205,13 @@ all:
           http_port: 8080
     ungrouped: {}
 ```
+Variable precendence from **high** to **low**
+
+- Host
+- Child group
+- Parent group
+- all group
+
 <hr>
 Use multiple inventory files. 
 
