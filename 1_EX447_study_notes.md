@@ -205,7 +205,7 @@ all:
           http_port: 8080
     ungrouped: {}
 ```
-
+<hr>
 Use multiple inventory files. 
 
 ### Task breakdown
