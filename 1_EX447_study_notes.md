@@ -150,6 +150,7 @@ Use multiple inventory files. The different kinds of inventory files is a fluste
 - yml, with vars sections
 - yml, without vars sections - just to F your brain
 - json, why the F not.
+- Tower inventory files are their own thing and just ignore CLI defined files? F you. 
 
 ### Task breakdown
 
