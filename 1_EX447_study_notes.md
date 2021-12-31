@@ -87,15 +87,17 @@ Perform the following using **git** which clones a repo, then creates and modifi
 1. Install CLI git and add your information
   ```
   [control-node ~]$ yum install git -y
+  ```
+2. Configure git
+  ```
   [control-node ~]$ git config --global user.email "nunya@bidnes.com"
   [control-node ~]$ git config --global user.name "git-username"
   ```
-2. Clone a git repo
+3. Clone a git repo
   ```
-  [control-node ~]$ yum install git -y
   [control-node ~]$ git clone https://github.com/git-username/git-repo/repo.git
   ```
-3. Update, modify and create files in a git repository
+4. Update, modify and create files in a git repository
   ```
   [control-node ~]$ cd git-repo
   [control-node git-repo]$ vi README.md
@@ -104,14 +106,15 @@ Perform the following using **git** which clones a repo, then creates and modifi
   ```
   ```
   [control-node git-repo]$ vi play.yml
+  
   [control-node git-repo]$ git add play.yml
   [control-node git-repo]$ git commit -m "Added play.yml"
   ```
-4. Add those modified files back into the git repository with error messages from github.
+5. Add those modified files back into the git repository with error messages from github.
   ```
   [control-node ex447]$ git push origin master
   
-  (gnome-ssh-askpass:5151): Gtk-WARNING **: 03:25:27.225: cannot open display: 
+(gnome-ssh-askpass:5151): Gtk-WARNING **: 03:25:27.225: cannot open display: 
 error: unable to read askpass response from '/usr/libexec/openssh/gnome-ssh-askpass'
 Username for 'https://github.com': git-username
 
@@ -121,11 +124,11 @@ Password for 'https://git-username@github.com': your-super-secret-personal-acces
   ```
 Gitlab may not prompt for the username and PAT 
   
-5. To cache the git credentials
+6. To cache the git credentials
 ```
-[control-node ex447] git config --global credential.helper cache
+[control-node ex447]$ git config --global credential.helper cache
 ```
-6. Show the git information
+7. Show the git information
   ```
 [control-node ex447]$ git config -l
 user.email=nunya@bidnes.com
