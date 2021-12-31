@@ -299,9 +299,8 @@ Populate variables with data from external sources using lookup plugins
 
 ### Task breakdown
 1. Use a lookup file plugin to read a file
-
 ```
-lookup('file','/path/to/file')
+{{ lookup('file','/path/to/file') }}
 ```
 ```
 ---
