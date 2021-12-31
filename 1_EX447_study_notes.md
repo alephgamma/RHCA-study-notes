@@ -89,7 +89,7 @@ Perform the following using **git** which clones a repo, then updates, modifies 
   [control-node ~]$ git config --global user.email "nunya@bidnes.com"
   [control-node ~]$ git config --global user.name "git-username"
   ```
-2. . Clone a git repo
+2. Clone a git repo
   ```
   [control-node ~]$ yum install git -y
   [control-node ~]$ git clone https://github.com/git-username/git-repo/repo.git
