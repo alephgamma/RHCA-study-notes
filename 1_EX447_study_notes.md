@@ -146,11 +146,11 @@ branch.master.merge=refs/heads/master
   
 ## 3. Manage inventory variables
 Use multiple inventory files. The different kinds of inventory files is a flustercuck. There are four different kinds of inventory files. 
-- ini
-- yml, with vars sections
-- yml, without vars sections - just to F your brain
-- json, why the F not.
-- Tower inventory files are their own thing and just ignore CLI defined files? F you. 
+- **ini**
+- **yml**: with vars sections
+- **yml** without vars sections - just to F your brain
+- **json** why the F not.
+- Tower inventory files are their own thing and just ignore CLI defined files and structures like  **group_vars** or **host_vars**? F you gentle reader. 
 
 ### Task breakdown
 
