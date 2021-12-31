@@ -124,7 +124,7 @@ Password for 'https://git-username@github.com': your-super-secret-personal-acces
   ```
 Gitlab may not prompt for the username and PAT 
   
-6. To cache the git credentials
+6. Cache the git credentials
 ```
 [control-node git-repo]$ git config --global credential.helper cache
 ```
