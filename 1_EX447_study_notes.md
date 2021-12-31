@@ -145,7 +145,7 @@ branch.master.merge=refs/heads/master
   ```
   
 ## 3. Manage inventory variables
-Use multiple inventory files. The different kinds of inventory files is a flustercuck. There are four different kinds of inventory files. 
+The different kinds of inventory files is a flustercuck. There are four different kinds of inventory files. 
 - **ini**
 - **yml**: with vars sections
 - **yml**: without vars sections - just to F your brain
@@ -187,7 +187,7 @@ all:
 ```
 Let's make magical sausage
 ```
-$ ansible-inventory -y --list -i inv-a.yml -i inv-b.ym
+$ ansible-inventory -y --list -i inv-a.yml -i inv-b.yml
 all:
   children:
     a_group:
@@ -205,6 +205,9 @@ all:
           http_port: 8080
     ungrouped: {}
 ```
+
+Use multiple inventory files. 
+
 ### Task breakdown
 
 1. Structure host and group variables using multiple files per host or group.
