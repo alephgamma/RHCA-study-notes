@@ -212,7 +212,7 @@ Use multiple inventory files.
 
 1. Structure host and group variables using multiple files per host or group.
   ```
-  [control-node ~]$ ansible-playbook play.yml -i webservers -i dbservers
+  [control-node ~]$ ansible-playbook play.yml -i webservers.yml -i dbservers.yml
   ```
   If there is a host variable with the same name **myvar** in both file, the one in dbservers takes precedence. 
   
