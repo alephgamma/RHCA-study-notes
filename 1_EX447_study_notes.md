@@ -156,7 +156,7 @@ This magical variable only appears to work in **yml** files without vars section
 ```
 ansible_group_priority: 10 
 ```
-inv-a.yml
+**inv-a.yml**
 ```
 all:
   children:
@@ -169,6 +169,40 @@ all:
       hosts:
         web2.example.com:
           http_port: 81
+    ungrouped: {}
+```
+**inv-b.yml**
+```
+all:
+  children:
+    a_group:
+      hosts:
+        web3.example.com:
+          http_port: 8080
+    b_group:
+      hosts:
+        web4.example.com:
+          http_port: 8080
+    ungrouped: {}
+```
+Let's make magical sausage
+```
+$ ansible-inventory -y --list -i inv-a.yml -i inv-b.ym
+all:
+  children:
+    a_group:
+      hosts:
+        web1.example.com:
+          ansible_group_priority: 10
+          http_port: 80
+        web3.example.com:
+          http_port: 8080
+    b_group:
+      hosts:
+        web2.example.com:
+          http_port: 81
+        web4.example.com:
+          http_port: 8080
     ungrouped: {}
 ```
 ### Task breakdown
