@@ -83,12 +83,18 @@ Perform the following using **git** which clones a repo, then updates, modifies 
 
 ### Task breakdown
 
-1. Clone a git repo
+1. Install git and add your information
+
+  [control-node ~]$ yum install git -y
+  [control-node ~]$ git config --global user.email "nunya@bidnes.com"
+  [control-node ~]$ git config --global user.name "git-username"
+
+2. . Clone a git repo
   ```
   [control-node ~]$ yum install git -y
   [control-node ~]$ git clone https://github.com/git-username/git-repo/repo.git
   ```
-2. Update, modify and create files in a git repository
+3. Update, modify and create files in a git repository
   ```
   [control-node ~]$ cd git-repo
   [control-node git-repo]$ vi README.md
@@ -100,7 +106,7 @@ Perform the following using **git** which clones a repo, then updates, modifies 
   [control-node git-repo]$ git add play.yml
   [control-node git-repo]$ git commit -m "Added play.yml"
   ```
-3. Add those modified files back into the git repository
+4. Add those modified files back into the git repository
   ```
   [control-node ex447]$ git push origin master
   ````
