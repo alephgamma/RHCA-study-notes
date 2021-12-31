@@ -417,11 +417,25 @@ Create Ansible Tower users and teams and make associations of one to the other
 ### Task breakdown
 1. Manage advanced inventories
    - Clicketty click the GUI
-3. Create a dynamic inventory from an identity management server or a database server
+2. Create a dynamic inventory from an identity management server or a database server. Let's see if this cheat works.
+```
+$ cat dynamic.sh
+#!/bin/bash 
+if [ "$#" -gt 2 ]; then
+   echo "Too many parameters"
+   exit 1
+elif [ "$#" -eq 1 ] && [ "$1" == "--list" ]; then
+   /usr/bin/ansible-inventory /home/cloud_user/inventory --list
+elif [ "$#" -eq 2 ] && [ "$1" == "--host" ]; then
+   /usr/bin/ansible-inventory /home/cloud_user/inventory --host "$2"
+else
+   echo "Error"
+   exit 1
+fi
+```
+3. Create machine credentials to access inventory hosts
    - Clicketty click the GUI
-4. Create machine credentials to access inventory hosts
-   - Clicketty click the GUI
-5. Create a source control credential
+4. Create a source control credential
    - Clicketty click the GUI
    
 ## 10. Manage Ansible Tower projects
