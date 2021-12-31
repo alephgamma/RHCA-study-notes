@@ -152,6 +152,25 @@ Use multiple inventory files. The different kinds of inventory files is a fluste
 - **json**: why the F not.
 - Tower inventory files are their own thing and just ignore CLI defined inventory file sections, groups and relative directories like  **group_vars** or **host_vars**? F you gentle reader. 
 
+This magical variable only appears to work in **yml** files without vars sections
+```
+ansible_group_priority: 10 
+```
+inv-a.yml
+```
+all:
+  children:
+    a_group:
+      hosts:
+        web1.example.com:
+          http_port: 80
+          ansible_group_priority: 10
+    b_group:
+      hosts:
+        web2.example.com:
+          http_port: 81
+    ungrouped: {}
+```
 ### Task breakdown
 
 1. Structure host and group variables using multiple files per host or group.
