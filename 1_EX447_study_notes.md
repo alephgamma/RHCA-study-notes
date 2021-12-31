@@ -83,7 +83,7 @@ Perform the following using **git** which clones a repo, then updates, modifies 
 
 ### Task breakdown
 
-1. Install git and add your information
+1. Install CLI git and add your information
   ```
   [control-node ~]$ yum install git -y
   [control-node ~]$ git config --global user.email "nunya@bidnes.com"
@@ -106,10 +106,39 @@ Perform the following using **git** which clones a repo, then updates, modifies 
   [control-node git-repo]$ git add play.yml
   [control-node git-repo]$ git commit -m "Added play.yml"
   ```
-4. Add those modified files back into the git repository
+4. Add those modified files back into the git repository with error messages from github.
   ```
   [control-node ex447]$ git push origin master
-  ````
+  
+  (gnome-ssh-askpass:5151): Gtk-WARNING **: 03:25:27.225: cannot open display: 
+error: unable to read askpass response from '/usr/libexec/openssh/gnome-ssh-askpass'
+Username for 'https://github.com': git-username
+
+(gnome-ssh-askpass:5161): Gtk-WARNING **: 03:25:35.539: cannot open display: 
+error: unable to read askpass response from '/usr/libexec/openssh/gnome-ssh-askpass'
+Password for 'https://git-username@github.com': your-super-secret-personal-access-token
+  ```
+Gitlab may not prompt for the username and PAT 
+  
+5. To cache the git credentials
+```
+[control-node ex447] git config --global credential.helper cache
+```
+6. Show the git information
+  ```
+[control-node ex447]$ git config -l
+user.email=nunya@bidnes.com
+user.name=git-username
+credential.helper=cache
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=https://github.com/git-username/git-repo/repo.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master
+  ```
   
 ## 3. Manage inventory variables
 Use multiple inventory files. 
