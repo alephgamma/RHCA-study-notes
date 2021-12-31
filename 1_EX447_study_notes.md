@@ -84,11 +84,11 @@ Perform the following using **git** which clones a repo, then updates, modifies 
 ### Task breakdown
 
 1. Install git and add your information
-
+  ```
   [control-node ~]$ yum install git -y
   [control-node ~]$ git config --global user.email "nunya@bidnes.com"
   [control-node ~]$ git config --global user.name "git-username"
-
+  ```
 2. . Clone a git repo
   ```
   [control-node ~]$ yum install git -y
