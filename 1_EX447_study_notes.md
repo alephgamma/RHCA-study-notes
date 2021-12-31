@@ -112,7 +112,7 @@ Perform the following using **git** which clones a repo, then creates and modifi
   ```
 5. Add those modified files back into the git repository with error messages from github.
   ```
-  [control-node ex447]$ git push origin master
+  [control-node git-repo]$ git push origin master
   
 (gnome-ssh-askpass:5151): Gtk-WARNING **: 03:25:27.225: cannot open display: 
 error: unable to read askpass response from '/usr/libexec/openssh/gnome-ssh-askpass'
@@ -126,11 +126,11 @@ Gitlab may not prompt for the username and PAT
   
 6. To cache the git credentials
 ```
-[control-node ex447]$ git config --global credential.helper cache
+[control-node git-repo]$ git config --global credential.helper cache
 ```
 7. Show the git information
   ```
-[control-node ex447]$ git config -l
+[control-node git-repo]$ git config -l
 user.email=nunya@bidnes.com
 user.name=git-username
 credential.helper=cache
