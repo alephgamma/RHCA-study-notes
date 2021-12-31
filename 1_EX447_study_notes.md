@@ -147,9 +147,9 @@ branch.master.merge=refs/heads/master
 ## 3. Manage inventory variables
 Use multiple inventory files. The different kinds of inventory files is a flustercuck. There are four different kinds of inventory files. 
 - ini
-- yml, with a vars sections
-- yml, without vars just to f your brain
-- json, why the f not.
+- yml, with vars sections
+- yml, without vars sections - just to F your brain
+- json, why the F not.
 
 ### Task breakdown
 
