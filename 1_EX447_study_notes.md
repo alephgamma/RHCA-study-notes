@@ -148,13 +148,13 @@ branch.master.merge=refs/heads/master
 Use multiple inventory files. The different kinds of inventory files is a flustercuck. There are four different kinds of inventory files. 
 - **ini**
 - **yml**: with vars sections
-- **yml** without vars sections - just to F your brain
-- **json** why the F not.
-- Tower inventory files are their own thing and just ignore CLI defined files and structures like  **group_vars** or **host_vars**? F you gentle reader. 
+- **yml**: without vars sections - just to F your brain
+- **json**: why the F not.
+- Tower inventory files are their own thing and just ignore CLI defined inventory file sections, groups and relative directories like  **group_vars** or **host_vars**? F you gentle reader. 
 
 ### Task breakdown
 
-1. Structure host and group variables using multiple files per host or group. **group_vars** or **host_vars**?
+1. Structure host and group variables using multiple files per host or group.
   ```
   [control-node ~]$ ansible-playbook play.yml -i webservers -i dbservers
   ```
