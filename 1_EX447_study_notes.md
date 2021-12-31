@@ -214,7 +214,7 @@ Use multiple inventory files.
   ```
   [control-node ~]$ ansible-playbook play.yml -i webservers.yml -i dbservers.yml
   ```
-  If there is a host variable with the same name **myvar** in both file, the one in dbservers takes precedence. 
+  If there is a host variable with the same name **myvar** in both files, the one in dbservers takes precedence. 
   
 2. Use special variables to override the host, port, or remote user Ansible uses for a specific host
  - **/etc/ansible/ansible.cfg**
