@@ -38,6 +38,7 @@ Using the **control-node**, use ansible to create a wheel user **svc.ansible** t
   ```
   [control-node ~]$ sudo su -
   [control-node ~]# ansible -u a_user -i node1, -m user -a "name=svc.ansible group=wheel" -b
+  BECOME password: ***********
   [control-node ~]# sudo su - svc.ansible
   [control-node ~]$ ssh-copy-id node1 
   ```
