@@ -8,13 +8,13 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
   ```
   [control-node ~]# yum install ansible -y
   ```
-2. How are the **managed-nodes** reachable? IP, hostname, DNS? 
+1.2. How are the **managed-nodes** reachable? IP, hostname, DNS? 
   ```
   [control-node ~]# ping node1
   ```
   Usually the **/etc/hosts** file is updated with hostnames
   
-3. Update the default inventory file: **/etc/ansible/hosts** if needed. The following notes will use:  **/etc/ansible/inventory**
+1.3. Update the default inventory file: **/etc/ansible/hosts** if needed. The following notes will use:  **/etc/ansible/inventory**
   ```
   node1 ansible_ssh=10.0.1.1
   node2 ansible_ssh=10.0.1.2
@@ -23,18 +23,18 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
   
   Groups are not defined yet, but usually there is a **proxy**, **webservers**, **dbservers** and maybe a **prod** group
   
-4. Is the **svc.ansible** user on the **control-node**? Create if needed.
+1.4. Is the **svc.ansible** user on the **control-node**? Create if needed.
   ```
   [control-node ~]# useradd -G 10 svc.ansible
   ```
   
-5. Create a key-pair for the **svc.ansible** user.
+1.5. Create a key-pair for the **svc.ansible** user.
   ```
   [control-node ~]# sudo su - svc.ansible
   [control-node ~]$ ssh-keygen
   ```
   
-6. Create **svc.ansible** user and copy the pub-key to the **managed-nodes**.
+1.6. Create **svc.ansible** user and copy the pub-key to the **managed-nodes**.
   ```
   [control-node ~]$ sudo su -
   [control-node ~]# ansible -u a_user -i node1, -m user -a "name=svc.ansible group=wheel" -K
@@ -43,7 +43,7 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
   [control-node ~]$ ssh-copy-id node1 
   ```
   
-7. Update **/etc/ansible/ansible.cfg**
+1.7. Update **/etc/ansible/ansible.cfg**
   ```
   [defaults]
   inventory = /etc/svc.ansible/inventory
@@ -58,17 +58,17 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
   become_ask_pass = false
   ```
   
-8. Copy the default inventory file to **/etc/svc.ansible/inventory**
+1.8. Copy the default inventory file to **/etc/svc.ansible/inventory**
   ```
   [control-node ~]$ cp /etc/ansible/inventory /etc/svc.ansible/inventory
   ```
   
-9. Update the sudoers file on the **managed-nodes**
+1.9. Update the sudoers file on the **managed-nodes**
   ```
   [control-node ~]$ ansible all -m lineinfile -a "dest=/etc/sudoers line='svc.ansible ALL=(ALL) NOPASSWD: ALL'"
   ```
   
-10. Validate
+1.10. Validate
   ```
   [control-node ~]$ ansible all -a whoami
   node1 | CHANGED | rc=0 >>
@@ -83,21 +83,20 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
 Perform the following using **git** which clones a repo, then creates and modifies files in the repo, and then add those files to the upstream repo.
 
 ### Task breakdown
-
-1. Install CLI git and add your information
+2.1. Install CLI git and add your information
   ```
   [control-node ~]$ yum install git -y
   ```
-2. Configure git
+2.2. Configure git
   ```
   [control-node ~]$ git config --global user.email "nunya@bidnes.com"
   [control-node ~]$ git config --global user.name "git-username"
   ```
-3. Clone a git repo
+2.3. Clone a git repo
   ```
   [control-node ~]$ git clone https://github.com/git-username/git-repo/repo.git
   ```
-4. Update, modify and create files in a git repository
+2.4. Update, modify and create files in a git repository
   ```
   [control-node ~]$ cd git-repo
   [control-node git-repo]$ vi README.md
@@ -110,7 +109,7 @@ Perform the following using **git** which clones a repo, then creates and modifi
   [control-node git-repo]$ git add play.yml
   [control-node git-repo]$ git commit -m "Added play.yml"
   ```
-5. Add those modified files back into the git repository with error messages from github.
+2.5. Add those modified files back into the git repository with error messages from github.
   ```
   [control-node git-repo]$ git push origin master
   
@@ -124,11 +123,11 @@ Password for 'https://git-username@github.com': your-super-secret-personal-acces
   ```
 Gitlab may not prompt for the username and PAT 
   
-6. Cache the git credentials
+2.6. Cache the git credentials
 ```
 [control-node git-repo]$ git config --global credential.helper cache
 ```
-7. Show the git information
+2.7. Show the git information
   ```
 [control-node git-repo]$ git config -l
 user.email=nunya@bidnes.com
@@ -185,20 +184,20 @@ Variable precendence from **high** to **low**
 <hr>
 
 ### Subtask
-Structure host and group variables using multiple files per host or group.
+3.1 Structure host and group variables using multiple files per host or group.
 
 ### Subtask breakdown
-1. Multiple inventory files for different groups at the command line. 
+3.1.1. Multiple inventory files for different groups at the command line. 
   ```
   [control-node ~]$ ansible-playbook play.yml -i webservers.yml -i dbservers.yml
   ```
   If there is a host variable with the same name **myvar** in both files, the one in dbservers takes precedence. 
 
 ### Subtask
-Use special variables to override the host, port, or remote user Ansible uses for a specific host.
+3.2 Use special variables to override the host, port, or remote user Ansible uses for a specific host.
 
 ### Subtask breakdown
-2. Special variables for host, port, or remote user can be set system-wide.
+3.2.1. Special variables for host, port, or remote user can be set system-wide.
  - **/etc/ansible/ansible.cfg**
   ```
   inventory=/home/ansible/inventory
@@ -213,10 +212,10 @@ Use special variables to override the host, port, or remote user Ansible uses fo
   node2 ansible_host=10.2.3.2 ansible_ssh_port=2122 ansible_user=joe
   ```
 ### Subtask
-Set up directories containing multiple host variable files for some of your managed hosts
+3.3. Set up directories containing multiple host variable files for some of your managed hosts
 
 ### Subtask breakdown
-3. An example structure with separate directories
+3.3.1. An example structure with separate directories
   ```
   inventory/     Base directory
     AWS.yml      Inventory plugin
@@ -228,7 +227,11 @@ Set up directories containing multiple host variable files for some of your mana
   ```
   [control-node ~]$ ansible-playbook test-play.yml -i inventory/dyn_inv.py -i inventory/hosts.ini
   ```
-4. Override the name used in the **inventory** file with a different name or IP address
+### Subtask
+3.4. Override the name used in the **inventory** file with a different name or IP address
+
+### Subtask breakdown
+3.4.1. Where are the diffent names?
   ```
   - hosts: localhost
     become: false
@@ -245,7 +248,8 @@ Set up directories containing multiple host variable files for some of your mana
       debug:
         msg: "The inventory_hostname: {{ inventory_hostname }}"
   ```
-  
+3.4.2. Where are the diffent IP addresses?  
+
 ## 4. Manage task execution
 Control privilege execution
 
