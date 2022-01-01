@@ -152,7 +152,7 @@ The different kinds of inventory files is a flustercuck. There are four differen
 - **json**: why the F not.
 - Tower inventory files are their own thing and just ignore CLI defined inventory file sections, groups and relative directories like  **group_vars** or **host_vars**? F you gentle reader. 
 
-There is a magical variable: only appears to work in **yml** files without vars sections. There don't appear to be any really clear examples. The default value is 1
+There is a magical variable **ansible_group_priority** and there don't appear to be any really clear examples. The default value is 1
 ```
 ansible_group_priority: 10 
 ```
@@ -171,7 +171,6 @@ all:
           http_port: 81
     ungrouped: {}
 ```
-There don't appear to be any really clear ansible_group_priority examples...
 
 Variable precendence from **high** to **low**
 
