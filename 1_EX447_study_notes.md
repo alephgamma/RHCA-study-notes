@@ -173,14 +173,14 @@ all:
     ungrouped: {}
 ```
 
-Variable precendence from **high** to **low**. There are up to 22 different sources. The rabbit hole:
+There are up to 22 different sources and with variable precendence from **high** to **low** the rabbit hole starts with:
 
 - Command line (-e "user=billy_joe_jim_bob")
 - role defaults
 - inventory files
-... turtles all the way down ...
+- ... turtles all the way down ...
 
-Within the same source the precendence is based on the inventory file structure: 
+Within the same source, the precendence is based on the inventory file structure: 
 - Host
 - Child group
 - Parent group
