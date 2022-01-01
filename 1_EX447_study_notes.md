@@ -242,7 +242,7 @@ Within the same source, the precendence is based on the inventory file structure
 3.4. Override the name used in the **inventory** file with a different name or IP address
 
 ### Subtask breakdown
-3.4.1. Where are the different names?
+3.4.1. Where are the different names? Are the names defined as a host variable in an inventory file, vars_file or vars?
   ```
   - hosts: localhost
     become: false
@@ -259,7 +259,7 @@ Within the same source, the precendence is based on the inventory file structure
       debug:
         msg: "The inventory_hostname: {{ inventory_hostname }}"
   ```
-3.4.2. Where are the different IP addresses?  
+3.4.2. Where are the different IP addresses? External IP adresses must defined in the inventory file. Whereas an internal address will be defined as an **ansible_fact**. Example, **ansible_default_ipv4.address**
 
 ## 4. Manage task execution
 Control privilege execution
