@@ -184,7 +184,7 @@ Variable precendence from **high** to **low**
 <hr>
 
 ### Subtask
-3.1 Structure host and group variables using multiple files per host or group.
+3.1. Structure host and group variables using multiple files per host or group.
 
 ### Subtask breakdown
 3.1.1. Multiple inventory files for different groups at the command line. 
@@ -194,7 +194,7 @@ Variable precendence from **high** to **low**
   If there is a host variable with the same name **myvar** in both files, the one in dbservers takes precedence. 
 
 ### Subtask
-3.2 Use special variables to override the host, port, or remote user Ansible uses for a specific host.
+3.2. Use special variables to override the host, port, or remote user Ansible uses for a specific host.
 
 ### Subtask breakdown
 3.2.1. Special variables for host, port, or remote user can be set system-wide.
@@ -226,6 +226,12 @@ Variable precendence from **high** to **low**
   ```
   ```
   [control-node ~]$ ansible-playbook test-play.yml -i inventory/dyn_inv.py -i inventory/hosts.ini
+  ```
+  The ansible structure for containing different variables per host is the **host_vars** directory. Where each file matches a hostname:
+  ```
+  ./host_vars/
+          ├── node1
+          └── node2
   ```
 ### Subtask
 3.4. Override the name used in the **inventory** file with a different name or IP address
