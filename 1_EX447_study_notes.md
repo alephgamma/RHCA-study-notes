@@ -152,18 +152,18 @@ The different kinds of inventory files is a flustercuck. There are four differen
 - **json**: why the F not.
 - Tower inventory files are their own thing and just ignore CLI defined inventory file sections, groups and relative directories like  **group_vars** or **host_vars**? F you gentle reader. 
 
-There is a magical variable only appears to work in **yml** files without vars sections. There don't appear to be any really clear examples...
+There is a magical variable: only appears to work in **yml** files without vars sections. There don't appear to be any really clear examples. The default value is 1
 ```
 ansible_group_priority: 10 
 ```
-**inv-a.yml**
+**inv.yml**
 ```
 all:
   children:
     a_group:
       hosts:
         web1.example.com:
-          http_port: 80
+          http_port: 8080
           ansible_group_priority: 10
     b_group:
       hosts:
@@ -171,42 +171,11 @@ all:
           http_port: 81
     ungrouped: {}
 ```
-**inv-b.yml**
-```
-all:
-  children:
-    a_group:
-      hosts:
-        web3.example.com:
-          http_port: 8080
-    b_group:
-      hosts:
-        web4.example.com:
-          http_port: 8080
-    ungrouped: {}
-```
-Let's make magical sausage
-```
-$ ansible-inventory -y --list -i inv-a.yml -i inv-b.yml
-all:
-  children:
-    a_group:
-      hosts:
-        web1.example.com:
-          ansible_group_priority: 10
-          http_port: 80
-        web3.example.com:
-          http_port: 8080
-    b_group:
-      hosts:
-        web2.example.com:
-          http_port: 81
-        web4.example.com:
-          http_port: 8080
-    ungrouped: {}
-```
+There don't appear to be any really clear ansible_group_priority examples...
+
 Variable precendence from **high** to **low**
 
+- Command line
 - Host
 - Child group
 - Parent group
