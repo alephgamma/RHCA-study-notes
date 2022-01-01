@@ -265,7 +265,7 @@ Within the same source, the precendence is based on the inventory file structure
 Control privilege execution
 
 ### Task breakdown
-1. Control privilege execution. **become** at the task level? 
+4.1. Control privilege execution. **become** at the task level? 
 ```
 - name: Run a command as the apache user
   command: somecommand
@@ -276,7 +276,7 @@ Control privilege execution
 Run selected tasks
 
 ### Task breakdown
-1. Use tags to specify tasks
+4.2. Use tags to specify tasks
   ```
   ---
   - name: First
@@ -301,9 +301,9 @@ Run selected tasks
 Populate variables with data from external sources using lookup plugins
 
 ### Task breakdown
-1. Use a lookup file plugin to read a file
+5.1. Use a lookup file plugin to read a file.
 ```
-{{ lookup('file','/path/to/file') }}
+lookup('file','/path/to/file')
 ```
 ```
 ---
@@ -314,9 +314,54 @@ Populate variables with data from external sources using lookup plugins
         user: svc.ansible
         key: "{{ lookup('file','/home/svc.ansible/.ssh/id_rsa.pub') }}"
 ```
-2. Use lookup and query functions to template data from external sources into playbooks and deployed template files
-3. Implement loops using structures other than simple lists using lookup plugins and filters
-4. Inspect, validate, and manipulate variables containing networking information with filters
+5.2. Use lookup and query functions to template data from external sources into playbooks and deployed template files.
+```
+vars:
+  motd_value: "{{ lookup('file', '/etc/motd') }}"
+tasks:
+  - debug:
+      msg: "motd value is {{ motd_value }}"
+  - template:
+      src: "issue.j2"
+      dest: "/etc/issue"
+```
+**issue.j2**
+```
+*******
+{{ motd_value }}
+*******
+```
+
+5.3. Implement loops using structures other than simple lists using lookup plugins and filters.
+**admin-users.yml**
+```
+---
+admin-users:
+  billy: { uid: 5001, shell: "/bin/bash", state: present, pubkey: "{{lookup('file','files/id_billy')}}" }
+  joe: { uid: 5002, shell: "/bin/bash", state: present, pubkey: "{{lookup('file','files/id_joe')}}" }
+  jim: { uid: 5003, shell: "/bin/bash", state: present, pubkey: "{{lookup('file','files/id_jim')}}" }
+  bob: { uid: 5004, shell: "/bin/bash", state: present, pubkey: "{{lookup('file','files/id_bob')}}" }
+```
+Just create the users
+```
+---
+- hosts: all
+  become: yes
+  vars_files:
+  - admin-users.yml
+  tasks:
+  - name: Create users
+    user:
+      name: "{{ item.key }}"
+      uid: "{{ item.value.uid }}"
+      home: "/home/{{ item.key }}"
+      groups: "wheel"
+      generate_ssh_key: yes
+      shell: "{{ item.value.shell }}"
+      state: "{{ item.value.present}}"
+    with_dict: "{{ admin-users }}"
+```
+5.4. Inspect, validate, and manipulate variables containing networking information with filters
 
 ## 6. Delegate tasks
 
