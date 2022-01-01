@@ -361,6 +361,15 @@ Just create the users
       state: "{{ item.value.present}}"
     with_dict: "{{ admin-users }}"
 ```
+Now create the keys.
+```
+  tasks:
+    - authorized_key:
+        user: "{{ item.key }}"
+        state: present
+        key: "{{ item.value.pubkey }}"
+      with_dict: "{{ admin-users }}"
+```
 5.4. Inspect, validate, and manipulate variables containing networking information with filters
 
 ## 6. Delegate tasks
