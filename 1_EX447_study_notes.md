@@ -237,7 +237,7 @@ Variable precendence from **high** to **low**
 3.4. Override the name used in the **inventory** file with a different name or IP address
 
 ### Subtask breakdown
-3.4.1. Where are the diffent names?
+3.4.1. Where are the different names?
   ```
   - hosts: localhost
     become: false
