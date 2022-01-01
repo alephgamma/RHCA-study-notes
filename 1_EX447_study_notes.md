@@ -4,7 +4,7 @@
 Use ansible on the **control-node** to create a wheel user **svc.ansible** that uses SSH-keys without a **sudo** password requirement. The provisioned (target) **managed-nodes** only have **a_user** account that can sudo with a password.
 
 ### Task breakdown
-1. Validate the ansible installation on the **control-node**. Install if needed.
+1.1. Validate the ansible installation on the **control-node**. Install if needed.
   ```
   [control-node ~]# yum install ansible -y
   ```
@@ -145,6 +145,8 @@ branch.master.merge=refs/heads/master
   ```
   
 ## 3. Manage inventory variables
+
+### Background information 
 The different kinds of inventory files is a flustercuck. There are four different kinds of inventory files. 
 - **ini**
 - **yml**: with vars sections
@@ -181,29 +183,40 @@ Variable precendence from **high** to **low**
 - all group
 
 <hr>
+
+### Subtask
 Structure host and group variables using multiple files per host or group.
 
-### Task breakdown
-
+### Subtask breakdown
 1. Multiple inventory files for different groups at the command line. 
   ```
   [control-node ~]$ ansible-playbook play.yml -i webservers.yml -i dbservers.yml
   ```
   If there is a host variable with the same name **myvar** in both files, the one in dbservers takes precedence. 
-  
-2. Use special variables to override the host, port, or remote user Ansible uses for a specific host
+
+### Subtask
+Use special variables to override the host, port, or remote user Ansible uses for a specific host.
+
+### Subtask breakdown
+2. Special variables for host, port, or remote user can be set system-wide.
  - **/etc/ansible/ansible.cfg**
   ```
   inventory=/home/ansible/inventory
   remote_user = centos 
   remote_port = 20022
   ```
+  
+  Or they can be set in individual (or multiple) inventory files
  - **/home/ansible/inventory**
   ```
-  alias1 ansible_host=10.2.3.1 ansible_ssh_port=2122 ansible_user=bob
-  alias2 ansible_host=10.2.3.2 ansible_ssh_port=2122 ansible_user=sandy
+  node1 ansible_host=10.2.3.1 ansible_ssh_port=2122 ansible_user=billy
+  node2 ansible_host=10.2.3.2 ansible_ssh_port=2122 ansible_user=joe
   ```
-3. Set up directories containing multiple host variable files for some of your managed hosts
+### Subtask
+Set up directories containing multiple host variable files for some of your managed hosts
+
+### Subtask breakdown
+3. An example structure with separate directories
   ```
   inventory/     Base directory
     AWS.yml      Inventory plugin
