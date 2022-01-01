@@ -80,7 +80,7 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
   ```
   
 ## 2. Basic git 
-Perform the following using **git** which clones a repo, then creates and modifies files in the repo, and then add those files to the repo.
+Perform the following using **git** which clones a repo, then creates and modifies files in the repo, and then add those files to the upstream repo.
 
 ### Task breakdown
 
