@@ -181,11 +181,11 @@ Variable precendence from **high** to **low**
 - all group
 
 <hr>
-Use multiple inventory files. 
+Structure host and group variables using multiple files per host or group.
 
 ### Task breakdown
 
-1. Structure host and group variables using multiple files per host or group.
+1. Multiple inventory files for different groups at the command line. 
   ```
   [control-node ~]$ ansible-playbook play.yml -i webservers.yml -i dbservers.yml
   ```
