@@ -254,7 +254,7 @@ Variable precendence from **high** to **low**
       debug:
         msg: "The inventory_hostname: {{ inventory_hostname }}"
   ```
-3.4.2. Where are the diffent IP addresses?  
+3.4.2. Where are the different IP addresses?  
 
 ## 4. Manage task execution
 Control privilege execution
