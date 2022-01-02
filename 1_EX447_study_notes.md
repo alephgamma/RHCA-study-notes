@@ -335,7 +335,9 @@ File template: **issue.j2**
 *******
 ```
 
-5.3. Implement loops using structures other than simple lists using lookup plugins and filters: **admin-users.yml**
+5.3. Implement loops using structures other than simple lists using lookup plugins and filters: 
+
+File: **admin-users.yml**
 ```
 ---
 admin-users:
@@ -344,7 +346,7 @@ admin-users:
   jim: { uid: 5003, shell: "/bin/bash", state: present, pubkey: "{{lookup('file','files/id_jim')}}" }
   bob: { uid: 5004, shell: "/bin/bash", state: present, pubkey: "{{lookup('file','files/id_bob')}}" }
 ```
-Just create the users
+The following playbook just creates the users:
 ```
 ---
 - hosts: all
@@ -363,7 +365,7 @@ Just create the users
       state: "{{ item.value.present}}"
     with_dict: "{{ admin-users }}"
 ```
-Now create the keys.
+Now create the keys:
 ```
   tasks:
     - authorized_key:
