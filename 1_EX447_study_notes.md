@@ -261,7 +261,7 @@ Within the same source, the precendence is based on the inventory file structure
       debug:
         msg: "The inventory_hostname: {{ inventory_hostname }}"
   ```
-3.4.2. Where are the different IP addresses? External IP adresses must defined in the inventory file. Whereas an internal address will be defined as an **ansible_fact**. Example, **ansible_default_ipv4.address**
+3.4.2. Where are the different IP addresses? External IP adresses must be defined in the inventory file. Whereas an internal address is defined as an **ansible_fact**. For example, **ansible_default_ipv4.address**
 
 ## 4. Manage task execution
 Control privilege execution
