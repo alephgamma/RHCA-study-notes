@@ -1,6 +1,7 @@
 # EX447 - Summary
 
 ## 1. Configure ansible to manage nodes
+### Task
 Use ansible on the **control-node** to create a wheel user **svc.ansible** that uses SSH-keys without a **sudo** password requirement. The provisioned (target) **managed-nodes** only have **a_user** account that can sudo with a password.
 
 ### Task breakdown
@@ -12,7 +13,7 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
   ```
   [control-node ~]# ping node1
   ```
-  Usually the **/etc/hosts** file is updated with hostnames
+  Usually the **/etc/hosts** file is updated with "IP hostname"
   
 1.3. Update the default inventory file: **/etc/ansible/hosts** if needed. The following notes will use:  **/etc/ansible/inventory**
   ```
@@ -21,7 +22,7 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
   node3 ansible_ssh=10.0.1.3
   ```
   
-  Groups are not defined yet, but usually there is a **proxy**, **webservers**, **dbservers** and maybe a **prod** group
+  Groups are not defined yet, but usually there is a **proxy**, **webservers**, **dbservers** and maybe a **prod** group. 
   
 1.4. Is the **svc.ansible** user on the **control-node**? Create if needed.
   ```
@@ -80,6 +81,7 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
   ```
   
 ## 2. Basic git 
+### Task
 Perform the following using **git** which clones a repo, then creates and modifies files in the repo, and then add those files to the upstream repo.
 
 ### Task breakdown
@@ -298,6 +300,7 @@ Run selected tasks
   [control-node ~]$ ansible-playbook -i inventory software.yml --tags install-software
   ```
 ## 5. Transform data with filters and plugins
+### Task
 Populate variables with data from external sources using lookup plugins
 
 ### Task breakdown
@@ -325,15 +328,14 @@ tasks:
       src: "issue.j2"
       dest: "/etc/issue"
 ```
-**issue.j2**
+File template: **issue.j2**
 ```
 *******
 {{ motd_value }}
 *******
 ```
 
-5.3. Implement loops using structures other than simple lists using lookup plugins and filters.
-**admin-users.yml**
+5.3. Implement loops using structures other than simple lists using lookup plugins and filters: **admin-users.yml**
 ```
 ---
 admin-users:
