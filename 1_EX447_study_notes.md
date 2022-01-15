@@ -379,7 +379,7 @@ Now create the keys:
 ## 6. Delegate tasks
 
 ### Task breakdown
-1. Run a task for a managed host on a different host, then control whether facts gathered by that task are delegated to the managed host or the other host
+6.1. Run a task for a managed host on a different host, then control whether facts gathered by that task are delegated to the managed host or the other host
   ```
   ---
   - hosts: all
@@ -407,14 +407,14 @@ Now create the keys:
 Install and Configure Ansible Tower
 
 ### Task breakdown
-1. Get the Ansible Tower bundle: **ansible-automation-platform-setup-bundle-1.2.1-1.tar.gz**
+7.1. Get the Ansible Tower bundle: **ansible-automation-platform-setup-bundle-1.2.1-1.tar.gz**
 
-2. Untar the bundle and cd into the directory. Example: **/home/cloud_user/**
+7.2. Untar the bundle and cd into the directory. Example: **/home/cloud_user/**
 ```
 # tar -xvf ansible-automation-platform-setup-bundle-1.2.1-1.tar.gz
 # cd ansible-automation-platform-setup-bundle-1.2.1-1
 ```
-3. Edit the ansible Tower inventory file to set the **admin_password** and the **pg_password**
+7.3. Edit the ansible Tower inventory file to set the **admin_password** and the **pg_password**
 ```
 [tower]
 localhost ansible_connection=local
@@ -435,13 +435,13 @@ pg_password=supersecret
 ...
 ```
 
-4. Ensure the following rpm is installed
+7.4. Ensure the following rpm is installed
 ```
 $ rpm -q python3-libselinux
 python3-libselinux-2.9-3.el8.x86_64
 ```
 
-5. Ensure python3 is used
+7.5. Ensure python3 is used
 ```
 $ alternatives --config python
 
@@ -456,13 +456,13 @@ There are 3 programs which provide 'python'.
 Enter to keep the current selection[+], or type selection number: 2
 ```
 
-6. Install Ansible Tower - This can take up to 20 minutes...
+7.6. Install Ansible Tower - This can take up to 20 minutes...
 ```
 # cd ansible-automation-platform-setup-bundle-1.2.1-1
 # ./setup.sh
 ```
 
-7. Ensure Ansible Tower is started
+7.7. Ensure Ansible Tower is started
 ```
 # systemctl status ansible-tower
 ```
@@ -471,14 +471,14 @@ Enter to keep the current selection[+], or type selection number: 2
 Create Ansible Tower users and teams and make associations of one to the other
 
 ### Task breakdown
-1. Clicketty click the GUI
+8.1. Clicketty click the GUI
 
 ## 9. Manage Ansible Tower inventories and credentials
 
 ### Task breakdown
-1. Manage advanced inventories
+9.1. Manage advanced inventories
    - Clicketty click the GUI
-2. Create a dynamic inventory from an identity management server or a database server. Let's see if this cheat works.
+9.2. Create a dynamic inventory from an identity management server or a database server. Let's see if this cheat works.
 ```
 $ cat dynamic.sh
 #!/bin/bash 
@@ -494,16 +494,16 @@ else
    exit 1
 fi
 ```
-3. Create machine credentials to access inventory hosts
+9.3. Create machine credentials to access inventory hosts
    - Clicketty click the GUI
-4. Create a source control credential
+9.4. Create a source control credential
    - Clicketty click the GUI
    
 ## 10. Manage Ansible Tower projects
 Create a project and then a job template
 
 ### Task breakdown
-1. Create a project
+10.1. Create a project
    - Name: **MyProject**
    - SCM Type: **git**
    - SCM URL: `https://github.com/git-username/git-repo/repo.git`
@@ -511,7 +511,7 @@ Create a project and then a job template
    - SCM UPDATE OPTIONS
      - Update Revision on Launch
 
-2. Create a job template
+10.2. Create a job template
    - New Job Template
    - NAME: **MyJobTemplate**
    - INVENTORY: playground
@@ -525,19 +525,19 @@ Create a project and then a job template
 ## 11. Manage Ansible Tower job workflows
 
 ### Task breakdown
-1. Create a job workflow template
+11.1. Create a job workflow template
    1. Clicketty click the GUI
 
 ## 12. Work with the Ansible Tower API
 Write an API scriptlet to launch a job
 
 ### Task breakdown
-1. Install jq. It may be useful.
+12.1. Install jq. It may be useful.
 ```
 $ sudo yum install jq -y
 ```
 
-2. Get the job id. Using the browser is best, **http://$tower-ip/api/v2/job_templates/** 
+12.2. Get the job id. Using the browser is best, **http://$tower-ip/api/v2/job_templates/** 
    - Look for, and match the name...
   ```
   ...
@@ -548,7 +548,7 @@ $ sudo yum install jq -y
   ...
   "name": "MyProductionTemplate"
   ```
-3. The scriptlet
+12.3. The scriptlet
   ```  
   $ echo 'curl -k -L -H "Content-Type: application/json" -X POST --user username:password http://$tower-ip/api/v2/job_templates/10/launch' > api-scriptlet.sh
   chmod u+x api-scriptlet.sh
@@ -558,7 +558,7 @@ $ sudo yum install jq -y
 Back up an instance of Ansible Tower
 
 ### Task breakdown
-1. Run the command in the ansible installation directory, example: **ansible-automation-platform-setup-bundle-1.2.1-1**
+13.1. Run the command in the ansible installation directory, example: **ansible-automation-platform-setup-bundle-1.2.1-1**
   ```
   $ ./setup.sh -b 
   ```
@@ -582,8 +582,8 @@ drwxr-xr-x. 21 28845 28845   4096 Jan 13  2021 roles
 lrwxrwxrwx.  1 root  root     105 Dec 17 00:58 tower-backup-latest.tar.gz -> /home/cloud_user/ansible-automation-platform-setup-bundle-1.2.1-1/tower-backup-2021-12-17-00:57:56.tar.gz
 
 ```
-### Bonus
-1. Restore from a backup
+### 14. Bonus
+14.1. Restore from a backup
 ```
 $ ./setup.sh -r -e 'restore_backup_file=/path/to/tar-gz-file'
 ```
