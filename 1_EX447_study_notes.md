@@ -478,6 +478,7 @@ Create Ansible Tower users and teams and make associations of one to the other
 ### Task breakdown
 9.1. Manage advanced inventories
    - Clicketty click the GUI
+
 9.2. Create a dynamic inventory from an identity management server or a database server. Let's see if this cheat works.
 ```
 $ cat dynamic.sh
@@ -496,6 +497,7 @@ fi
 ```
 9.3. Create machine credentials to access inventory hosts
    - Clicketty click the GUI
+
 9.4. Create a source control credential
    - Clicketty click the GUI
    
