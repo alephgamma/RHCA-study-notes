@@ -244,7 +244,7 @@ Within the same source, the precendence is based on the inventory file structure
 3.4. Override the name used in the **inventory** file with a different name or IP address
 
 ### Subtask breakdown
-3.4.1. Where are the different names? Are the names defined as a host variable in an inventory file, vars_file or vars?
+3.4.1. Where are the different names? Are the names defined as a host variable in an **inventory** file, **vars_files** or **vars** section?
   ```
   - hosts: localhost
     become: false
