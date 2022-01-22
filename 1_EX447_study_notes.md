@@ -513,6 +513,17 @@ Create a project and then a job template
    - SCM UPDATE OPTIONS
      - Update Revision on Launch
 
+10.1.1. Somehow, a customized **/etc/ansible/ansible.cfg** file may cause the following error message:
+```
+{
+    "module_stdout": "",
+    "module_stderr": "sudo: /etc/sudo.conf is owned by uid 65534, should be 0\nsudo: /usr/bin/sudo must be owned by uid 0 and have the setuid bit set\n",
+    "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error",
+    "rc": 1,
+    "_ansible_no_log": false,
+    "changed": false
+}
+```
 10.2. Create a job template
    - New Job Template
    - NAME: **MyJobTemplate**
