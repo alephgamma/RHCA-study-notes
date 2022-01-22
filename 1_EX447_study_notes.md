@@ -561,9 +561,9 @@ Back up an instance of Ansible Tower
 
 ### Task breakdown
 13.1. Run the command in the ansible installation directory, example: **ansible-automation-platform-setup-bundle-1.2.1-1**
-  ```
-  $ ./setup.sh -b 
-  ```
+```
+# ./setup.sh -b 
+```
 This creates a backup file in the format: **tar.gz** 
 ```
 [ansible-automation-platform-setup-bundle-1.2.1-1]# ls -l
