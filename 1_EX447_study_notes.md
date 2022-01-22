@@ -531,7 +531,7 @@ Create a project and then a job template
    - PROJECT: **MyProject**
    - PLAYBOOK: Available from the git repo
    - CREDENTIALS:
-     - cloud_user/superscret
+     - cloud_user/supersecret
    - OPTIONS
      - ENABLE PRIVILEGE ESCALATION
 
