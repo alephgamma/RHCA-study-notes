@@ -492,9 +492,9 @@ if [ "$#" -gt 2 ]; then
    echo "Too many parameters"
    exit 1
 elif [ "$#" -eq 1 ] && [ "$1" == "--list" ]; then
-   /usr/bin/ansible-inventory /home/cloud_user/inventory --list
+   /usr/bin/ansible-inventory /home/$USERNAME/inventory --list
 elif [ "$#" -eq 2 ] && [ "$1" == "--host" ]; then
-   /usr/bin/ansible-inventory /home/cloud_user/inventory --host "$2"
+   /usr/bin/ansible-inventory /home/$USERNAME/inventory --host "$2"
 else
    echo "Error"
    exit 1
