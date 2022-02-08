@@ -17,9 +17,14 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
   
 1.3. Update the default inventory file: **/etc/ansible/hosts** if needed. The following notes will use:  **/etc/ansible/inventory**
   ```
+  [proxy]
   node1 ansible_ssh=10.0.1.1
+  [webserver]
   node2 ansible_ssh=10.0.1.2
   node3 ansible_ssh=10.0.1.3
+  [database]
+  node4 ansible_ssh=10.0.1.4
+  node5 ansible_ssh=10.0.1.5
   ```
   
   Groups are not defined yet, but usually there is a **proxy**, **webservers**, **dbservers** and maybe a **prod** group. 
