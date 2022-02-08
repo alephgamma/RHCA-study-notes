@@ -409,7 +409,7 @@ Install and Configure Ansible Tower
 ### Task breakdown
 7.1. Get the Ansible Tower bundle: **ansible-automation-platform-setup-bundle-1.2.1-1.tar.gz**
 
-7.2. Untar the bundle and cd into the directory. Example: **/home/cloud_user/**
+7.2. Untar the bundle and cd into the directory. Example: **/home/$USERNAME/**
 ```
 # tar -xvf ansible-automation-platform-setup-bundle-1.2.1-1.tar.gz
 # cd ansible-automation-platform-setup-bundle-1.2.1-1
@@ -468,10 +468,15 @@ Enter to keep the current selection[+], or type selection number: 2
 ```
 
 ## 8. Manage access for Ansible Tower
-Create Ansible Tower users and teams and make associations of one to the other
+Create Ansible Tower users and teams and make associations of one to the other.
+
+sysadmin group
 ```
 billy
 joe
+```
+developer group
+```
 jim
 bob
 ```
@@ -597,7 +602,7 @@ drwxr-xr-x.  3 28845 28845   8192 Jan 13  2021 licenses
 drwxr-xr-x. 21 28845 28845   4096 Jan 13  2021 roles
 -rwxr-xr-x.  1 28845 28845  10819 Jan 13  2021 setup.sh
 -rw-------.  1 root  root  123551 Dec 17 00:58 tower-backup-2021-12-17-00:57:56.tar.gz
-lrwxrwxrwx.  1 root  root     105 Dec 17 00:58 tower-backup-latest.tar.gz -> /home/cloud_user/ansible-automation-platform-setup-bundle-1.2.1-1/tower-backup-2021-12-17-00:57:56.tar.gz
+lrwxrwxrwx.  1 root  root     105 Dec 17 00:58 tower-backup-latest.tar.gz -> /home/$USERNAME/ansible-automation-platform-setup-bundle-1.2.1-1/tower-backup-2021-12-17-00:57:56.tar.gz
 
 ```
 ### 14. Bonus
