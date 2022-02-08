@@ -494,7 +494,20 @@ bob
 9.1. Manage advanced inventories
    - Clicketty click the GUI
 
-9.2. Create a dynamic inventory from an identity management server or a database server. Let's see if this cheat works.
+9.2. Create a dynamic inventory from an identity management server or a database server.
+
+The inventory file
+```
+[proxy]
+node1 ansible_ssh=10.0.1.1
+[webserver]
+node2 ansible_ssh=10.0.1.2
+node3 ansible_ssh=10.0.1.3
+[database]
+node4 ansible_ssh=10.0.1.4
+node5 ansible_ssh=10.0.1.5
+```
+Test script:
 ```
 $ cat dynamic.sh
 #!/bin/bash 
@@ -509,6 +522,56 @@ else
    echo "Error"
    exit 1
 fi
+```
+The result from:
+```
+$ ./dynamic.sh --list
+{
+    "_meta": {
+        "hostvars": {
+            "node1": {
+                "ansible_ssh": "10.0.1.1"
+            },
+            "node2": {
+                "ansible_ssh": "10.0.1.2"
+            },
+            "node3": {
+                "ansible_ssh": "10.0.1.3"
+            },
+            "node4": {
+                "ansible_ssh": "10.0.1.4"
+            },
+            "node5": {
+                "ansible_ssh": "10.0.1.5"
+            }
+        }
+    },
+    "all": {
+        "children": [
+            "database",
+            "proxy",
+            "ungrouped",
+            "webserver"
+        ]
+    },
+    "database": {
+        "hosts": [
+            "node4",
+            "node5"
+        ]
+    },
+    "proxy": {
+        "hosts": [
+            "node1"
+        ]
+    },
+    "webserver": {
+        "hosts": [
+            "node2",
+            "node3"
+        ]
+    }
+}
 ```
 9.3. Create machine credentials to access inventory hosts
    - Clicketty click the GUI
