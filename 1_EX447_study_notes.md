@@ -678,3 +678,6 @@ lrwxrwxrwx.  1 root  root     105 Dec 17 00:58 tower-backup-latest.tar.gz -> /ho
 ```
 $ ./setup.sh -r -e 'restore_backup_file=/path/to/tar-gz-file'
 ```
+
+### 15. Checksum
+15.1.
