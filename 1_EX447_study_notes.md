@@ -673,11 +673,11 @@ drwxr-xr-x. 21 28845 28845   4096 Jan 13  2021 roles
 lrwxrwxrwx.  1 root  root     105 Dec 17 00:58 tower-backup-latest.tar.gz -> /home/$USERNAME/ansible-automation-platform-setup-bundle-1.2.1-1/tower-backup-2021-12-17-00:57:56.tar.gz
 
 ```
-### 14. Bonus
+## 14. Bonus
 14.1. Restore from a backup
 ```
 $ ./setup.sh -r -e 'restore_backup_file=/path/to/tar-gz-file'
 ```
 
-### 15. Checksum
+## 15. Checksum
 15.1. Get a file from a webserver only if the sha256 checksum matches.
