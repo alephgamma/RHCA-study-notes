@@ -273,6 +273,7 @@ Control privilege execution
 
 ### Task breakdown
 4.1. Control privilege execution. **become** at the task level.
+
 Snippet
 ```
 - name: Run a command as the apache user
