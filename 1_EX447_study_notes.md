@@ -303,7 +303,7 @@ Playbook
 ```
 Results
 ```
-$ ansible-playbook privilege_execution.yml -K -u gonzalezlz
+$ ansible-playbook privilege_execution.yml -K -u bueller
 BECOME password:
 
 PLAY [localhost] *************************************************************************************************
@@ -311,7 +311,7 @@ PLAY [localhost] ***************************************************************
 TASK [task 1] ****************************************************************************************************
 changed: [localhost]
 
-TASK [debug] $ ansible-playbook privilege_execution.yml -K -u gonzalezlz
+TASK [debug] $ ansible-playbook privilege_execution.yml -K -u bueller
 BECOME password:
 
 PLAY [localhost] *************************************************************************************************
@@ -329,7 +329,7 @@ changed: [localhost]
 
 TASK [debug] *****************************************************************************************************
 ok: [localhost] => {
-    "msg": "gonzalezlz"
+    "msg": "bueller"
 }
 
 PLAY RECAP *******************************************************************************************************
