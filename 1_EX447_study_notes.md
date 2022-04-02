@@ -272,15 +272,60 @@ Within the same source, the precendence is based on the inventory file structure
 Control privilege execution
 
 ### Task breakdown
-4.1. Control privilege execution. **become** at the task level? 
+4.1. Control privilege execution. **become** at the task level.
+Snippet
 ```
 - name: Run a command as the apache user
   command: somecommand
   become: yes
   become_user: apache
 ```
+Playbook
+```
+---
+- hosts: localhost
+  become: true
+  gather_facts: false
+  tasks:
+    - name: task 1
+      shell: whoami
+      register: w
+    - debug:
+        msg: "{{ w.stdout }}"
+    - name: task 2
+      shell: whoami
+      become: true
+      become_user: bueller
+      register: w
+    - debug:
+        msg: "{{ w.stdout }}"
+```
+Results
+```
+$ ansible-playbook privilege_execution.yml -K -u gonzalezlz
+BECOME password:
 
-Run selected tasks
+PLAY [localhost] *************************************************************************************************************************************
+
+TASK [task 1] ****************************************************************************************************************************************
+changed: [localhost]
+
+TASK [debug] *****************************************************************************************************************************************
+ok: [localhost] => {
+    "msg": "root"
+}
+
+TASK [task 2] ****************************************************************************************************************************************
+changed: [localhost]
+
+TASK [debug] *****************************************************************************************************************************************
+ok: [localhost] => {
+    "msg": "bueller"
+}
+
+PLAY RECAP *******************************************************************************************************************************************
+localhost                  : ok=4    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+```
 
 ### Task breakdown
 4.2. Use tags to specify tasks
