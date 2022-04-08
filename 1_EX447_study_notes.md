@@ -488,7 +488,7 @@ Install and Configure Ansible Tower
 # tar -xvf ansible-automation-platform-setup-bundle-1.2.1-1.tar.gz
 # cd ansible-automation-platform-setup-bundle-1.2.1-1
 ```
-7.3. Edit the ansible Tower inventory file to set the **admin_password** and the **pg_password**
+7.3. Edit the ansible Tower **inventory** file to set the **admin_password** and the **pg_password**
 ```
 [tower]
 localhost ansible_connection=local
