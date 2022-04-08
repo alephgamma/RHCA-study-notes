@@ -19,9 +19,11 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
   ```
   [proxy]
   node1 ansible_ssh=10.0.1.1
+  
   [webserver]
   node2 ansible_ssh=10.0.1.2
   node3 ansible_ssh=10.0.1.3
+  
   [database]
   node4 ansible_ssh=10.0.1.4
   node5 ansible_ssh=10.0.1.5
