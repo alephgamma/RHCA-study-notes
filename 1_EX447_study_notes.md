@@ -182,7 +182,7 @@ all:
     ungrouped: {}
 ```
 
-There are up to 22 different sources and with variable precendence from **high** to **low** the rabbit hole starts with:
+There are up to 22 different sources and with variable precendence from **high** to **low**. The rabbit hole starts with:
 
 - Command line (-e "user=billy_joe_jim_bob")
 - role defaults
