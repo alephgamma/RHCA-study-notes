@@ -137,7 +137,7 @@ Gitlab may not prompt for the username and PAT
 [control-node git-repo]$ git config --global credential.helper cache
 ```
 2.7. Show the git information
-  ```
+```
 [control-node git-repo]$ git config -l
 user.email=nunya@bidnes.com
 user.name=git-username
@@ -150,8 +150,23 @@ remote.origin.url=https://github.com/git-username/git-repo/repo.git
 remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
 branch.master.remote=origin
 branch.master.merge=refs/heads/master
-  ```
-  
+```
+ 2.8. The push options 
+``` 
+[control-node git-repo]$ cat .git/config
+[core]
+        repositoryformatversion = 0
+        filemode = true
+        bare = false
+        logallrefupdates = true
+[remote "origin"]
+        url =  https://github.com/git-username/git-repo/repo.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master'
+```
+
 ## 3. Manage inventory variables
 
 ### Background information 
