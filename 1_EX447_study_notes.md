@@ -151,7 +151,7 @@ remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
 branch.master.remote=origin
 branch.master.merge=refs/heads/master
 ```
- 2.8. The push options 
+ 2.8. The push settings 
 ``` 
 [control-node git-repo]$ cat .git/config
 [core]
