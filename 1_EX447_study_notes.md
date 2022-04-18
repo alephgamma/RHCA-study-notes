@@ -30,19 +30,24 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
   ```
   
   Groups are not defined yet, but usually there is a **proxy**, **webservers**, **dbservers** and maybe a **prod** group. 
-  
-1.4. Is the **svc.ansible** user on the **control-node**? Create if needed.
+
+1.4. Clear out the ~/.ssh/known_hosts file
+  ```
+  [control-node ~]$ >.ssh/known_hosts
+  ```
+
+1.5. Is the **svc.ansible** user on the **control-node**? Create if needed.
   ```
   [control-node ~]# useradd -G 10 svc.ansible
   ```
   
-1.5. Create a key-pair for the **svc.ansible** user.
+1.6. Create a key-pair for the **svc.ansible** user.
   ```
   [control-node ~]# sudo su - svc.ansible
   [control-node ~]$ ssh-keygen
   ```
   
-1.6. Create **svc.ansible** user and copy the pub-key to the **managed-nodes**.
+1.7. Create **svc.ansible** user and copy the pub-key to the **managed-nodes**.
   ```
   [control-node ~]$ sudo su -
   [control-node ~]# ansible -u a_user -i node1, -m user -a "name=svc.ansible group=wheel" -K
@@ -51,7 +56,7 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
   [control-node ~]$ ssh-copy-id node1 
   ```
   
-1.7. Update **/etc/ansible/ansible.cfg**
+1.8. Update **/etc/ansible/ansible.cfg**
   ```
   [defaults]
   inventory = /etc/svc.ansible/inventory
@@ -66,17 +71,17 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
   become_ask_pass = false
   ```
   
-1.8. Copy the default inventory file to **/etc/svc.ansible/inventory**
+1.9. Copy the default inventory file to **/etc/svc.ansible/inventory**
   ```
   [control-node ~]$ cp /etc/ansible/inventory /etc/svc.ansible/inventory
   ```
   
-1.9. Update the sudoers file on the **managed-nodes**
+1.10. Update the sudoers file on the **managed-nodes**
   ```
   [control-node ~]$ ansible all -m lineinfile -a "dest=/etc/sudoers line='svc.ansible ALL=(ALL) NOPASSWD: ALL'"
   ```
   
-1.10. Validate
+1.11. Validate
   ```
   [control-node ~]$ ansible all -a whoami
   node1 | CHANGED | rc=0 >>
