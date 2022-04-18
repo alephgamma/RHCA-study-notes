@@ -76,7 +76,7 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
   [control-node ~]$ cp /etc/ansible/inventory /etc/svc.ansible/inventory
   ```
   
-1.10. Set the environment variable:
+1.10. Set the environment variable **ANSIBLE_CONFIG**
   ```
   [control-node ~]$ export ANSIBLE_CONFIG=/home/svc.ansible/ansible.cfg
   ```
