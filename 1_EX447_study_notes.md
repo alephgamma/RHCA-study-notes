@@ -76,12 +76,17 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
   [control-node ~]$ cp /etc/ansible/inventory /etc/svc.ansible/inventory
   ```
   
-1.10. Update the sudoers file on the **managed-nodes**
+1.10. Set the environment variable:
+  ```
+  [control-node ~]$ export ANSIBLE_CONFIG=/home/svc.ansible/ansible.cfg
+  ```
+
+1.11. Update the sudoers file on the **managed-nodes**
   ```
   [control-node ~]$ ansible all -m lineinfile -a "dest=/etc/sudoers line='svc.ansible ALL=(ALL) NOPASSWD: ALL'"
   ```
   
-1.11. Validate
+1.12. Validate
   ```
   [control-node ~]$ ansible all -a whoami
   node1 | CHANGED | rc=0 >>
