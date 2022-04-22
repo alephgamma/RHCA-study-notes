@@ -31,7 +31,7 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
   
   Groups are not defined yet, but usually there is a **proxy**, **webservers**, **dbservers** and maybe a **prod** group. 
 
-1.4. Clear out the ~/.ssh/known_hosts file
+1.4. Clear out the **~/.ssh/known_hosts** file
   ```
   [control-node ~]$ >.ssh/known_hosts
   ```
