@@ -555,6 +555,8 @@ Create Ansible Tower users and teams and make associations of one to the other.
 - Execute
 - Read
 
+### Teams
+
 **operations** Team
 ```
 billy
