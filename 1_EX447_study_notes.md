@@ -712,14 +712,16 @@ Write an API scriptlet to launch a job
 $ sudo yum install jq -y
 ```
 
-12.2. Get the job id. Using the browser is best, **http://$tower-ip/api/v2/job_templates/** 
-   - Look for, and match the name...
+12.2. Get the job **id**. Using the browser is best: **http://$tower-ip/api/v2/job_templates/** 
+   - Then look for, and match the name...
   ```
   ...
   "id": 10,
   "type": "job_template"
   ...
-  lots of stuff
+  ```
+  *lots of stuff*
+  ```
   ...
   "name": "MyProductionTemplate"
   ```
