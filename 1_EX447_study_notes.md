@@ -724,6 +724,7 @@ $ sudo yum install jq -y
   ```
   ...
   "name": "MyProductionTemplate"
+  ...
   ```
   
 12.3. The components
