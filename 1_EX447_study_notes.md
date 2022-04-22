@@ -707,7 +707,7 @@ Create a project and then a job template
 Write an API scriptlet to launch a job
 
 ### Task breakdown
-12.1. Install jq. It may be useful.
+12.1. Install **jq**. It may be useful.
 ```
 $ sudo yum install jq -y
 ```
@@ -723,7 +723,15 @@ $ sudo yum install jq -y
   ...
   "name": "MyProductionTemplate"
   ```
-12.3. The scriptlet
+12.3. The components
+
+$ curl -k 
+       -H 'Content-Type: application/json'
+       -X POST 
+       --user username:password
+       http://$tower-ip/api/v2/job_templates/$job-id/launch
+
+12.4 The scriptlet
   ```  
   $ echo 'curl -k -L -H "Content-Type: application/json" -X POST --user username:password http://$tower-ip/api/v2/job_templates/10/launch' > api-scriptlet.sh
   chmod u+x api-scriptlet.sh
