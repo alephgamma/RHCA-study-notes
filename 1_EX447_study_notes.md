@@ -723,13 +723,15 @@ $ sudo yum install jq -y
   ...
   "name": "MyProductionTemplate"
   ```
+  
 12.3. The components
-
+```
 $ curl -k 
        -H 'Content-Type: application/json'
        -X POST 
        --user username:password
        http://$tower-ip/api/v2/job_templates/$job-id/launch
+```
 
 12.4 The scriptlet
   ```  
