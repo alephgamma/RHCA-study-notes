@@ -29,7 +29,7 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
   node5 ansible_ssh=10.0.1.5
   ```
   
-  Groups are not defined yet, but usually there is a **proxy**, **webservers**, **dbservers** and maybe a **prod** group. 
+  Groups are not defined yet, but usually there is a **proxy**, **webservers**, **dbservers** and maybe a **prod**, **test** and **dev** group. 
 
 1.4. Clear out the **~/.ssh/known_hosts** file
   ```
