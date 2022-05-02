@@ -550,7 +550,13 @@ Enter to keep the current selection[+], or type selection number: 2
 ## 8. Manage access for Ansible Tower
 Create Ansible Tower users and teams and make associations of one to the other.
 
-### Roles
+### Organizations
+
+### Teams
+
+### Users
+
+### Roles or Permissions vary based on the resources: **Job Templates**, **Projects**, etc
 - Admin
 - Execute
 - Read
