@@ -61,7 +61,7 @@ Use ansible on the **control-node** to create a wheel user **svc.ansible** that 
   [defaults]
   inventory = /etc/svc.ansible/inventory
   remote_user = svc.ansible
-  host_key_checking = False
+  host_key_checking = false
   private_key_file = /home/svc.ansible/.ssh/id_rsa
 
   [privilege_escalation]
@@ -739,7 +739,7 @@ $ curl -k
 12.4 The scriptlet
   ```  
   $ echo 'curl -k -L -H "Content-Type: application/json" -X POST --user username:password http://$tower-ip/api/v2/job_templates/10/launch' > api-scriptlet.sh
-  chmod u+x api-scriptlet.sh
+  $ chmod u+x api-scriptlet.sh
   ```
   
 ## 13. Back up Ansible Tower
