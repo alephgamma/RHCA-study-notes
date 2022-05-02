@@ -550,7 +550,7 @@ Enter to keep the current selection[+], or type selection number: 2
 ## 8. Manage access for Ansible Tower
 Create Ansible Tower **users** and **teams** and make associations of one to the other.
 
-### Organizations
+### ( Organizations )
 
 ### Users
 
