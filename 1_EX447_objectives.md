@@ -1,4 +1,4 @@
-## Official EX447 Objectives
+## EX447 Objectives
 
 1. Understand and use Git
    - [x] Clone a Git repository
@@ -31,8 +31,8 @@
 9. Manage projects
    - [x] Create a job template
 10. Manage job workflows
-   - [x] Create a job workflow template
+    - [x] Create a job workflow template
 11. Work with the Ansible Tower API
-   - [x] Write an API scriptlet to launch a job
+    - [x] Write an API scriptlet to launch a job
 12. Back up Ansible Tower
-   - [x] Back up an instance of Ansible Tower
+    - [x] Back up an instance of Ansible Tower
