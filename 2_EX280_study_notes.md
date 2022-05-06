@@ -7,7 +7,9 @@ Install the OpenShift 4.6 container platform on RHEL 8.
 
 ### Task breakdown
 1.1. Do this
-
+```
+$ this-command
+```
 1.2. And then that
 
 ## 2. Manage the OpenShift Container Platform
