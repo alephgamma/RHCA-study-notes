@@ -11,6 +11,9 @@ Install the OpenShift 4.6 container platform on RHEL 8.
 $ this-command
 ```
 1.2. And then that
+```
+$ that-command
+```
 
 ## 2. Manage the OpenShift Container Platform
 
