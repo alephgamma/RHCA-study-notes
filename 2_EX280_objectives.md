@@ -1,4 +1,4 @@
-## EX280 Objectives
+## EX280 Objectives version 4.6
 
 1. Manage OpenShift Container Platform
    - [ ] Use the command-line interface to manage and configure an OpenShift cluster
