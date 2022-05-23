@@ -1,4 +1,4 @@
-## EX180 Objectives
+## EX180 Containers and Kubernetes Objectives
 
 1. Implement images using Podman
    - [ ] Understand and use FROM (the concept of a base image) instruction.
