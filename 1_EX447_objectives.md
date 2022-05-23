@@ -1,4 +1,4 @@
-## EX447 Objectives
+## EX447 Advance Ansible Objectives
 
 1. Understand and use Git
    - [x] Clone a Git repository
