@@ -28,13 +28,14 @@
    - [ ] Listen to container events on the container host.
    - [ ] Use Podman inspect.
 4. Basic OpenShift knowledge
-   - [ ] Creating applications in OpenShift
+5. Creating applications in OpenShift
    - [ ] Create, manage and delete projects from a template, from source code, and from an image.
    - [ ] Customize catalog template parameters.
    - [ ] Specifying environment parameters.
    - [ ] Expose public applications.
-5. Troubleshoot applications in OpenShift 
+6. Troubleshoot applications in OpenShift 
    - [ ] Understand the description of application resources.
    - [ ] Get application logs.
    - [ ] Inspect running applications.
    - [ ] Connecting to containers running in a pod.
+   - [ ] Copy resources to/from containers running in a pod
