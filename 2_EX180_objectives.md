@@ -1,4 +1,4 @@
-## EX280 Objectives version 4.6
+## EX180 Objectives
 
 1. Implement images using Podman
    - [ ] Understand and use FROM (the concept of a base image) instruction.
