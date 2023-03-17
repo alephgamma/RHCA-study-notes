@@ -12,7 +12,7 @@ Create the Openshift workspace environment
 * 3.4 TB of disk space
 
 0.1. Download the standalone `crc` and `pull-secret` from RedHat
-Clicketty click the RedHat web UI
+- Clicketty click the RedHat web UI
 
 0.2. Install crc
 ```
