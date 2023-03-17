@@ -14,7 +14,7 @@ Create the Openshift workspace environment
 0.1. Download the standalone `crc` and `pull-secret` from RedHat
 - Clicketty click the RedHat web UI
 
-0.2. Install crc
+0.2. Install `crc`
 ```
 $ crc setup
 ```
