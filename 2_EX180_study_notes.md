@@ -8,7 +8,7 @@ Create the Openshift workspace environment
 ### Task breakdown
 0.0. Get a beefy server for the homelab
 
-0.1. Download standalone `crc` and `pull-secret` from RedHat
+0.1. Download the standalone `crc` and `pull-secret` from RedHat
 Clicketty click the RedHat web UI
 
 0.2. Install crc
