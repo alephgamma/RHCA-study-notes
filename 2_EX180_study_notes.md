@@ -63,3 +63,10 @@ Build and tag the image using the Dockerfile
 
 ### Task breakdown
 2.1. **cd** to the directory with the Dockerfile
+```
+$ podman build -t jboss-eap:7.4.0 .
+```
+2.2 Start the container
+```
+$ podman run -d --name jboss-from-dockerfile -p 38080:8080 -p 39990:9990 jboss-eap:7.4.0
+```
