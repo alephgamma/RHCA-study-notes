@@ -84,7 +84,7 @@ $ podman stop jboss-app
 
 3.2 Save the image
 ```
-$ podman save -o -o jboss-eap-7.4.0-backup.tar jboss-eap:7.4.0
+$ podman save -o jboss-eap-7.4.0-backup.tar jboss-eap:7.4.0
 ```
 
 3.3 Update the index page
