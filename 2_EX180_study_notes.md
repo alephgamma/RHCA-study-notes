@@ -68,7 +68,7 @@ $ podman build -t jboss-eap:7.4.0 .
 ```
 2.2 Start the container
 ```
-$ podman run -d --name jboss-app -p 38080:8080 -p 39990:9990 jboss-eap:7.4.0
+$ podman run -d --name jboss-app -p 38080:8080 -p 39990:9990 jboss-eap-7.4.0
 ```
 
 ## 3. Manage podman images
@@ -90,7 +90,7 @@ $ podman save -o -o jboss-eap-7.4.0-backup.tar jboss-eap:7.4.0
 3.3 Update the index page
 ```
 $ cat index.html
-Worldmap Page
+JBOSS
 
 $ podman cp index.html jboss-app:/usr/share/nginx/html/index.html
 ```
