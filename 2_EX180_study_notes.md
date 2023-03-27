@@ -22,7 +22,44 @@ $ crc setup
 ## 1. Dockerfiles
 
 ### Task
-Create a centos server with ssh enabled using a Dockerfile 
+Create (extend) an image using a Dockerfile 
 
 ### Task breakdown
-1.1. Open the text editor of the beast (vi vi vi)
+1.1. Open the text editor of the beast (vi vi vi) for ~/Dockerfile
+```
+FROM registry.access.redhat.com/ubi8:latest
+RUN  yum install -y java-1.8.0-openjdk-devel unzip
+RUN  groupadd -g 1100 jboss
+RUN  useradd  -u 1100 -m -g jboss -d /opt/jboss -s /sbin/nologin jboss
+
+# Set the environment variable JBOSS_HOME to /opt/jboss/jboss-eap-7.4
+ENV  JBOSS_HOME /opt/jboss/jboss-eap-7.4
+
+# Set the working directory to the jboss' user home directory
+WORKDIR /opt/jboss
+
+# The ADD command will create new files and directories with a UID and GID of 0 by default
+ADD ./jboss-eap-7.4.0.zip /opt/jboss
+# Unpack the jboss-eap-7.4.0.zip file to the /opt/jboss directory
+RUN unzip /opt/jboss/jboss-eap-7.4.0.zip
+# Set the permissions
+RUN chown -R jboss:jboss /opt/jboss
+# create JBOSS console user
+RUN $JBOSS_HOME/bin/add-user.sh admin secret@123 --silent
+
+# Make the container run as the jboss user
+USER jboss
+# Expose JBoss ports
+EXPOSE 8080 9990 9999
+
+# Start JBoss, use the exec form which is the preferred form
+ENTRYPOINT ["/opt/jboss/jboss-eap-7.4/bin/standalone.sh", "-b", "0.0.0.0", "-c", "standalone-full-ha.xml"]
+```
+
+## 2. Build the application image and run the container
+
+### Task
+Build and tag the image using the Dockerfile
+
+### Task breakdown
+2.1. **cd** to the directory with the Dockerfile
