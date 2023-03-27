@@ -6,15 +6,15 @@
 Create the Openshift workspace environment
 
 ### Task breakdown
-0.0. Get a beefy server for the homelab
+0.0 Get a beefy server for the homelab
 * 40 virtual CPUs (vCPUs)
 * 70 GB of RAM
 * 3.4 TB of disk space
 
-0.1. Download the standalone `crc` and `pull-secret` from RedHat
+0.1 Download the standalone `crc` and `pull-secret` from RedHat
 - Clicketty click the RedHat web UI
 
-0.2. Install `crc`
+0.2 Install `crc`
 ```
 $ crc setup
 ```
@@ -25,7 +25,7 @@ $ crc setup
 Create (extend) an image using a Dockerfile 
 
 ### Task breakdown
-1.1. Open the text editor of the beast (vi vi vi) for ~/Dockerfile
+1.1 Open the text editor of the beast (vi vi vi) for ~/Dockerfile
 ```
 FROM registry.access.redhat.com/ubi8:latest
 RUN  yum install -y java-1.8.0-openjdk-devel unzip
@@ -62,11 +62,45 @@ ENTRYPOINT ["/opt/jboss/jboss-eap-7.4/bin/standalone.sh", "-b", "0.0.0.0", "-c",
 Build and tag the image using the Dockerfile
 
 ### Task breakdown
-2.1. **cd** to the directory with the Dockerfile
+2.1 **cd** to the directory with the Dockerfile
 ```
 $ podman build -t jboss-eap:7.4.0 .
 ```
 2.2 Start the container
 ```
-$ podman run -d --name jboss-from-dockerfile -p 38080:8080 -p 39990:9990 jboss-eap:7.4.0
+$ podman run -d --name jboss-app -p 38080:8080 -p 39990:9990 jboss-eap:7.4.0
+```
+
+## 3. Manage podman images
+
+### Task
+Save, update, tag and commit the application image
+
+### Task breakdown
+3.1 Stop the running container
+```
+$ podman stop jboss-app
+```
+
+3.2 Save the image
+```
+$ podman save -o -o jboss-eap-7.4.0-backup.tar jboss-eap:7.4.0
+```
+
+3.3 Update the index page
+```
+$ cat index.html
+Worldmap Page
+
+$ podman cp index.html jboss-app:/usr/share/nginx/html/index.html
+```
+
+3.4 Tag the image with: **-Final**
+```
+$ podman tag localhost:jboss-eap:7.4.0 localhost:jboss-eap:7.4.0-Final
+```
+
+3.4 Commit the changes
+```
+$ podman commit --author "Rufus A. Babadook" jboss-app jboss-eap:7.4.0-Final
 ```
