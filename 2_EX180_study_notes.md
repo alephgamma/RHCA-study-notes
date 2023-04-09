@@ -104,3 +104,33 @@ $ podman tag localhost:jboss-eap:7.4.0 localhost:jboss-eap:7.4.0-Final
 ```
 $ podman commit --author "Rufus A. Babadook" jboss-app jboss-eap:7.4.0-Final
 ```
+
+## 4. Working with registries
+
+### Task
+Search, pull, login and push to a registry 
+
+### Task breakdown
+4.1 Search for an official image
+```
+$ podman search --filter=is-official docker.io/httpd
+```
+
+4.2 Pull the image
+```
+$ podman login quay.io
+Username: USERNAME
+Password: **********
+Login Succeeded!
+
+```
+
+4.3 Login to a online registry
+```
+$ podman tag docker.io/httpd:latest quay.io/USERNAME/httpd:1.0-test
+```
+
+4.4 Tag and push the image
+```
+$ podman podman push quay.io/USERNAME/httpd:1.0-test
+```
