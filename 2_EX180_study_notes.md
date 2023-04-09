@@ -132,5 +132,16 @@ $ podman tag docker.io/httpd:latest quay.io/USERNAME/httpd:1.0-test
 
 4.4 Tag and push the image
 ```
-$ podman podman push quay.io/USERNAME/httpd:1.0-test
+$ podman push quay.io/USERNAME/httpd:1.0-test
+```
+
+## 5. Working with pods and volumes
+
+### Task
+Create a mysql database with a shared directory
+
+### Task breakdown
+5.1 Create the directory
+```
+$ mkdir db-directory
 ```
