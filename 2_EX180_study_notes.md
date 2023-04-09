@@ -14,9 +14,15 @@ Create the Openshift workspace environment
 0.1 Download the standalone `crc` and `pull-secret` from RedHat
 - Clicketty click the RedHat web UI
 
-0.2 Install `crc`
+0.2 Install `crc` NOTE: All this is done as a regular user.
 ```
 $ crc setup
+```
+
+0.3 Start `crc`=
+```
+$ crc start
+...
 ```
 
 ## 1. Dockerfiles
