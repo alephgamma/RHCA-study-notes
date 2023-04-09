@@ -62,7 +62,7 @@ ENTRYPOINT ["/opt/jboss/jboss-eap-7.4/bin/standalone.sh", "-b", "0.0.0.0", "-c",
 Build and tag the image using the Dockerfile
 
 ### Task breakdown
-2.1 **cd** to the directory with the Dockerfile
+2.1 First **cd** to the directory with the Dockerfile and then build with the tag: 7.4.0
 ```
 $ podman build -t jboss-eap:7.4.0 .
 ```
