@@ -144,10 +144,47 @@ $ podman push quay.io/USERNAME/httpd:1.0-test
 ## 5. Working with pods and volumes
 
 ### Task
-Create a mysql database with a shared directory
+Create a pod with a mysql database and a shared directory that runs as a regular user (rootless)
 
 ### Task breakdown
 5.1 Create the directory
 ```
-$ mkdir db-directory
+$ mkdir -p /home/user/db-pod/db-directory
 ```
+
+5.2 Set the SELINUX context
+```
+$ sudo semanage fcontext -a -t container_file_t "/home/user/db-pod(/.*)?"
+$ sudo restorecon -Rv /home/user/db-pod/db-directory
+```
+
+5.3 Get he UID of the MySQL container by inspecting the image
+```
+$ podman inspect registry.access.redhat.com/rhscl/mysql-57-rhel7:5.7-49 | grep User
+"User": "27",
+"User": "27",
+```
+
+5.4 Set the UID of the shared directory to the MySQL container UID in the modified user (rootless) namespace
+```
+$ podman unshare chown -R 27:27 /home/user/db-pod/db-directory
+```
+
+5.5 Create a pod called wp and publish port 8080
+```
+$ podman pod create --name db-pod -p 8080:80
+```
+
+5.6 Run (and pull) the MySQL container in the db-pod with persistent storage
+```
+$ podman run -d \
+--pod wp \
+--name database \
+-e MYSQL_ROOT_PASSWORD="ex180AdminPassword" \
+-e MYSQL_USER="wpuser" \
+-e MYSQL_PASSWORD="ex180UserPassword" \
+-e MYSQL_DATABASE="wordpress" \
+--volume $HOME/workspaces/wp/db-podman:/var/lib/mysql/data \
+registry.access.redhat.com/rhscl/mysql-57-rhel7:5.7-49
+```
+
