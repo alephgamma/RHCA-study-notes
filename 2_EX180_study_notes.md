@@ -30,6 +30,26 @@ $ crc start
 ### Task
 Create (extend) an image using a Dockerfile 
 
+### Requirements
+* As a user in /home/user/jboss-eap
+* Install the latest ubi8 from: registry.access.redhat.com
+* Install: java-1.8.0-openjdk-devel
+* Create the OS user: jboss
+    * Set UID/GID: 1100:1100 / jboss:jboss
+    * Set the HOMEDIR and WORKDIR: /opt/jboss
+    * Set the UID:GID perms recursively to: jboss:jboss
+    * Set shell: nologin
+* Expose ports: 8080 9990 9999
+* Run the container as: jboss
+* Unpack the jboss-eap-7.4.0.zip file to /opt/jboss
+* Set the environment variable JBOSS_HOME to /opt/jboss/jboss-eap-7.4
+* Create a JBOSS user with credentials: admin/secret@123
+* Start the container with the options: 	
+    * /opt/jboss/jboss-eap-7.4/bin/standalone.sh
+    * -b 0.0.0.0
+    * -c standalone-full-ha.xml
+
+
 ### Task breakdown
 1.1 Open the text editor of the beast (vi vi vi) for ~/Dockerfile
 ```
