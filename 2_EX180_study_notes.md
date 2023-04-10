@@ -19,7 +19,7 @@ Create the Openshift workspace environment
 $ crc setup
 ```
 
-0.3 Start `crc`=
+0.3 Start `crc`
 ```
 $ crc start
 ...
@@ -178,13 +178,12 @@ $ podman pod create --name db-pod -p 8080:80
 5.6 Run (and pull) the MySQL container in the db-pod with persistent storage
 ```
 $ podman run -d \
---pod wp \
+--pod db-pod \
 --name database \
--e MYSQL_ROOT_PASSWORD="ex180AdminPassword" \
--e MYSQL_USER="wpuser" \
--e MYSQL_PASSWORD="ex180UserPassword" \
+-e MYSQL_ROOT_PASSWORD="admin-password" \
+-e MYSQL_USER="db-user" \
+-e MYSQL_PASSWORD="user-password" \
 -e MYSQL_DATABASE="wordpress" \
---volume $HOME/workspaces/wp/db-podman:/var/lib/mysql/data \
+--volume /home/user/db-pod/db-directory:/var/lib/mysql/data \
 registry.access.redhat.com/rhscl/mysql-57-rhel7:5.7-49
 ```
-
