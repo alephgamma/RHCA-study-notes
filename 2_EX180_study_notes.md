@@ -187,3 +187,23 @@ $ podman run -d \
 --volume /home/user/db-pod/db-directory:/var/lib/mysql/data \
 registry.access.redhat.com/rhscl/mysql-57-rhel7:5.7-49
 ```
+
+## 6. Deploy a WordPress Application within the db-pod
+
+### Task
+Deploy a WordPress Application
+
+### Requirements
+Use the latest image: **docker.io/library/wordpress:latest**
+
+Set the following environment variables in the application container
+* WORDPRESS_DB_HOST=127.0.0.1
+* WORDPRESS_DB_USER=wpuser
+* WORDPRESS_DB_PASSWORD=ex180UserPassword
+* WORDPRESS_DB_NAME=wordpress
+
+### Task breakdown
+6.1 Create the directory
+```
+$ mkdir -p /home/user/db-pod/db-directory
+```Deploy a WordPress Application within the pod
