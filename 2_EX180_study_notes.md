@@ -178,7 +178,7 @@ $ sudo semanage fcontext -a -t container_file_t "/home/user/db-pod(/.*)?"
 $ sudo restorecon -Rv /home/user/db-pod/db-directory
 ```
 
-5.3 Get he UID of the MySQL container by inspecting the image
+5.3 Get the UID of the MySQL container by inspecting the image
 ```
 $ podman inspect registry.access.redhat.com/rhscl/mysql-57-rhel7:5.7-49 | grep User
 "User": "27",
@@ -208,10 +208,10 @@ $ podman run -d \
 registry.access.redhat.com/rhscl/mysql-57-rhel7:5.7-49
 ```
 
-## 6. Deploy a WordPress Application within the db-pod
+## 6. Deploy a WordPress application within the db-pod
 
 ### Task
-Deploy a WordPress Application
+Deploy a WordPress application
 
 ### Requirements
 Use the latest image: **docker.io/library/wordpress:latest**
@@ -219,11 +219,29 @@ Use the latest image: **docker.io/library/wordpress:latest**
 Set the following environment variables in the application container
 * WORDPRESS_DB_HOST=127.0.0.1
 * WORDPRESS_DB_USER=wpuser
-* WORDPRESS_DB_PASSWORD=ex180UserPassword
+* WORDPRESS_DB_PASSWORD=wppassword
 * WORDPRESS_DB_NAME=wordpress
 
 ### Task breakdown
-6.1 Create the directory
+6.1 Run (and pull) the WordPress application
 ```
-$ mkdir -p /home/user/db-pod/db-directory
-```Deploy a WordPress Application within the pod
+$ podman run -d \
+--pod db-pod \
+--name application \
+-e WORDPRESS_DB_HOST="127.0.0.1" \
+-e WORDPRESS_DB_USER="wpuser" \
+-e WORDPRESS_DB_PASSWORD="wppassword" \
+-e WORDPRESS_DB_NAME="wordpress" \
+docker.io/library/wordpress:latest
+```
+
+6.2 Verify the containers are running
+```
+$ podman ps
+CONTAINER ID  IMAGE                            COMMAND     CREATED    STATUS    PORTS                  NAMES
+6026e0eda6c0  localhost/podman-pause:4.1.1-16              hour ago   Up About  0.0.0.0:8080->80/tcp   122-infra
+c064b4fe26c9  registry.redhat.com/mysql-57-r   run-mysqld  29 min     Up 29     0.0.0.0:8080->80/tcp   database
+947d4296255a  docker.io/library/wordpress:lat  apache2-..  16 min     Up 16     0.0.0.0:8080->80/tcp   application
+
+```
+6.3 
