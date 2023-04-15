@@ -264,7 +264,7 @@ Deploy a WordPress application
 * The OpenShift installer creates several templates by default. Use the postgresql-ephemeral template to deploy a postgresql Application to OpenShift
 * The name of the application should be postgresql-db
 * Inspect the postgresql-ephemeral template to work out what variables to pass during deployment
-* Set the MySQL environment variables to: 
+* Set the postgresql environment variables to: 
     * POSTGRESQL_USER=pdbuser
     * POSTGRESQL_PASSWORD=pdbpass
     * POSTGRESQL_DATABASE=pdb
