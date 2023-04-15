@@ -242,6 +242,12 @@ CONTAINER ID  IMAGE                            COMMAND     CREATED    STATUS    
 6026e0eda6c0  localhost/podman-pause:4.1.1-16              hour ago   Up About  0.0.0.0:8080->80/tcp   122-infra
 c064b4fe26c9  registry.redhat.com/mysql-57-r   run-mysqld  29 min     Up 29     0.0.0.0:8080->80/tcp   database
 947d4296255a  docker.io/library/wordpress:lat  apache2-..  16 min     Up 16     0.0.0.0:8080->80/tcp   application
-
 ```
-6.3 
+
+6.3 Verify the WordPress page is served out by the webserver 
+```
+$ curl -sL http://127.0.0.1:8080 | grep -i wordpress
+...
+<p id="logo">WordPress</p>
+...
+```
