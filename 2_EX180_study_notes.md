@@ -258,7 +258,7 @@ $ curl -sL http://127.0.0.1:8080 | grep -i wordpress
 Deploy a WordPress application
 
 ### Requirements
-* OpenShift can be accessed: https://api.crc.testing:6443
+* OpenShift can be accessed: `https://api.crc.testing:6443`
 * Login to OpenShift with username developer and password developer
 * Create a new-project called my-psql and use it to deploy resources for this task
 * The OpenShift installer creates several templates by default. Use the postgresql-ephemeral template to deploy a postgresql Application to OpenShift
