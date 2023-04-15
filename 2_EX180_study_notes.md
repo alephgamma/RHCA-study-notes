@@ -251,3 +251,40 @@ $ curl -sL http://127.0.0.1:8080 | grep -i wordpress
 <p id="logo">WordPress</p>
 ...
 ```
+
+## 7. Deploy a postgresql application using an OpenShift template
+
+### Task
+Deploy a WordPress application
+
+### Requirements
+* OpenShift can be accessed: https://api.crc.testing:6443
+* Login to OpenShift with username developer and password developer
+* Create a new-project called my-psql and use it to deploy resources for this task
+* The OpenShift installer creates several templates by default. Use the postgresql-ephemeral template to deploy a postgresql Application to OpenShift
+* The name of the application should be postgresql-db
+* Inspect the postgresql-ephemeral template to work out what variables to pass during deployment
+* Set the MySQL environment variables to: 
+    * POSTGRESQL_USER=pdbuser
+    * POSTGRESQL_PASSWORD=pdbpass
+    * POSTGRESQL_DATABASE=pdb
+    * DATABASE_SERVICE_NAME=pdb-svc-name
+* Verify that the database pdb has been created
+* Info for create OpenShift application a docker image
+
+### Task breakdown
+7.1 Create a new-project
+```
+$ oc new-project my-psql
+```
+
+7.2 Create a new-project
+```
+$ oc new-app -n my-psql  \
+--name=postgresql-db \
+--template=postgresql-ephemeral \
+--param DATABASE_SERVICE_NAME=pdb-svc-name \
+--param POSTGRESQL_USER=pdbuser \
+--param POSTGRESQL_PASSWORD=pdbpass \
+--param POSTGRESQL_DATABASE=pdb
+```
