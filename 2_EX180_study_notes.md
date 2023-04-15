@@ -1,4 +1,4 @@
-# EX180 - Containers and Kubernetes (Openshift) Summary
+# EX180 - Containers and Kubernetes (OpenShift) Summary
 
 ## 0. The workspace environment
 
