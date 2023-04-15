@@ -3,7 +3,7 @@
 ## 0. The workspace environment
 
 ### Task 
-Create the Openshift workspace environment
+Create the OpenShift workspace environment
 
 ### Task breakdown
 0.0 Get a beefy server for the homelab
