@@ -3,7 +3,10 @@
 ## 1. Install the OpenShift Container Platform
 
 ### Task
-Install the OpenShift 4.6 container platform on RHEL 8. 
+Install the CodeReady Containers (or OpenShift 4.6) on RHEL 8. 
+
+### Requirements
+* Create a user with the cluster-admin role
 
 ### Task breakdown
 1.1. Do this
