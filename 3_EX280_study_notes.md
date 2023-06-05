@@ -203,7 +203,7 @@ $ oc create quota quota-resource --hard=pods=3,memory=2Gi,cpu=200m -n NAMESPACE
 Create a LimitRange
 
 ### Task breakdown
-9.1 Create limits yaml file
+9.1. Create limits yaml file
 ```
 apiVersion: v1
 kind: LimitRange
@@ -219,6 +219,10 @@ spec:
         cpu: "200m"
         memory: "16Mi"
 
+```
+9.2. Apply the limits file
+```
+$ oc create -f limits.yaml -n NAMESPACE
 ```
 ## 10. Scaling
 
