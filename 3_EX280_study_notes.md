@@ -33,17 +33,15 @@ $ sudo yum install httpd-tools -y
 $ sudo htpasswd -c -B -b /etc/users.htpasswd admin admin123
 $ sudo htpasswd -b /etc/users.htpasswd redhat redhat123
 ```
-2.3. Create the secret localusers in NAMESPACE: openshift-config
+2.3. Create the secret localusers in the NAMESPACE: openshift-config
 ```
 $ oc create secret generic localusers \
 --from-file htpasswd=/etc/users.htpasswd \
 -n openshift-config
-secret/localusers created
 ```
 2.4. Replace the file: oauth.yml
 ```
 $ oc replace -f oauth.yml
-oauth.config.openshift.io/cluster replaced
 ```
 
 ## 3. Configure Role-Based Access and Groups
@@ -58,3 +56,32 @@ $ oc adm policy add-cluster-role-to-user cluster-admin admin
 Warning: User 'admin' not found
 clusterrole.rbac.authorization.k8s.io/cluster-admin added: "admin"
 ```
+3.2. Add the groups:  dev-group  qa-group
+```
+$ oc adm groups new dev-group
+
+$ oc adm groups new qa-group
+```
+3.3. Add the user admin to the group: dev-group
+```
+$ oc adm groups add-users dev-group admin
+```
+3.4. Remove the ability for ALL users to create new projects
+```
+$ oc adm policy remove-cluster-role-from-group self-provisioner system:authenticated:oauth
+```
+3.5. Grant the role self-provisioner to the dev-group
+```
+$ oc adm policy add-cluster-role-to-group self-provisioner dev-group
+```
+3.6 Remove the kubeadmin user from the cluster
+```
+$ oc delete secrets kubeadmin -n kube-system
+```
+
+## 4. Configure Role-Based Access and Groups
+
+### Task
+Configure Security Context Constraints
+
+### Task breakdown
