@@ -6,7 +6,7 @@
 Install the CodeReady Containers (or OpenShift 4.6) on RHEL 8. 
 
 ### Requirements
-* Create a user with the cluster-admin role
+* Default settings
 
 ### Task breakdown
 1.1. Do this
@@ -18,7 +18,7 @@ $ this-command
 $ that-command
 ```
 
-## 2. Configure an Identity Provider
+## 2. Identity Providers
 
 ### Task
 Configure htpasswd as the Identity Provider
@@ -44,7 +44,7 @@ $ oc create secret generic localusers \
 $ oc replace -f oauth.yml
 ```
 
-## 3. Configure Role-Based Access and Groups
+## 3. Role-Based Access and Groups
 
 ### Task
 Create roles, groups and manage users
@@ -53,13 +53,10 @@ Create roles, groups and manage users
 3.1. Grant the role cluster-admin the the user admin
 ```
 $ oc adm policy add-cluster-role-to-user cluster-admin admin
-Warning: User 'admin' not found
-clusterrole.rbac.authorization.k8s.io/cluster-admin added: "admin"
 ```
 3.2. Add the groups:  dev-group  qa-group
 ```
 $ oc adm groups new dev-group
-
 $ oc adm groups new qa-group
 ```
 3.3. Add the user admin to the group: dev-group
@@ -78,10 +75,33 @@ $ oc adm policy add-cluster-role-to-group self-provisioner dev-group
 ```
 $ oc delete secrets kubeadmin -n kube-system
 ```
+NOTE: Do not delete for CRC
 
-## 4. Configure Role-Based Access and Groups
+## 4. Security Context Constraints 
 
 ### Task
-Configure Security Context Constraints
+Configure Security Context Constraints (SCC)
+
+### Requirements
+* Using a new project deploy git from quay.io/redhattraining/gitlab-ce:8.4.3-ce.0
 
 ### Task breakdown
+4.1. Create the gitlab project
+```
+$ oc new-project gitlab-project
+$ oc new-app --image quay.io/redhattraining/gitlab-ce:8.4.3-ce.0
+```
+4.2. Create a serviceaccount
+```
+$ oc create serviceaccount application-sa
+```
+4.3 As kubeadmin assign the SCC anyuid to the Service Account: application-sa
+```
+$ oc login -u kubeadmin -p SUPER-SECRET https://api.crc.testing:6443
+$ oc adm policy add-scc-to-user anyuid -z application-sa
+$ oc login -u developer -p developer https://api.crc.testing:6443
+```
+4.4. Assign the application-sa Service Account to the gitlab deployment
+```
+$ oc set serviceaccount deployment.apps/gitlab-ce application-sa
+```
