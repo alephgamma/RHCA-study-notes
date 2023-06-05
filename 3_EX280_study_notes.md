@@ -202,18 +202,21 @@ Create a ResourceQuota
 Create a LimitRange
 
 ### Task breakdown
-
-
+```
+```
 ## 10. Scaling
 
 ### Task 1
-Create a LimitRange
+Manually scale replicas
 
 ### Task breakdown
-10.1. Manually scale replicaa
-
+10.1. Increase the amount of replicas
+```
+```
 ### Task 2
 Horizontal Pod Autoscaling (hpa)
 
 ### Task breakdown
 10.2. Dynamically scale
+```
+```
