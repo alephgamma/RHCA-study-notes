@@ -86,7 +86,7 @@ Configure Security Context Constraints (SCC)
 * Using a new project deploy git from quay.io/redhattraining/gitlab-ce:8.4.3-ce.0
 
 ### Task breakdown
-4.1. Create the gitlab project
+4.1. Create the gitlab project and deploy the app
 ```
 $ oc new-project gitlab-project
 $ oc new-app --image quay.io/redhattraining/gitlab-ce:8.4.3-ce.0
@@ -104,4 +104,44 @@ $ oc login -u developer -p developer https://api.crc.testing:6443
 4.4. Assign the application-sa Service Account to the gitlab deployment
 ```
 $ oc set serviceaccount deployment.apps/gitlab-ce application-sa
+```
+
+## 5. Secure routes
+
+### Task
+Create a secure passthrough route to the pod
+
+### Requirements
+* Create a cert and key
+* Using a new project deploy an http server with TLS
+* Deploy from quay.io/redhattraining/hello-world-secure:v1.0
+
+### Task breakdown
+5.1. Create the cert and key
+```
+$ openssl req -x509 -newkey rsa:4096 -nodes -sha256 -out passthrough.crt -keyout passthrough.key -days 3650 \
+-subj '/C=US/ST=Indiana/L=Hawkins/O=DOE/OU=National Labs/CN=hawkins.doe.gov/emailAddress=nunya@bidness.com'
+```
+5.2. Create the gitlab project and deploy the app
+```
+$ oc new-project hello-secure-project
+$ oc new-app --name hello-secure --image quay.io/redhattraining/hello-world-secure:v1.0
+```
+5.3. Create the TLS secret
+```
+$ oc create secret tls passthrough \
+--key passthrough.key \
+--cert passthrough.crt
+```
+5.4. Create the volume that will have the cert and key
+```
+$ oc set volumes deployment.apps/hello-secure \
+--add \
+--type secret \
+--secret-name passthrough \
+--mount-path /run/secrets/nginx
+```
+5.5 Create secure edge route
+```
+$ oc create route passthrough --service hello-secure 
 ```
