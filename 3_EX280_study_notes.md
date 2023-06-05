@@ -172,3 +172,18 @@ $ oc create secret generic mysql-secret \
 ```
 $ oc set env deployment.apps/mysql-name --from secret/mysql-secret --prefix MYSQL_
 ```
+
+## 7. Labeling nodes
+
+### Task
+Label a node with a tag ENV and set it to PROD
+
+### Task breakdown
+7.1. As kubeadmin (or clusteradmin) get the nodes
+```
+$ oc get nodes --show-labels
+```
+7.2. Set the node tag
+```
+$ oc label node crc-74q6p-master-0 env=prod
+```
