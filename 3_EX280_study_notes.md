@@ -71,7 +71,7 @@ $ oc adm policy remove-cluster-role-from-group self-provisioner system:authentic
 ```
 $ oc adm policy add-cluster-role-to-group self-provisioner dev-group
 ```
-3.6 Remove the kubeadmin user from the cluster
+3.6. Remove the kubeadmin user from the cluster
 ```
 $ oc delete secrets kubeadmin -n kube-system
 ```
@@ -95,7 +95,7 @@ $ oc new-app --image quay.io/redhattraining/gitlab-ce:8.4.3-ce.0
 ```
 $ oc create serviceaccount application-sa
 ```
-4.3 As kubeadmin assign the SCC anyuid to the Service Account: application-sa
+4.3. As kubeadmin assign the SCC anyuid to the Service Account: application-sa
 ```
 $ oc login -u kubeadmin -p SUPER-SECRET https://api.crc.testing:6443
 $ oc adm policy add-scc-to-user anyuid -z application-sa
@@ -187,3 +187,33 @@ $ oc get nodes --show-labels
 ```
 $ oc label node crc-74q6p-master-0 env=prod
 ```
+
+## 8. ResourceQuotas
+
+### Task
+Create a ResourceQuota
+
+### Task breakdown
+
+
+## 9. LimitRange
+
+### Task
+Create a LimitRange
+
+### Task breakdown
+
+
+## 10. Scaling
+
+### Task 1
+Create a LimitRange
+
+### Task breakdown
+10.1. Manually scale replicaa
+
+### Task 2
+Horizontal Pod Autoscaling (hpa)
+
+### Task breakdown
+10.2. Dynamically scale
