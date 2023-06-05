@@ -194,24 +194,41 @@ $ oc label node crc-74q6p-master-0 env=prod
 Create a ResourceQuota
 
 ### Task breakdown
-
-
+```
+$ oc create quota quota-resource --hard=pods=3,memory=2Gi,cpu=200m -n NAMESPACE
+```
 ## 9. LimitRanges
 
 ### Task
 Create a LimitRange
 
 ### Task breakdown
+9.1 Create limits yaml file
 ```
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: resource-limits
+spec:
+  limits:
+    - type: "Pod"
+      max:
+        cpu: "2"
+        memory: "1Gi"
+      min:
+        cpu: "200m"
+        memory: "16Mi"
+
 ```
 ## 10. Scaling
 
 ### Task 1
-Manually scale replicas
+Manually scale replicas to 2
 
 ### Task breakdown
 10.1. Increase the amount of replicas
 ```
+oc scale --replicas 2 deploymentconfig.apps.openshift.io/postgresql
 ```
 ### Task 2
 Horizontal Pod Autoscaling (hpa)
@@ -219,4 +236,5 @@ Horizontal Pod Autoscaling (hpa)
 ### Task breakdown
 10.2. Dynamically scale
 ```
+$ oc autoscale deployment.app/postgresql --min 1 --max 3 --cpu-percent 75
 ```
