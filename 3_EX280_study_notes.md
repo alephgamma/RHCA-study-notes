@@ -44,9 +44,9 @@ $ oc create secret generic localusers \
 $ oc get oauth cluster -o yaml > oauth-original.yml
 $ cp oauth-original.yml oauth.yml
 ```
-2.5. Edit in file in place
+2.5. Or edit in file in place
 ```
-oc login -u kubeadmin -p pZYyD-ykREm-N9iGr-JVbR8 https://api.crc.testing:6443
+$ oc edit oauth.config.openshift.io/cluster
 ```
 2.6. Edit the oauth file 
 ``` 
@@ -59,11 +59,7 @@ spec:
     name: htpasswd
     type: HTPasswd
 ```
-2.7. Edit in file in place
-```
-oc login -u kubeadmin -p pZYyD-ykREm-N9iGr-JVbR8 https://api.crc.testing:6443
-```
-2.8. Replace the file: oauth.yml
+2.7. Replace the file: oauth.yml
 ```
 $ oc replace -f oauth.yml
 ```
