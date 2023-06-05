@@ -196,7 +196,7 @@ Create a ResourceQuota
 ### Task breakdown
 
 
-## 9. LimitRange
+## 9. LimitRanges
 
 ### Task
 Create a LimitRange
