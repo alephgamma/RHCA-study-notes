@@ -228,7 +228,7 @@ Manually scale replicas to 2
 ### Task breakdown
 10.1. Increase the amount of replicas
 ```
-oc scale --replicas 2 deploymentconfig.apps.openshift.io/postgresql
+$ oc scale --replicas 2 deploymentconfig.apps.openshift.io/postgresql
 ```
 ### Task 2
 Horizontal Pod Autoscaling (hpa)
