@@ -122,7 +122,7 @@ Create a secure passthrough route to the pod
 $ openssl req -x509 -newkey rsa:4096 -nodes -sha256 -out passthrough.crt -keyout passthrough.key -days 3650 \
 -subj '/C=US/ST=Indiana/L=Hawkins/O=DOE/OU=National Labs/CN=hawkins.doe.gov/emailAddress=nunya@bidness.com'
 ```
-5.2. Create the gitlab project and deploy the app
+5.2. Create the secure http server project and deploy the app
 ```
 $ oc new-project hello-secure-project
 $ oc new-app --name hello-secure --image quay.io/redhattraining/hello-world-secure:v1.0
@@ -141,7 +141,34 @@ $ oc set volumes deployment.apps/hello-secure \
 --secret-name passthrough \
 --mount-path /run/secrets/nginx
 ```
-5.5 Create secure edge route
+5.5. Create secure edge route
 ```
 $ oc create route passthrough --service hello-secure 
+```
+
+## 6. Secret literals
+
+### Task
+Create secret literals and apply to a deployment
+
+### Task breakdown
+6.1. Create the project and deploy the application
+```
+$ oc new-project mysql-project
+$ oc new-app mysql \
+-n mysql \
+--name=mysql-name \
+-l app=mysql-label
+```
+6.2. Create the secret from literals
+```
+$ oc create secret generic mysql-secret \
+--from-literal root_password=rootpass \
+--from-literal user=mysqluser \
+--from-literal password=mysqlpass \
+--from-literal database=mysqldb
+```
+6.3. Set the deployment RESOURCE to use environment variables
+```
+$ oc set env deployment.apps/mysql-name --from secret/mysql-secret --prefix MYSQL_
 ```
