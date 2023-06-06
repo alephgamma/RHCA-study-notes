@@ -44,7 +44,7 @@ $ oc create secret generic localusers \
 $ oc get oauth cluster -o yaml > oauth-original.yml
 $ cp oauth-original.yml oauth.yml
 ```
-2.5. Or edit in file in place
+2.5. Or edit the file in place
 ```
 $ oc edit oauth.config.openshift.io/cluster
 ```
