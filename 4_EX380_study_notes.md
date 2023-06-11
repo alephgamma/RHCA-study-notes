@@ -41,17 +41,17 @@
    - [ ] Add a worker node
    - [ ] Create custom machine config pools
 10. Configure Persistent Storage
-   - [ ] Provision shared storage for applications
-   - [ ] Provision block storage
-   - [ ] Configure and use storage quotas, classes, and policies
-   - [ ] Troubleshoot storage issues
+    - [ ] Provision shared storage for applications
+    - [ ] Provision block storage
+    - [ ] Configure and use storage quotas, classes, and policies
+    - [ ] Troubleshoot storage issues
 11. Manage Cluster Monitoring and Metrics
-   - [ ] Manage OpenShift alerts
-   - [ ] Use monitoring to troubleshoot cluster issues
+    - [ ] Manage OpenShift alerts
+    - [ ] Use monitoring to troubleshoot cluster issues
 12. Provision and Inspect Cluster Logging
-   - [ ] Deploy cluster logging
-   - [ ] Query cluster logs
-   - [ ] Diagnose cluster logging problems
+    - [ ] Deploy cluster logging
+    - [ ] Query cluster logs
+    - [ ] Diagnose cluster logging problems
 13. Recover Failed Worker Nodes
-   - [ ] Diagnose worker node failures
-   - [ ] Recover a node that has failed
+    - [ ] Diagnose worker node failures
+    - [ ] Recover a node that has failed
