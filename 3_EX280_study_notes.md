@@ -28,9 +28,9 @@ Configure htpasswd as the Identity Provider
 ```
 $ sudo yum install httpd-tools -y
 ```
-2.2. Create the htpasswd file and add the users: admin redhat
+2.2. Create the htpasswd file and add the ( user / password ) : ( manager / manager123 ) ( redhat / redhat123 )
 ```
-$ sudo htpasswd -c -B -b /etc/users.htpasswd admin admin123
+$ sudo htpasswd -c -B -b /etc/users.htpasswd manager manager123
 $ sudo htpasswd -b /etc/users.htpasswd redhat redhat123
 ```
 2.3. Create the secret localusers in the NAMESPACE: openshift-config
