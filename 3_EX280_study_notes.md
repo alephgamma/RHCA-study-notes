@@ -1,12 +1,12 @@
 # EX280 - Summary
 
-## 1. Install the OpenShift Container Platform (Template)
+## 1. Install the OpenShift CodeReady Container (crc) Platform (Template)
 
 ### Task
-Install the CodeReady Containers (or OpenShift 4.6) on RHEL 8. 
+Install the `crc` on RHEL 8. 
 
 ### Requirements
-* Default settings
+* New settings
 
 ### Task breakdown
 1.1. Do this
