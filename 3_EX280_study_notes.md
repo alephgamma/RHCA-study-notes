@@ -3,7 +3,7 @@
 ## 1. Install the OpenShift CodeReady Container (crc) Platform (Template)
 
 ### Task
-Install the `crc` on RHEL 8. 
+Install `crc` on RHEL 8. 
 
 ### Requirements
 * New settings
