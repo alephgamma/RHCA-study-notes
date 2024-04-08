@@ -172,7 +172,7 @@ $ oc create route passthrough --service hello-secure
 ## 6. Secret literals
 
 ### Task
-Create a secret from literal and apply to a deployment
+Create a secret from a **key:value** and apply to a deployment
 
 ### Task breakdown
 6.1. Create the project and deploy the application
