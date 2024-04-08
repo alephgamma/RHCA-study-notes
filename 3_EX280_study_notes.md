@@ -24,11 +24,14 @@ $ that-command
 Configure htpasswd as the Identity Provider
 
 ### Task breakdown
-2.1. Install httpd-tools
+2.1. Install `httpd-tools`
 ```
 $ sudo yum install httpd-tools -y
 ```
-2.2. Create the htpasswd file and add the users in the format, ( user / password ) : ( manager / manager123 ) ( redhat / redhat123 )
+2.2. Create the htpasswd file and add the users in the format:
+* `user` / `password`
+* `manager` / `manager123`
+* `redhat` / `redhat123`
 ```
 $ sudo htpasswd -c -B -b /etc/users.htpasswd manager manager123
 $ sudo htpasswd -b /etc/users.htpasswd redhat redhat123
@@ -56,7 +59,7 @@ spec:
       fileData:
         name: localusers
     mappingMethod: claim
-    name: htpasswd
+    name: htpasswd-file
     type: HTPasswd
 ```
 2.7. Replace the file: oauth.yml
