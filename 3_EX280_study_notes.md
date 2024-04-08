@@ -172,7 +172,7 @@ $ oc create route passthrough --service hello-secure
 ## 6. Secret literals
 
 ### Task
-Create a secret from a **key:value** and apply to a deployment
+Create a secret from a **key:value** pairs and apply to a deployment
 
 ### Task breakdown
 6.1. Create the project and deploy the application
@@ -183,7 +183,11 @@ $ oc new-app mysql \
 --name=mysql-name \
 -l app=mysql-label
 ```
-6.2. Create the secret from literals
+6.2. Create the secret from **key:value** pairs
+* root_password=rootpass
+* user=mysqluser
+* password=mysqlpass
+* database=mysqldb
 ```
 $ oc create secret generic mysql-secret \
 --from-literal root_password=rootpass \
