@@ -76,14 +76,15 @@ Create roles, groups and manage users
 ```
 $ oc adm policy add-cluster-role-to-user cluster-admin manager
 ```
-3.2. Add the groups:  dev-group  qa-group
+3.2. Add the groups `admin-group` `dev-group` `qa-group`
 ```
+$ oc adm groups new admin-group
 $ oc adm groups new dev-group
 $ oc adm groups new qa-group
 ```
-3.3. Add the user `manager` to the group: dev-group
+3.3. Add the user `manager` to the group: admin-group
 ```
-$ oc adm groups add-users dev-group manager
+$ oc adm groups add-users admin-group manager
 ```
 3.4. Remove the ability for ALL users to create new projects
 ```
