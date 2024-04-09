@@ -28,7 +28,7 @@ Configure `htpasswd` as the Identity Provider
 ```
 $ sudo yum install httpd-tools -y
 ```
-2.2. Create the htpasswd file and add the users in the format:
+2.2. Create the `htpasswd` file and add the users
 * `manager` / `manager123`
 * `redhat` / `redhat123`
 ```
