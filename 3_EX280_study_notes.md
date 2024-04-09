@@ -248,6 +248,10 @@ hello-787445fd88-tcqv9   1/1     Running   0          67s   10.9.0.41   master01
 ```
 $ oc edit deployment/hello
 ...output omitted...
+spec:
+  template:
+    spec:
+      dnsPolicy: ClusterFirst
       nodeSelector:
         env: dev
 ...output omitted...
