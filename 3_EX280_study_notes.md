@@ -222,14 +222,16 @@ master03   Ready    master,worker   621d   v1.23.3+e419edf   beta.kubernetes.io/
 7.2. Set the node tag **( k=v )**
 ```
 $ oc label node master01 env=prod
+$ oc label node master02 env=test
+$ oc label node master03 env=dev
 ```
 7.3. View the label `env`
 ```
 $ oc get node -L env
 NAME       STATUS   ROLES           AGE    VERSION           ENV
 master01   Ready    master,worker   621d   v1.23.3+e419edf   prod
-master02   Ready    master,worker   621d   v1.23.3+e419edf
-master03   Ready    master,worker   621d   v1.23.3+e419edf
+master02   Ready    master,worker   621d   v1.23.3+e419edf   test
+master03   Ready    master,worker   621d   v1.23.3+e419edf   dev
 ```
 7.3. Create a project and application 
 ```
@@ -244,7 +246,17 @@ hello-787445fd88-tcqv9   1/1     Running   0          67s   10.9.0.41   master01
 ```
 7.4. Edit a deployment to use a tagged node
 ```
-$ oc get deployment
+$ oc edit deployment/hello
+...output omitted...
+      nodeSelector:
+        env: dev
+...output omitted...
+```
+7.5. Get the node on which the pod is running 
+```
+$ oc get pod -o wide
+NAME                    READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+hello-b64bdf567-t5r4v   1/1     Running   0          65s   10.10.0.72   master03   <none>           <none>
 ```
 ## 8. ResourceQuotas
 
