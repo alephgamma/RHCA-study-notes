@@ -21,7 +21,7 @@ $ that-command
 ## 2. Identity Providers
 
 ### Task
-Configure htpasswd as the Identity Provider
+Configure `htpasswd` as the Identity Provider
 
 ### Task breakdown
 2.1. Install `httpd-tools`
