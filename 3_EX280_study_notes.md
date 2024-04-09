@@ -5,7 +5,7 @@
 ### Task
 Install `crc` on RHEL 8. 
 
-### Requirements
+### Requirements (Optional)
 * New settings
 
 ### Task breakdown
@@ -106,7 +106,7 @@ NOTE: Do not delete for CRC
 Configure Security Context Constraints (SCC)
 
 ### Requirements
-* Using a new project deploy gitlab server from quay.io/redhattraining/gitlab-ce:8.4.3-ce.0
+* Using a new project deploy gitlab server from `quay.io/redhattraining/gitlab-ce:8.4.3-ce.0`
 
 ### Task breakdown
 4.1. Create the gitlab project and deploy the app
@@ -114,17 +114,17 @@ Configure Security Context Constraints (SCC)
 $ oc new-project gitlab-project
 $ oc new-app --image quay.io/redhattraining/gitlab-ce:8.4.3-ce.0
 ```
-4.2. Create a serviceaccount
+4.2. Create a serviceaccount `application-sa`
 ```
 $ oc create serviceaccount application-sa
 ```
-4.3. As kubeadmin assign the SCC anyuid to the Service Account: application-sa
+4.3. As `kubeadmin` assign the SCC `anyuid` to the Service Account `application-sa`
 ```
 $ oc login -u kubeadmin -p SUPER-SECRET https://api.crc.testing:6443
 $ oc adm policy add-scc-to-user anyuid -z application-sa
 $ oc login -u developer -p developer https://api.crc.testing:6443
 ```
-4.4. Assign the application-sa Service Account to the gitlab deployment
+4.4. Assign the `application-sa` Service Account to the gitlab deployment
 ```
 $ oc set serviceaccount deployment.apps/gitlab-ce application-sa
 ```
@@ -172,7 +172,7 @@ $ oc create route passthrough --service hello-secure
 ## 6. Secret literals
 
 ### Task
-Create a secret from a **key:value** pairs and apply to a deployment
+Create a secret from **key:value** pair(s) and apply to a deployment
 
 ### Task breakdown
 6.1. Create the project and deploy the application
@@ -222,7 +222,7 @@ Create a ResourceQuota
 
 ### Task breakdown
 ```
-$ oc create quota quota-resource --hard=pods=3,memory=2Gi,cpu=200m -n NAMESPACE
+$ oc create quota quota-resource --hard pods=3,memory=2Gi,cpu=200m -n NAMESPACE
 ```
 ## 9. LimitRanges
 
