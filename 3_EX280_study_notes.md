@@ -203,7 +203,7 @@ $ oc set env deployment.apps/mysql-name --from secret/mysql-secret --prefix MYSQ
 ## 7. Labeling nodes
 
 ### Task
-Label a node with a tag **ENV** and set it to PROD **( k:v )**
+Label a node with a tag **ENV** and set it to PROD **( k=v )**
 
 ### Task breakdown
 7.1. As `kubeadmin` (or a user with the `clusteradmin` role) get the nodes
@@ -214,11 +214,11 @@ master01   Ready    master,worker   621d   v1.23.3+e419edf   beta.kubernetes.io/
 master02   Ready    master,worker   621d   v1.23.3+e419edf   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=master02,kubernetes.io/os=linux,node-role.kubernetes.io/master=,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos
 master03   Ready    master,worker   621d   v1.23.3+e419edf   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=master03,kubernetes.io/os=linux,node-role.kubernetes.io/master=,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos
 ```
-7.2. Set the node tag
+7.2. Set the node tag **( k=v )**
 ```
 $ oc label node master01 env=prod
 ```
-7.3. View the label: env
+7.3. View the label `env`
 ```
 $ oc get node -L env
 NAME       STATUS   ROLES           AGE    VERSION           ENV
@@ -226,7 +226,21 @@ master01   Ready    master,worker   621d   v1.23.3+e419edf   prod
 master02   Ready    master,worker   621d   v1.23.3+e419edf
 master03   Ready    master,worker   621d   v1.23.3+e419edf
 ```
-
+7.3. Create a project and application 
+```
+$ oc new-project pods-project
+$ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0 --name hello -n pods-project
+```
+7.3. Get the node on which the pod is running 
+```
+$ oc get pod -o wide
+NAME                     READY   STATUS    RESTARTS   AGE   IP          NODE       NOMINATED NODE   READINESS GATES
+hello-787445fd88-tcqv9   1/1     Running   0          67s   10.9.0.41   master01   <none>           <none>
+```
+7.4. Edit a deployment to use a tagged node
+```
+$ oc get deployment
+```
 ## 8. ResourceQuotas
 
 ### Task
