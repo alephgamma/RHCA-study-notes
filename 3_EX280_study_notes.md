@@ -203,7 +203,7 @@ $ oc set env deployment.apps/mysql-name --from secret/mysql-secret --prefix MYSQ
 ## 7. Labeling nodes
 
 ### Task
-Label a node with a tag ENV and set it to PROD **( k:v )**
+Label a node with a tag **ENV** and set it to PROD **( k:v )**
 
 ### Task breakdown
 7.1. As `kubeadmin` (or a user with the `clusteradmin` role) get the nodes
@@ -217,6 +217,14 @@ master03   Ready    master,worker   621d   v1.23.3+e419edf   beta.kubernetes.io/
 7.2. Set the node tag
 ```
 $ oc label node master01 env=prod
+```
+7.3. View the label: env
+```
+$ oc get node -L env
+NAME       STATUS   ROLES           AGE    VERSION           ENV
+master01   Ready    master,worker   621d   v1.23.3+e419edf   prod
+master02   Ready    master,worker   621d   v1.23.3+e419edf
+master03   Ready    master,worker   621d   v1.23.3+e419edf
 ```
 
 ## 8. ResourceQuotas
