@@ -72,7 +72,7 @@ $ oc replace -f oauth.yml
 Create roles, groups and manage users
 
 ### Task breakdown
-3.1. Grant the role cluster-admin the the user manager
+3.1. Grant the role cluster-admin the the user `manager`
 ```
 $ oc adm policy add-cluster-role-to-user cluster-admin manager
 ```
@@ -82,7 +82,7 @@ $ oc adm groups new admin-group
 $ oc adm groups new dev-group
 $ oc adm groups new qa-group
 ```
-3.3. Add the user `manager` to the group: admin-group
+3.3. Add the user `manager` to the group `admin-group`
 ```
 $ oc adm groups add-users admin-group manager
 ```
@@ -90,11 +90,11 @@ $ oc adm groups add-users admin-group manager
 ```
 $ oc adm policy remove-cluster-role-from-group self-provisioner system:authenticated:oauth
 ```
-3.5. Grant the role self-provisioner to the dev-group
+3.5. Grant the role `self-provisioner` to the `dev-group`
 ```
 $ oc adm policy add-cluster-role-to-group self-provisioner dev-group
 ```
-3.6. Remove the kubeadmin user from the cluster
+3.6. Remove the `kubeadmin` user from the cluster
 ```
 $ oc delete secrets kubeadmin -n kube-system
 ```
