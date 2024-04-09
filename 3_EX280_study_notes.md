@@ -29,14 +29,13 @@ Configure htpasswd as the Identity Provider
 $ sudo yum install httpd-tools -y
 ```
 2.2. Create the htpasswd file and add the users in the format:
-* `user` / `password`
 * `manager` / `manager123`
 * `redhat` / `redhat123`
 ```
 $ sudo htpasswd -c -B -b /etc/users.htpasswd manager manager123
 $ sudo htpasswd -b /etc/users.htpasswd redhat redhat123
 ```
-2.3. Create the secret localusers in the NAMESPACE: openshift-config
+2.3. Create the secret `localusers` in the NAMESPACE `openshift-config`
 ```
 $ oc create secret generic localusers \
 --from-file htpasswd=/etc/users.htpasswd \
@@ -62,7 +61,7 @@ spec:
     name: htpasswd-file
     type: HTPasswd
 ```
-2.7. Replace the file: oauth.yml
+2.7. Replace the file `oauth.yml`
 ```
 $ oc replace -f oauth.yml
 ```
@@ -82,9 +81,9 @@ $ oc adm policy add-cluster-role-to-user cluster-admin admin
 $ oc adm groups new dev-group
 $ oc adm groups new qa-group
 ```
-3.3. Add the user admin to the group: dev-group
+3.3. Add the user `manager` to the group: dev-group
 ```
-$ oc adm groups add-users dev-group admin
+$ oc adm groups add-users dev-group manager
 ```
 3.4. Remove the ability for ALL users to create new projects
 ```
