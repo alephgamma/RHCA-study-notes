@@ -32,13 +32,13 @@ $ sudo yum install httpd-tools -y
 * `manager` / `manager123`
 * `redhat` / `redhat123`
 ```
-$ sudo htpasswd -c -B -b /etc/users.htpasswd manager manager123
-$ sudo htpasswd -b /etc/users.htpasswd redhat redhat123
+$ sudo htpasswd -c -B -b /tmp/users.htpasswd manager manager123
+$ sudo htpasswd -b /tmp/users.htpasswd redhat redhat123
 ```
 2.3. Create the secret `localusers` in the NAMESPACE `openshift-config`
 ```
 $ oc create secret generic localusers \
---from-file htpasswd=/etc/users.htpasswd \
+--from-file htpasswd=/tmp/users.htpasswd \
 -n openshift-config
 ```
 2.4. Get the oauth cluster RESOURCE, but first make a back up 
