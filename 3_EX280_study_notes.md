@@ -129,10 +129,8 @@ $ oc login -u developer -p developer https://api.crc.testing:6443
 $ oc set serviceaccount deployment.apps/gitlab-ce application-sa
 ```
 
-## 5. Secure routes
-
-### Task
-Create a secure passthrough route to the pod
+## 5. Secure routes: `edge`
+Create a secure `edge` route to the pod
 
 ### Requirements
 * Create a cert and key
@@ -150,13 +148,35 @@ $ openssl req -x509 -newkey rsa:4096 -nodes -sha256 -out passthrough.crt -keyout
 $ oc new-project hello-secure-project
 $ oc new-app --name hello-secure --image quay.io/redhattraining/hello-world-secure:v1.0
 ```
-5.3. Create the TLS secret
+
+## 6. Secure routes: `passthrough`
+
+### Task
+Create a secure `passthrough` route to the pod
+
+### Requirements
+* Create a cert and key
+* Using a new project deploy an http server with TLS
+* Deploy from quay.io/redhattraining/hello-world-secure:v1.0
+
+### Task breakdown
+6.1. Create the cert and key
+```
+$ openssl req -x509 -newkey rsa:4096 -nodes -sha256 -out passthrough.crt -keyout passthrough.key -days 3650 \
+-subj '/C=US/ST=Indiana/L=Hawkins/O=DOE/OU=National Labs/CN=hawkins.doe.gov/emailAddress=nunya@bidness.com'
+```
+6.2. Create the secure http server project and deploy the app
+```
+$ oc new-project hello-secure-project
+$ oc new-app --name hello-secure --image quay.io/redhattraining/hello-world-secure:v1.0
+```
+6.3. Create the TLS `passthrough` secret
 ```
 $ oc create secret tls passthrough \
 --key passthrough.key \
 --cert passthrough.crt
 ```
-5.4. Create the volume that will have the cert and key
+6.4. Create the volume that will have the cert and key
 ```
 $ oc set volumes deployment.apps/hello-secure \
 --add \
@@ -164,18 +184,18 @@ $ oc set volumes deployment.apps/hello-secure \
 --secret-name passthrough \
 --mount-path /run/secrets/nginx
 ```
-5.5. Create secure edge route
+6.5. Create secure edge route
 ```
 $ oc create route passthrough --service hello-secure 
 ```
 
-## 6. Secret literals
+## 7. Secret literals
 
 ### Task
 Create a secret from **key:value** pair(s) and apply to a deployment
 
 ### Task breakdown
-6.1. Create the project and deploy the application
+7.1. Create the project and deploy the application
 ```
 $ oc new-project mysql-project
 $ oc new-app mysql \
@@ -183,7 +203,7 @@ $ oc new-app mysql \
 --name=mysql-name \
 -l app=mysql-label
 ```
-6.2. Create the secret from **key:value** pairs
+7.2. Create the secret from **key:value** pairs
 * root_password=rootpass
 * user=mysqluser
 * password=mysqlpass
@@ -195,12 +215,12 @@ $ oc create secret generic mysql-secret \
 --from-literal password=mysqlpass \
 --from-literal database=mysqldb
 ```
-6.3. Set the deployment RESOURCE to use environment variables
+7.3. Set the deployment RESOURCE to use environment variables
 ```
 $ oc set env deployment.apps/mysql-name --from secret/mysql-secret --prefix MYSQL_
 ```
 
-## 7. Labeling nodes
+## 8. Labeling nodes
 
 ### Task
 Label a node with a tag **ENV** and set it to values **( k=v )**
@@ -211,7 +231,7 @@ Label a node with a tag **ENV** and set it to values **( k=v )**
 * master03: dev
 
 ### Task breakdown
-7.1. As `kubeadmin` (or a user with the `clusteradmin` role) get the nodes
+8.1. As `kubeadmin` (or a user with the `clusteradmin` role) get the nodes
 ```
 $ oc get nodes --show-labels
 NAME       STATUS   ROLES           AGE    VERSION           LABELS
@@ -219,13 +239,13 @@ master01   Ready    master,worker   621d   v1.23.3+e419edf   beta.kubernetes.io/
 master02   Ready    master,worker   621d   v1.23.3+e419edf   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=master02,kubernetes.io/os=linux,node-role.kubernetes.io/master=,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos
 master03   Ready    master,worker   621d   v1.23.3+e419edf   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=master03,kubernetes.io/os=linux,node-role.kubernetes.io/master=,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos
 ```
-7.2. Set the node tag **( k=v )**
+8.2. Set the node tag **( k=v )**
 ```
 $ oc label node master01 env=prod
 $ oc label node master02 env=test
 $ oc label node master03 env=dev
 ```
-7.3. View the label `env`
+8.3. View the label `env`
 ```
 $ oc get node -L env
 NAME       STATUS   ROLES           AGE    VERSION           ENV
@@ -233,18 +253,18 @@ master01   Ready    master,worker   621d   v1.23.3+e419edf   prod
 master02   Ready    master,worker   621d   v1.23.3+e419edf   test
 master03   Ready    master,worker   621d   v1.23.3+e419edf   dev
 ```
-7.3. Create a project and application 
+8.4. Create a project and application 
 ```
 $ oc new-project pods-project
 $ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0 --name hello -n pods-project
 ```
-7.3. Get the node on which the pod is running 
+8.5. Get the node on which the pod is running 
 ```
 $ oc get pod -o wide
 NAME                     READY   STATUS    RESTARTS   AGE   IP          NODE       NOMINATED NODE   READINESS GATES
 hello-787445fd88-tcqv9   1/1     Running   0          67s   10.9.0.41   master01   <none>           <none>
 ```
-7.4. Edit a deployment to use a tagged node
+8.6. Edit a deployment to use a tagged node
 ```
 $ oc edit deployment/hello
 ...output omitted...
@@ -256,13 +276,13 @@ spec:
         env: dev
 ...output omitted...
 ```
-7.5. Get the node on which the pod is running 
+8.7. Get the node on which the pod is running 
 ```
 $ oc get pod -o wide
 NAME                    READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
 hello-b64bdf567-t5r4v   1/1     Running   0          65s   10.10.0.72   master03   <none>           <none>
 ```
-## 8. ResourceQuotas
+## 9. ResourceQuotas
 
 ### Task
 Create a ResourceQuota
@@ -271,13 +291,13 @@ Create a ResourceQuota
 ```
 $ oc create quota quota-resource --hard pods=3,memory=2Gi,cpu=200m -n NAMESPACE
 ```
-## 9. LimitRanges
+## 10. LimitRanges
 
 ### Task
 Create a LimitRange
 
 ### Task breakdown
-9.1. Create limits yaml file
+10.1. Create limits yaml file
 ```
 apiVersion: v1
 kind: LimitRange
@@ -292,19 +312,25 @@ spec:
       min:
         cpu: "200m"
         memory: "16Mi"
-
+    - type: "Container"
+      max:
+        cpu: "2"
+        memory: "1Gi"
+      min:
+        cpu: "200m"
+        memory: "16Mi"
 ```
-9.2. Apply the limits file
+10.2. Apply the limits file
 ```
 $ oc create -f limits.yaml -n NAMESPACE
 ```
-## 10. Scaling
+## 11. Scaling
 
 ### Task 1
 Manually scale replicas to 2
 
 ### Task breakdown
-10.1. Increase the amount of replicas
+11.1. Increase the amount of replicas
 ```
 $ oc scale --replicas 2 deploymentconfig.apps.openshift.io/postgresql
 ```
@@ -312,7 +338,7 @@ $ oc scale --replicas 2 deploymentconfig.apps.openshift.io/postgresql
 Horizontal Pod Autoscaling (hpa)
 
 ### Task breakdown
-10.2. Dynamically scale
+11.2. Dynamically scale
 ```
 $ oc autoscale deployment.app/postgresql --min 1 --max 3 --cpu-percent 75
 ```
