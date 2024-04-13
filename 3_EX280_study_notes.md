@@ -71,6 +71,9 @@ $ oc replace -f oauth.yml
 ### Task
 Create roles, groups and manage users
 
+### Requirements
+* New settings
+
 ### Task breakdown
 3.1. Grant the role cluster-admin the user `manager`
 ```
