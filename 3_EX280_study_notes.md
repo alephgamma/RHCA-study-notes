@@ -106,7 +106,7 @@ NOTE: Do not delete for CRC
 Configure Security Context Constraints (SCC)
 
 ### Requirements
-* Using a new project, deploy gitlab server from `quay.io/redhattraining/gitlab-ce:8.4.3-ce.0`
+* Using a new project, deploy a gitlab server from `quay.io/redhattraining/gitlab-ce:8.4.3-ce.0`
 
 ### Task breakdown
 4.1. Create the gitlab project and deploy the app
