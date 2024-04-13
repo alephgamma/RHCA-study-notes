@@ -149,9 +149,16 @@ $ openssl req -x509 -newkey rsa:4096 -nodes -sha256 -out passthrough.crt -keyout
 5.2. Create the secure http server project and deploy the app
 ```
 $ oc new-project hello-secure-project
-$ oc new-app --name hello-secure --image quay.io/redhattraining/hello-world-secure:v1.0
+$ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
-
+5.3. Create the `edge` route
+```
+$ oc create route edge \
+--hostname hello.apps.ocp4.example.com \
+--service hello-world-nginx \
+--key edge.key \
+--cert edge.crt
+```
 ## 6. Secure routes: `passthrough`
 
 ### Task
