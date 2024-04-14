@@ -1,8 +1,13 @@
 # EX280 - Summary
 
 ## Prerequisites
+* Set the text editor
 ```
 echo 'set expandtab tabstop=2 shiftwidth=2' >> ~/.vimrc
+```
+* The missing manual
+```
+oc explain limitrange.spec.limits
 ```
 ## 1. Install the OpenShift CodeReady Container (crc) Platform (Template)
 
