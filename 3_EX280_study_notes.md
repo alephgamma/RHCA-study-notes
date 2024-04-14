@@ -139,11 +139,12 @@ Create a secure `edge` route to the pod
 * Create a cert and key
 * Using a new project deploy an http server with TLS
 * Deploy from quay.io/redhattraining/hello-world-secure:v1.0
+* Ingress route: apps-crc.testing
 
 ### Task breakdown
 5.1. Create the cert and key
 ```
-$ openssl req -x509 -newkey rsa:4096 -nodes -sha256 -out passthrough.crt -keyout passthrough.key -days 3650 \
+$ openssl req -x509 -newkey rsa:4096 -nodes -sha256 -out edge.crt -keyout edge.key -days 3650 \
 -subj '/C=US/ST=Indiana/L=Hawkins/O=DOE/OU=National Labs/CN=hawkins.doe.gov/emailAddress=nunya@bidness.com'
 ```
 5.2. Create the secure http server project and deploy the app
@@ -153,12 +154,18 @@ $ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
 5.3. Create the `edge` route
 ```
+$ APPS=apps-crc.testing
 $ oc create route edge \
---hostname hello.apps.ocp4.example.com \
+--hostname hello.$APPS \
 --service hello-world-nginx \
 --key edge.key \
 --cert edge.crt
 ```
+5.4. Verify
+```
+$ curl 
+```
+
 ## 6. Secure routes: `passthrough`
 
 ### Task
@@ -168,6 +175,7 @@ Create a secure `passthrough` route to the pod
 * Create a cert and key
 * Using a new project deploy an http server with TLS
 * Deploy from quay.io/redhattraining/hello-world-secure:v1.0
+* Ingress route: apps-crc.testing
 
 ### Task breakdown
 6.1. Create the cert and key
