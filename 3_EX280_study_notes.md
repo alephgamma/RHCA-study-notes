@@ -262,9 +262,9 @@ $ oc set env deployment.apps/mysql-name --from secret/mysql-secret --prefix MYSQ
 Label a node with a tag **ENV** and set it to values **( k=v )**
 
 ### Requirements
-* master01: prod
-* master02: test
-* master03: dev
+* `master01: prod`
+* `master02: test`
+* `master03: dev`
 
 ### Task breakdown
 8.1. As `kubeadmin` (or a user with the `clusteradmin` role) get the nodes
