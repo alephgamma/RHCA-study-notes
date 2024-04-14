@@ -77,10 +77,7 @@ $ oc replace -f oauth.yml
 Create roles, groups and manage users
 
 ### Requirements
-* Groups
-`admin-group`
-`dev-group`
-`qa-group`
+* Groups: `admin-group` `dev-group` `qa-group`
 
 ### Task breakdown
 3.1. Grant the role cluster-admin the user `manager`
@@ -231,7 +228,7 @@ $ curl -k hello.apps-crc.testing
 ## 7. Secret literals
 
 ### Task
-Create a secret from **key:value** pair(s) and apply to a deployment
+Create a secret from **key: value** pair(s) and apply to a deployment
 
 ### Task breakdown
 7.1. Create the project and deploy the application
