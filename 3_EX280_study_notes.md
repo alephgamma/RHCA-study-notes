@@ -90,6 +90,7 @@ Create projects, groups and manage users with the respective roles
 * Grant the `self-provisioner` role ONLY to the group `dev-group`
 * Add users to groups and roles
   * Add the user `manager` to the `admin-group`
+  * Add the user `dev-user` to the `dev-group`
   * Grant the role `admin` to `manager` to projects `wonderland` `zland`
   * Grant the role `edit` to `devuser` to the project `wonderland`
   * Grant the role `view` to `qauser` to the project `zland`
@@ -133,6 +134,10 @@ oc adm groups add-users admin-group manager
 ```
 oc adm policy add-role-to-user admin manager -n wonderland
 oc adm policy add-role-to-user admin manager -n zland
+```
+3.8. Add `devuser` the group `dev-group`
+```
+oc adm policy add-role-to-user view devuser -n wonderland 
 ```
 3.9. Add `devuser` the role `edit` to the project `wonderland`
 ```
