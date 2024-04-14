@@ -88,13 +88,14 @@ Create projects, groups and manage users with the respective roles
 * Create projects: `wonderland` `zland`
 * Create groups: `admin-group` `dev-group` `qa-group`
 * Grant the `self-provisioner` role ONLY to the group `dev-group`
+* Add users to groups
 * Grant the role `admin` to `manager` to projects `wonderland` `zland`
 * Grant the role `edit` to `devuser` to the project `wonderland`
 * Grant the role `view` to `qauser` to the project `zland`
 * Remove the user `kubadmin`
 
 ### Task breakdown
-3.1. Grant the role cluster-admin the user `manager`
+3.1. Grant the role `cluster-admin` the user `manager`
 ```
 oc adm policy add-cluster-role-to-user cluster-admin manager
 ```
@@ -102,7 +103,7 @@ oc adm policy add-cluster-role-to-user cluster-admin manager
 ```
 $ for P in wonderland zland ; do oc new-project ${P} ; done
 ```
-3.3. Add the groups `admin-group` `dev-group` `qa-group`
+3.3. Add the groups: `admin-group` `dev-group` `qa-group`
 ```
 oc adm groups new admin-group
 oc adm groups new dev-group
@@ -124,7 +125,7 @@ oc adm policy add-cluster-role-to-group self-provisioner dev-group
 ```
 oc delete secrets kubeadmin -n kube-system
 ```
-NOTE: Do not delete for CRC
+NOTE: Do not delete `kubeadmin` from CRC
 
 ## 4. Security Context Constraints 
 
