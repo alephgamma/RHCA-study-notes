@@ -465,7 +465,11 @@ Manually scale replicas
 oc new-project zland-project
 oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
-11.2. Increase the amount of replicas
+11.2. Get the deployment RESOURCE
+```
+oc scale --replicas 2 deploymentconfig.apps.openshift.io/postgresql
+```
+11.3. Increase the amount of replicas
 ```
 oc scale --replicas 2 deploymentconfig.apps.openshift.io/postgresql
 ```
