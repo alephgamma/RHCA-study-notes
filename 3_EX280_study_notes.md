@@ -40,10 +40,12 @@ sudo yum install httpd-tools -y
 ```
 2.2. Create the `htpasswd` file and add the users
 * `manager` / `manager123`
-* `redhat` / `redhat123`
+* `qauser` / `qauser123`
+* `devuser` / `devuser123`
 ```
 sudo htpasswd -c -B -b /tmp/users.htpasswd manager manager123
-sudo htpasswd -b /tmp/users.htpasswd redhat redhat123
+sudo htpasswd -b /tmp/users.htpasswd qauser qauser123
+sudo htpasswd -b /tmp/users.htpasswd devuser devuser123
 ```
 2.3. Create the secret `localusers` in the NAMESPACE `openshift-config`
 ```
@@ -82,7 +84,11 @@ oc replace -f oauth.yml
 Create roles, groups and manage users
 
 ### Requirements
+* Grant the user `manager` the cluster-role `cluster-admin`
+* Projects: `wonderland` `zland`
 * Groups: `admin-group` `dev-group` `qa-group`
+* Grant the `self-provioner` role ONLY to the group `dev-group`
+* Remove the user `kubadmin`
 
 ### Task breakdown
 3.1. Grant the role cluster-admin the user `manager`
