@@ -5,7 +5,7 @@
 ```
 echo 'set expandtab tabstop=2 shiftwidth=2' >> ~/.vimrc
 ```
-* The missing manual
+* The missing manual: `man limitrange`
 ```
 oc explain limitrange.spec.limits
 ```
