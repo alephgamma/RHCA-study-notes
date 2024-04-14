@@ -2,8 +2,7 @@
 
 ## Prerequisites
 ```
-$ cat ~/.vimrc
-set expandtab tabstop=2 shiftwidth=2
+echo 'set expandtab tabstop=2 shiftwidth=2' >> ~/.vimrc
 ```
 ## 1. Install the OpenShift CodeReady Container (crc) Platform (Template)
 
@@ -16,11 +15,11 @@ Install `crc` on RHEL 8.
 ### Task breakdown
 1.1. Do this
 ```
-$ this-command
+this-command
 ```
 1.2. And then that
 ```
-$ that-command
+that-command
 ```
 
 ## 2. Identity Providers
@@ -37,23 +36,23 @@ $ sudo yum install httpd-tools -y
 * `manager` / `manager123`
 * `redhat` / `redhat123`
 ```
-$ sudo htpasswd -c -B -b /tmp/users.htpasswd manager manager123
-$ sudo htpasswd -b /tmp/users.htpasswd redhat redhat123
+sudo htpasswd -c -B -b /tmp/users.htpasswd manager manager123
+sudo htpasswd -b /tmp/users.htpasswd redhat redhat123
 ```
 2.3. Create the secret `localusers` in the NAMESPACE `openshift-config`
 ```
-$ oc create secret generic localusers \
+oc create secret generic localusers \
 --from-file htpasswd=/tmp/users.htpasswd \
 -n openshift-config
 ```
 2.4. Get the oauth cluster RESOURCE, but first make a back up 
 ```
-$ oc get oauth cluster -o yaml > oauth-original.yml
-$ cp oauth-original.yml oauth.yml
+oc get oauth cluster -o yaml > oauth-original.yml
+cp oauth-original.yml oauth.yml
 ```
 2.5. Or edit the file in place
 ```
-$ oc edit oauth.config.openshift.io/cluster
+oc edit oauth.config.openshift.io/cluster
 ```
 2.6. Edit the oauth file 
 ``` 
@@ -68,7 +67,7 @@ spec:
 ```
 2.7. Replace the file `oauth.yml`
 ```
-$ oc replace -f oauth.yml
+oc replace -f oauth.yml
 ```
 
 ## 3. Role-Based Access and Groups
@@ -82,29 +81,29 @@ Create roles, groups and manage users
 ### Task breakdown
 3.1. Grant the role cluster-admin the user `manager`
 ```
-$ oc adm policy add-cluster-role-to-user cluster-admin manager
+oc adm policy add-cluster-role-to-user cluster-admin manager
 ```
 3.2. Add the groups `admin-group` `dev-group` `qa-group`
 ```
-$ oc adm groups new admin-group
-$ oc adm groups new dev-group
-$ oc adm groups new qa-group
+oc adm groups new admin-group
+oc adm groups new dev-group
+oc adm groups new qa-group
 ```
 3.3. Add the user `manager` to the group `admin-group`
 ```
-$ oc adm groups add-users admin-group manager
+oc adm groups add-users admin-group manager
 ```
 3.4. Remove the ability for ALL users to create new projects
 ```
-$ oc adm policy remove-cluster-role-from-group self-provisioner system:authenticated:oauth
+oc adm policy remove-cluster-role-from-group self-provisioner system:authenticated:oauth
 ```
 3.5. Grant the role `self-provisioner` to the `dev-group`
 ```
-$ oc adm policy add-cluster-role-to-group self-provisioner dev-group
+oc adm policy add-cluster-role-to-group self-provisioner dev-group
 ```
 3.6. Remove the `kubeadmin` user from the cluster
 ```
-$ oc delete secrets kubeadmin -n kube-system
+oc delete secrets kubeadmin -n kube-system
 ```
 NOTE: Do not delete for CRC
 
@@ -119,18 +118,18 @@ Configure Security Context Constraints (SCC)
 ### Task breakdown
 4.1. Create the gitlab project and deploy the app
 ```
-$ oc new-project gitlab-project
-$ oc new-app --image quay.io/redhattraining/gitlab-ce:8.4.3-ce.0
+oc new-project gitlab-project
+oc new-app --image quay.io/redhattraining/gitlab-ce:8.4.3-ce.0
 ```
 4.2. Create a serviceaccount `application-sa`
 ```
-$ oc create serviceaccount application-sa
+oc create serviceaccount application-sa
 ```
 4.3. As `kubeadmin` assign the SCC `anyuid` to the Service Account `application-sa`
 ```
-$ oc login -u kubeadmin -p SUPER-SECRET https://api.crc.testing:6443
-$ oc adm policy add-scc-to-user anyuid -z application-sa
-$ oc login -u developer -p developer https://api.crc.testing:6443
+oc login -u kubeadmin -p SUPER-SECRET https://api.crc.testing:6443
+oc adm policy add-scc-to-user anyuid -z application-sa
+oc login -u developer -p developer https://api.crc.testing:6443
 ```
 4.4. Assign the `application-sa` Service Account to the gitlab deployment
 ```
@@ -149,18 +148,18 @@ Create a secure `edge` route to the pod
 ### Task breakdown
 5.1. Create the cert and key
 ```
-$ openssl req -x509 -newkey rsa:4096 -nodes -sha256 -out edge.crt -keyout edge.key -days 3650 \
+openssl req -x509 -newkey rsa:4096 -nodes -sha256 -out edge.crt -keyout edge.key -days 3650 \
 -subj '/C=US/ST=Indiana/L=Hawkins/O=DOE/OU=National Labs/CN=hawkins.doe.gov/emailAddress=nunya@bidness.com'
 ```
 5.2. Create the secure http server project and deploy the app
 ```
-$ oc new-project hello-secure-project
-$ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
+oc new-project hello-secure-project
+oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
 5.3. Create the `edge` route
 ```
-$ APPS=`oc whoami --show-console | cut -d'.' -f2,3`
-$ oc create route edge \
+APPS=`oc whoami --show-console | cut -d'.' -f2,3`
+oc create route edge \
 --hostname hello.$APPS \
 --service hello-world-nginx \
 --key edge.key \
@@ -168,7 +167,7 @@ $ oc create route edge \
 ```
 5.4. Verify
 ```
-$ curl -k hello.apps-crc.testing
+curl -k hello.apps-crc.testing
 <html>
   <body>
     <h1>Hello, world from nginx!</h1>
@@ -190,23 +189,23 @@ Create a secure `passthrough` route to the pod
 ### Task breakdown
 6.1. Create the cert and key
 ```
-$ openssl req -x509 -newkey rsa:4096 -nodes -sha256 -out passthrough.crt -keyout passthrough.key -days 3650 \
+openssl req -x509 -newkey rsa:4096 -nodes -sha256 -out passthrough.crt -keyout passthrough.key -days 3650 \
 -subj '/C=US/ST=Indiana/L=Hawkins/O=DOE/OU=National Labs/CN=hawkins.doe.gov/emailAddress=nunya@bidness.com'
 ```
 6.2. Create the secure http server project and deploy the app
 ```
-$ oc new-project hello-secure-project
-$ oc new-app --name hello-secure --image quay.io/redhattraining/hello-world-secure:v1.0
+oc new-project hello-secure-project
+oc new-app --name hello-secure --image quay.io/redhattraining/hello-world-secure:v1.0
 ```
 6.3. Create the TLS `passthrough` secret
 ```
-$ oc create secret tls passthrough \
+oc create secret tls passthrough \
 --key passthrough.key \
 --cert passthrough.crt
 ```
 6.4. Create the volume that will have the cert and key
 ```
-$ oc set volumes deployment.apps/hello-secure \
+oc set volumes deployment.apps/hello-secure \
 --add \
 --type secret \
 --secret-name passthrough \
@@ -214,11 +213,11 @@ $ oc set volumes deployment.apps/hello-secure \
 ```
 6.5. Create secure edge route
 ```
-$ oc create route passthrough --service hello-secure 
+oc create route passthrough --service hello-secure 
 ```
 6.6. Verify
 ```
-$ curl -k hello.apps-crc.testing
+curl -k hello.apps-crc.testing
 <html>
   <body>
     <h1>Hello, world from nginx!</h1>
@@ -233,8 +232,8 @@ Create a secret from **key: value** pair(s) and apply to a deployment
 ### Task breakdown
 7.1. Create the project and deploy the application
 ```
-$ oc new-project mysql-project
-$ oc new-app mysql \
+oc new-project mysql-project
+oc new-app mysql \
 -n mysql \
 --name=mysql-name \
 -l app=mysql-label
@@ -245,7 +244,7 @@ $ oc new-app mysql \
 * `password: mysqlpass`
 * `database: mysqldb`
 ```
-$ oc create secret generic mysql-secret \
+oc create secret generic mysql-secret \
 --from-literal root_password=rootpass \
 --from-literal user=mysqluser \
 --from-literal password=mysqlpass \
@@ -269,7 +268,7 @@ Label a node with a tag **ENV** and set it to values **( k: v )**
 ### Task breakdown
 8.1. As `kubeadmin` (or a user with the `clusteradmin` role) get the nodes
 ```
-$ oc get nodes --show-labels
+oc get nodes --show-labels
 NAME       STATUS   ROLES           AGE    VERSION           LABELS
 master01   Ready    master,worker   621d   v1.23.3+e419edf   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=master01,kubernetes.io/os=linux,node-role.kubernetes.io/master=,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos
 master02   Ready    master,worker   621d   v1.23.3+e419edf   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=master02,kubernetes.io/os=linux,node-role.kubernetes.io/master=,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos
@@ -277,9 +276,9 @@ master03   Ready    master,worker   621d   v1.23.3+e419edf   beta.kubernetes.io/
 ```
 8.2. Set the node tag **( k=v )**
 ```
-$ oc label node master01 env=prod
-$ oc label node master02 env=test
-$ oc label node master03 env=dev
+oc label node master01 env=prod
+oc label node master02 env=test
+oc label node master03 env=dev
 ```
 8.3. View the label `env`
 ```
@@ -291,12 +290,12 @@ master03   Ready    master,worker   621d   v1.23.3+e419edf   dev
 ```
 8.4. Create a project and application 
 ```
-$ oc new-project pods-project
-$ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0 --name hello -n pods-project
+oc new-project pods-project
+oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0 --name hello -n pods-project
 ```
 8.5. Get the node on which the pod is running 
 ```
-$ oc get pod -o wide
+oc get pod -o wide
 NAME                     READY   STATUS    RESTARTS   AGE   IP          NODE       NOMINATED NODE   READINESS GATES
 hello-787445fd88-tcqv9   1/1     Running   0          67s   10.9.0.41   master01   <none>           <none>
 ```
@@ -314,7 +313,7 @@ spec:
 ```
 8.7. Get the node on which the pod is running 
 ```
-$ oc get pod -o wide
+oc get pod -o wide
 NAME                    READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
 hello-b64bdf567-t5r4v   1/1     Running   0          65s   10.10.0.72   master03   <none>           <none>
 ```
@@ -325,7 +324,7 @@ Create a ResourceQuota
 
 ### Task breakdown
 ```
-$ oc create quota quota-resource --hard pods=3,memory=2Gi,cpu=200m -n NAMESPACE
+oc create quota quota-resource --hard pods=3,memory=2Gi,cpu=200m -n NAMESPACE
 ```
 ## 10. LimitRanges
 
@@ -358,7 +357,7 @@ spec:
 ```
 10.2. Apply the limits file
 ```
-$ oc create -f limits.yaml -n NAMESPACE
+oc create -f limits.yaml -n NAMESPACE
 ```
 ## 11. Scaling
 
@@ -368,7 +367,7 @@ Manually scale replicas to 2
 ### Task breakdown
 11.1. Increase the amount of replicas
 ```
-$ oc scale --replicas 2 deploymentconfig.apps.openshift.io/postgresql
+oc scale --replicas 2 deploymentconfig.apps.openshift.io/postgresql
 ```
 ### Task 2
 Horizontal Pod Autoscaling (hpa)
@@ -376,5 +375,5 @@ Horizontal Pod Autoscaling (hpa)
 ### Task breakdown
 11.2. Dynamically scale
 ```
-$ oc autoscale deployment.app/postgresql --min 1 --max 3 --cpu-percent 75
+oc autoscale deployment.app/postgresql --min 1 --max 3 --cpu-percent 75
 ```
