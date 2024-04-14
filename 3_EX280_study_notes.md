@@ -89,6 +89,7 @@ Create projects, groups and manage users with the respective roles
 * Create groups: `admin-group` `dev-group` `qa-group`
 * Grant the `self-provisioner` role ONLY to the group `dev-group`
 * Add users to groups and roles
+  * Add the user `manager` to the `admin-group`
   * Grant the role `admin` to `manager` to projects `wonderland` `zland`
   * Grant the role `edit` to `devuser` to the project `wonderland`
   * Grant the role `view` to `qauser` to the project `zland`
@@ -101,7 +102,7 @@ oc adm policy add-cluster-role-to-user cluster-admin manager
 ```
 3.2. Create projects: `wonderland` `zland`
 ```
-$ for P in wonderland zland ; do oc new-project ${P} ; done
+for P in wonderland zland ; do oc new-project ${P} ; done
 ```
 3.3. Add the groups: `admin-group` `dev-group` `qa-group`
 ```
@@ -121,11 +122,17 @@ oc adm policy add-cluster-role-to-group self-provisioner dev-group
 ```
 oc adm groups add-users admin-group manager 
 ```
-3.7. Add the user `devuser` the role `edit` to the group `devuser`
+3.7. Add the user `manager` to the role `admin` in the projects: `wonderland` `zland`
+```
+oc adm policy add-role-to-user admin manager -n wonderland
+oc adm policy add-role-to-user admin manager -n zland
+
+```
+3.8. Add the user `devuser` the role `edit` to the group `devuser`
 ```
 oc adm groups add-users admin-group manager
 ```
-3.8. Remove the `kubeadmin` user from the cluster
+3.9. Remove the `kubeadmin` user from the cluster
 ```
 oc delete secrets kubeadmin -n kube-system
 ```
@@ -167,7 +174,7 @@ Create a secure `edge` route to the pod
 * Create a cert and key
 * Using a new project deploy an http server with TLS
 * Deploy from `quay.io/redhattraining/hello-world-secure:v1.0`
-* Ingress route: apps-crc.testing
+* Ingress route from the FQDN
 
 ### Task breakdown
 5.1. Create the cert and key
