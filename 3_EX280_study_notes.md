@@ -306,7 +306,7 @@ oc set env deployment.apps/mysql-name --from secret/mysql-secret --prefix MYSQL_
 ## 8. Labeling nodes
 
 ### Task
-Label a node with a tag **ENV** and set it to values **( k: v )**
+Label a node with a tag **ENV** and set it to values **( key: value )**
 
 ### Requirements
 * `master01: prod`
@@ -408,12 +408,12 @@ oc create quota quota-resource --hard pods=3,memory=2Gi,cpu=200m -n zland-projec
 Create a LimitRange
 
 ### Requirements
-* Set the Pods and Containers
+* Set the Pods and Containers to:
   * max cpus: 2
   * min cpus: 200 millicores
   * max memory: 1 GB
   * min memory: 16 MB
-* DefaultRequest for Pods
+* Set DefaultRequest for Pods to:
   * cpu: 100 millicores
 
 ### Task breakdown
@@ -459,8 +459,13 @@ Manually scale replicas
 ### Requirements
 * Set the replicas to 2
 
-### Task breakdown
-11.1. Increase the amount of replicas
+### Task 1 breakdown
+11.1. Create the project and the app
+```
+oc new-project zland-project
+oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
+```
+11.2. Increase the amount of replicas
 ```
 oc scale --replicas 2 deploymentconfig.apps.openshift.io/postgresql
 ```
@@ -472,8 +477,8 @@ Horizontal Pod Autoscaling `hpa`
 * max: 3
 * cpu percentage: 75
 
-### Task breakdown
-11.2. Dynamically scale
+### Task 2 breakdown
+11.3. Dynamically scale
 ```
 oc autoscale deployment.app/postgresql --min 1 --max 3 --cpu-percent 75
 ```
