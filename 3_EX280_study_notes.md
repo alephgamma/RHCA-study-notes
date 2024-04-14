@@ -379,7 +379,6 @@ Create a ResourceQuota
 9.1. Create the project and the app
 ```
 oc new-project zland-project
-
 oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
 9.1. Two ways to do this
@@ -421,7 +420,6 @@ Create a LimitRange
 10.1. Create the project and the app
 ```
 oc new-project wonderland-project
-
 oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
 10.1. Create and apply the `limitrange` YAML CRD
