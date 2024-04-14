@@ -81,7 +81,7 @@ oc replace -f oauth.yml
 ## 3. Role-Based Access and Groups
 
 ### Task
-Create roles, groups and manage users
+Create projects, groups and manage users with the respective roles
 
 ### Requirements
 * Grant the user `manager` the cluster-role `cluster-admin`
