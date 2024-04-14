@@ -85,8 +85,8 @@ Create roles, groups and manage users
 
 ### Requirements
 * Grant the user `manager` the cluster-role `cluster-admin`
-* Projects: `wonderland` `zland`
-* Groups: `admin-group` `dev-group` `qa-group`
+* Create projects: `wonderland` `zland`
+* Create groups: `admin-group` `dev-group` `qa-group`
 * Grant the `self-provioner` role ONLY to the group `dev-group`
 * Remove the user `kubadmin`
 
@@ -95,25 +95,29 @@ Create roles, groups and manage users
 ```
 oc adm policy add-cluster-role-to-user cluster-admin manager
 ```
-3.2. Add the groups `admin-group` `dev-group` `qa-group`
+3.2. Create projects: `wonderland` `zland`
+```
+$ for P in wonderland zland ; do oc new-project ${P} ; done
+```
+3.3. Add the groups `admin-group` `dev-group` `qa-group`
 ```
 oc adm groups new admin-group
 oc adm groups new dev-group
 oc adm groups new qa-group
 ```
-3.3. Add the user `manager` to the group `admin-group`
+3.4. Add the user `manager` to the group `admin-group`
 ```
 oc adm groups add-users admin-group manager
 ```
-3.4. Remove the ability for ALL users to create new projects
+3.5. Remove the ability for ALL users to create new projects
 ```
 oc adm policy remove-cluster-role-from-group self-provisioner system:authenticated:oauth
 ```
-3.5. Grant the role `self-provisioner` to the `dev-group`
+3.6. Grant the role `self-provisioner` to the `dev-group`
 ```
 oc adm policy add-cluster-role-to-group self-provisioner dev-group
 ```
-3.6. Remove the `kubeadmin` user from the cluster
+3.7. Remove the `kubeadmin` user from the cluster
 ```
 oc delete secrets kubeadmin -n kube-system
 ```
