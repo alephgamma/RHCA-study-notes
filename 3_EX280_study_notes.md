@@ -1,5 +1,10 @@
 # EX280 - Summary
 
+## Prerequisites
+```
+$ cat ~/.vimrc
+set expandtab tabstop=2 shiftwidth=2
+```
 ## 1. Install the OpenShift CodeReady Container (crc) Platform (Template)
 
 ### Task
@@ -163,7 +168,12 @@ $ oc create route edge \
 ```
 5.4. Verify
 ```
-$ curl 
+$ curl -k hello.apps-crc.testing
+<html>
+  <body>
+    <h1>Hello, world from nginx!</h1>
+  </body>
+</html>
 ```
 
 ## 6. Secure routes: `passthrough`
@@ -206,7 +216,15 @@ $ oc set volumes deployment.apps/hello-secure \
 ```
 $ oc create route passthrough --service hello-secure 
 ```
-
+6.6. Verify
+```
+$ curl -k hello.apps-crc.testing
+<html>
+  <body>
+    <h1>Hello, world from nginx!</h1>
+  </body>
+</html>
+```
 ## 7. Secret literals
 
 ### Task
