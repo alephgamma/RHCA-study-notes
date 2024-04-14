@@ -240,10 +240,10 @@ $ oc new-app mysql \
 -l app=mysql-label
 ```
 7.2. Create the secret from **key:value** pairs
-* root_password=rootpass
-* user=mysqluser
-* password=mysqlpass
-* database=mysqldb
+* `root_password=rootpass`
+* `user=mysqluser`
+* `password=mysqlpass`
+* `database=mysqldb`
 ```
 $ oc create secret generic mysql-secret \
 --from-literal root_password=rootpass \
