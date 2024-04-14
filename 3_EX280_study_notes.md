@@ -109,7 +109,7 @@ oc new-project zland
 ```
 for P in wonderland zland ; do oc new-project ${P} ; done
 ```
-3.3. Add the groups: `admin-group` `dev-group` `qa-group`
+3.3. Create the groups: `admin-group` `dev-group` `qa-group`
 ```
 oc adm groups new admin-group
 oc adm groups new dev-group
@@ -139,11 +139,11 @@ oc adm policy add-role-to-user admin manager -n zland
 ```
 oc adm policy add-role-to-user view devuser -n wonderland 
 ```
-3.9. Add `devuser` the role `edit` to the project `wonderland`
+3.9. Grant `devuser` the role `edit` to the project `wonderland`
 ```
 oc adm policy add-role-to-user view devuser -n wonderland 
 ```
-3.10. Add `qauser` the role `view` to the project `zland`
+3.10. Grant `qauser` the role `view` to the project `zland`
 ```
 oc adm groups add-users admin-group manager -n zland
 ```
