@@ -30,7 +30,7 @@ Configure `htpasswd` as the Identity Provider
 ### Task breakdown
 2.1. Install `httpd-tools`
 ```
-$ sudo yum install httpd-tools -y
+sudo yum install httpd-tools -y
 ```
 2.2. Create the `htpasswd` file and add the users
 * `manager` / `manager123`
@@ -133,7 +133,7 @@ oc login -u developer -p developer https://api.crc.testing:6443
 ```
 4.4. Assign the `application-sa` Service Account to the gitlab deployment
 ```
-$ oc set serviceaccount deployment.apps/gitlab-ce application-sa
+oc set serviceaccount deployment.apps/gitlab-ce application-sa
 ```
 
 ## 5. Secure routes: `edge`
@@ -252,7 +252,7 @@ oc create secret generic mysql-secret \
 ```
 7.3. Set the deployment RESOURCE to use environment variables
 ```
-$ oc set env deployment.apps/mysql-name --from secret/mysql-secret --prefix MYSQL_
+oc set env deployment.apps/mysql-name --from secret/mysql-secret --prefix MYSQL_
 ```
 
 ## 8. Labeling nodes
@@ -282,7 +282,7 @@ oc label node master03 env=dev
 ```
 8.3. View the label `env`
 ```
-$ oc get node -L env
+oc get node -L env
 NAME       STATUS   ROLES           AGE    VERSION           ENV
 master01   Ready    master,worker   621d   v1.23.3+e419edf   prod
 master02   Ready    master,worker   621d   v1.23.3+e419edf   test
@@ -301,7 +301,7 @@ hello-787445fd88-tcqv9   1/1     Running   0          67s   10.9.0.41   master01
 ```
 8.6. Edit a deployment to use a tagged node
 ```
-$ oc edit deployment/hello
+oc edit deployment/hello
 ...output omitted...
 spec:
   template:
