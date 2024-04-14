@@ -151,7 +151,7 @@ oc adm groups add-users admin-group manager -n zland
 ```
 oc delete secrets kubeadmin -n kube-system
 ```
-NOTE: Do not delete `kubeadmin` from CRC
+**NOTE**: Do not delete `kubeadmin` from CRC
 
 ## 4. Security Context Constraints 
 
@@ -169,7 +169,7 @@ oc new-app --image quay.io/redhattraining/gitlab-ce:8.4.3-ce.0
 ```
 4.2. Create a serviceaccount `application-sa`
 ```
-oc create serviceaccount application-sa
+oc create serviceaccount application-sa -n gitlab-project
 ```
 4.3. As `kubeadmin` assign the SCC `anyuid` to the Service Account `application-sa`
 ```
@@ -179,7 +179,7 @@ oc login -u developer -p developer https://api.crc.testing:6443
 ```
 4.4. Assign the `application-sa` Service Account to the gitlab deployment
 ```
-oc set serviceaccount deployment.apps/gitlab-ce application-sa
+oc set serviceaccount deployment.apps/gitlab-ce application-sa -n gitlab-project
 ```
 
 ## 5. Secure routes: `edge`
@@ -275,6 +275,12 @@ curl -k hello.apps-crc.testing
 ### Task
 Create a secret from **key: value** pair(s) and apply to a deployment
 
+### Requirements
+* `root_password: rootpass`
+* `user: mysqluser`
+* `password: mysqlpass`
+* `database: mysqldb`
+
 ### Task breakdown
 7.1. Create the project and deploy the application
 ```
@@ -285,10 +291,6 @@ oc new-app mysql \
 -l app=mysql-label
 ```
 7.2. Create the secret from **key: value** pairs
-* `root_password: rootpass`
-* `user: mysqluser`
-* `password: mysqlpass`
-* `database: mysqldb`
 ```
 oc create secret generic mysql-secret \
 --from-literal root_password=rootpass \
