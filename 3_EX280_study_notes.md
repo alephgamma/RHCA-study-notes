@@ -454,7 +454,10 @@ oc create -f limits.yaml -n wonderland
 ## 11. Scaling
 
 ### Task 1
-Manually scale replicas to 2
+Manually scale replicas
+
+### Requirements
+* Set the replicas to 2
 
 ### Task breakdown
 11.1. Increase the amount of replicas
@@ -463,6 +466,11 @@ oc scale --replicas 2 deploymentconfig.apps.openshift.io/postgresql
 ```
 ### Task 2
 Horizontal Pod Autoscaling `hpa`
+
+### Requirements
+* min: 1
+* max: 3
+* cpu percentage: 75
 
 ### Task breakdown
 11.2. Dynamically scale
