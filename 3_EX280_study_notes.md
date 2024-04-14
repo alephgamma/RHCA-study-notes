@@ -125,21 +125,24 @@ oc adm policy remove-cluster-role-from-group self-provisioner system:authenticat
 ```
 oc adm policy add-cluster-role-to-group self-provisioner dev-group
 ```
-3.6. Add the user `manager` to the group `admin-group`
+3.6. Add `manager` to the group `admin-group`
 ```
 oc adm groups add-users admin-group manager 
 ```
-3.7. Add the user `manager` to the role `admin` in the projects: `wonderland` `zland`
+3.7. Grant `manager` the role `admin` in the projects `wonderland` `zland`
 ```
 oc adm policy add-role-to-user admin manager -n wonderland
 oc adm policy add-role-to-user admin manager -n zland
-
 ```
-3.8. Add the user `devuser` the role `edit` to the group `devuser`
+3.9. Add `devuser` the role `edit` to the project `wonderland`
 ```
-oc adm groups add-users admin-group manager
+oc adm policy add-role-to-user view devuser -n wonderland 
 ```
-3.9. Remove the `kubeadmin` user from the cluster
+3.10. Add `qauser` the role `view` to the project `zland`
+```
+oc adm groups add-users admin-group manager -n zland
+```
+3.11. Remove the `kubeadmin` user from the cluster
 ```
 oc delete secrets kubeadmin -n kube-system
 ```
