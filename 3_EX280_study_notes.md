@@ -184,8 +184,8 @@ Create a secure `passthrough` route to the pod
 ### Requirements
 * Create a cert and key
 * Using a new project deploy an http server with TLS
-* Deploy from quay.io/redhattraining/hello-world-secure:v1.0
-* Ingress route: apps-crc.testing
+* Deploy from `quay.io/redhattraining/hello-world-secure:v1.0`
+* Set a local volume for the cert and key
 
 ### Task breakdown
 6.1. Create the cert and key
