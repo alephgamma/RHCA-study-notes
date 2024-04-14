@@ -143,7 +143,7 @@ Create a secure `edge` route to the pod
 ### Requirements
 * Create a cert and key
 * Using a new project deploy an http server with TLS
-* Deploy from quay.io/redhattraining/hello-world-secure:v1.0
+* Deploy from `quay.io/redhattraining/hello-world-secure:v1.0`
 * Ingress route: apps-crc.testing
 
 ### Task breakdown
@@ -159,7 +159,7 @@ $ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
 5.3. Create the `edge` route
 ```
-$ APPS=apps-crc.testing
+$ APPS=`oc whoami --show-console | cut -d'.' -f2,3`
 $ oc create route edge \
 --hostname hello.$APPS \
 --service hello-world-nginx \
