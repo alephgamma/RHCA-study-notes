@@ -370,17 +370,57 @@ hello-b64bdf567-t5r4v   1/1     Running   0          65s   10.10.0.72   master03
 ### Task
 Create a ResourceQuota
 
+### Requirements
+* pod count: 3
+* cpu allocated: 200 millicores
+* memory: 2 GB
+
 ### Task breakdown
+9.1. Create the project and the app
 ```
-oc create quota quota-resource --hard pods=3,memory=2Gi,cpu=200m -n NAMESPACE
+oc new-project zland-project
+
+oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
+```
+9.1. Two ways to do this
+
+9.1.1. Create and apply the resourcequota YAML CRD
+```
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: quota-resource
+  namespace: zland-project
+spec:
+  hard:
+    pods: "3"
+    memory: "2Gi"
+    cpu: "200m"
+    replicationcontrollers: ""
+    services: ""
+
+
+```
+9.1.2. Or create the Resource at the CLI
+```
+oc create quota quota-resource --hard pods=3,memory=2Gi,cpu=200m -n zland-project
 ```
 ## 10. LimitRanges
 
 ### Task
 Create a LimitRange
 
+### Requirements
+* Set the Pods and Containers
+  * max cpus: 2
+  * min cpus: 200 millicores
+  * max memory: 1 GB
+  * min memory: 16 MB
+* DefaultRequest for Pods
+  * cpu: 100 millicores
+
 ### Task breakdown
-10.1. Create limits yaml file
+10.1. Create and apply the limitrange YAML CRD
 ```
 apiVersion: v1
 kind: LimitRange
@@ -396,7 +436,7 @@ spec:
         cpu: "200m"
         memory: "16Mi"
       defaultRequest:
-        
+        cpu: "100m"
     - type: "Container"
       max:
         cpu: "2"
