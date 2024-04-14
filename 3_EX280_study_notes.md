@@ -418,7 +418,13 @@ Create a LimitRange
   * cpu: 100 millicores
 
 ### Task breakdown
-10.1. Create and apply the limitrange YAML CRD
+10.1. Create the project and the app
+```
+oc new-project wonderland-project
+
+oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
+```
+10.1. Create and apply the `limitrange` YAML CRD
 ```
 apiVersion: v1
 kind: LimitRange
@@ -443,9 +449,9 @@ spec:
         cpu: "200m"
         memory: "16Mi"
 ```
-10.2. Apply the limits file
+10.2. Apply the limits YAML file
 ```
-oc create -f limits.yaml -n NAMESPACE
+oc create -f limits.yaml -n wonderland
 ```
 ## 11. Scaling
 
