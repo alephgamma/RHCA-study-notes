@@ -88,9 +88,9 @@ Create roles, groups and manage users
 * Create projects: `wonderland` `zland`
 * Create groups: `admin-group` `dev-group` `qa-group`
 * Grant the `self-provisioner` role ONLY to the group `dev-group`
-* Grant the role admin to the user manager to projects `wonderland` `zland`
-* Grant the role edit to the devuser dev to project `wonderland`
-* Grant the role view to the qauser to project `zland`
+* Grant the role `admin` to the user `manager` to projects `wonderland` `zland`
+* Grant the role `edit` to the `devuser` to project `wonderland`
+* Grant the role `view` to the `qauser` to project `zland`
 * Remove the user `kubadmin`
 
 ### Task breakdown
