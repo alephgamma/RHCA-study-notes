@@ -77,7 +77,10 @@ $ oc replace -f oauth.yml
 Create roles, groups and manage users
 
 ### Requirements
-* New settings
+* Groups
+`admin-group`
+`dev-group`
+`qa-group`
 
 ### Task breakdown
 3.1. Grant the role cluster-admin the user `manager`
@@ -239,11 +242,11 @@ $ oc new-app mysql \
 --name=mysql-name \
 -l app=mysql-label
 ```
-7.2. Create the secret from **key:value** pairs
-* `root_password=rootpass`
-* `user=mysqluser`
-* `password=mysqlpass`
-* `database=mysqldb`
+7.2. Create the secret from **key: value** pairs
+* `root_password: rootpass`
+* `user: mysqluser`
+* `password: mysqlpass`
+* `database: mysqldb`
 ```
 $ oc create secret generic mysql-secret \
 --from-literal root_password=rootpass \
@@ -259,7 +262,7 @@ $ oc set env deployment.apps/mysql-name --from secret/mysql-secret --prefix MYSQ
 ## 8. Labeling nodes
 
 ### Task
-Label a node with a tag **ENV** and set it to values **( k=v )**
+Label a node with a tag **ENV** and set it to values **( k: v )**
 
 ### Requirements
 * `master01: prod`
