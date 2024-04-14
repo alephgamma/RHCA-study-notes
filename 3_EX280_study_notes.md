@@ -384,7 +384,7 @@ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
 9.1. Two ways to do this
 
-9.1.1. Create and apply the resourcequota YAML CRD
+9.1.1. Create and apply the `resourcequota` YAML CRD
 ```
 apiVersion: v1
 kind: ResourceQuota
@@ -398,8 +398,6 @@ spec:
     cpu: "200m"
     replicationcontrollers: ""
     services: ""
-
-
 ```
 9.1.2. Or create the Resource at the CLI
 ```
@@ -460,7 +458,7 @@ Manually scale replicas to 2
 oc scale --replicas 2 deploymentconfig.apps.openshift.io/postgresql
 ```
 ### Task 2
-Horizontal Pod Autoscaling (hpa)
+Horizontal Pod Autoscaling `hpa`
 
 ### Task breakdown
 11.2. Dynamically scale
