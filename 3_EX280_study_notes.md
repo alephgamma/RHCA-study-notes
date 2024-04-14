@@ -102,6 +102,10 @@ oc adm policy add-cluster-role-to-user cluster-admin manager
 ```
 3.2. Create projects: `wonderland` `zland`
 ```
+oc new-project wonderland
+oc new-project zland
+```
+```
 for P in wonderland zland ; do oc new-project ${P} ; done
 ```
 3.3. Add the groups: `admin-group` `dev-group` `qa-group`
@@ -109,6 +113,9 @@ for P in wonderland zland ; do oc new-project ${P} ; done
 oc adm groups new admin-group
 oc adm groups new dev-group
 oc adm groups new qa-group
+```
+```
+for G in wonderland zland ; do oc adm groups new ${G} ; done
 ```
 3.4. Remove the ability for ALL users to create new projects
 ```
