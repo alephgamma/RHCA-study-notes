@@ -389,9 +389,9 @@ Create a ResourceQuota
 oc new-project zland-project
 oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
-9.1. Two ways to do this
+9.2. Two ways to do this
 
-9.1.1. Create and apply the `resourcequota` YAML CRD: `resource.yml`
+9.2.1. Create and apply the `resourcequota` YAML CRD: `resource.yml`
 ```
 apiVersion: v1
 kind: ResourceQuota
@@ -409,11 +409,11 @@ spec:
 ```
 oc create -f resource.yml
 ```
-9.1.2. Or create the Resource at the CLI
+9.2.2. Or create the Resource at the CLI
 ```
 oc create quota quota-resource --hard pods=3,memory=2Gi,cpu=200m -n zland-project
 ```
-9.2. View the results
+9.3. View the results
 ```
 ```
 ## 10. LimitRanges
