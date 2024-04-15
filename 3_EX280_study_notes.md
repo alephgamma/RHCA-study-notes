@@ -100,7 +100,7 @@ Create projects, groups and manage users with the respective roles
 * Remove the user `kubadmin`
 
 ### Task breakdown
-3.1. Grant the role `cluster-admin` the user `manager`
+3.1. Grant the role `cluster-admin` to the user `manager`
 ```
 oc adm policy add-cluster-role-to-user cluster-admin manager
 ```
@@ -119,7 +119,7 @@ oc adm groups new dev-group
 oc adm groups new qa-group
 ```
 ```
-for G in wonderland zland ; do oc adm groups new ${G} ; done
+for G in admin-group dev-group qa-group ; do oc adm groups new ${G} ; done
 ```
 3.4. Remove the ability for ALL users to create new projects
 ```
