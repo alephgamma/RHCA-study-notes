@@ -391,7 +391,7 @@ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
 9.1. Two ways to do this
 
-9.1.1. Create and apply the `resourcequota` YAML CRD
+9.1.1. Create and apply the `resourcequota` YAML CRD: `resource.yml`
 ```
 apiVersion: v1
 kind: ResourceQuota
@@ -406,9 +406,15 @@ spec:
     replicationcontrollers: ""
     services: ""
 ```
+```
+oc create -f resource.yml
+```
 9.1.2. Or create the Resource at the CLI
 ```
 oc create quota quota-resource --hard pods=3,memory=2Gi,cpu=200m -n zland-project
+```
+9.2. View the results
+```
 ```
 ## 10. LimitRanges
 
@@ -430,7 +436,7 @@ Create a LimitRange
 oc new-project wonderland-project
 oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
-10.1. Create and apply the `limitrange` YAML CRD
+10.1. Create and apply the `limitrange` YAML CRD: `limits.yaml`
 ```
 apiVersion: v1
 kind: LimitRange
@@ -455,14 +461,17 @@ spec:
         cpu: "200m"
         memory: "16Mi"
 ```
-10.2. Apply the limits YAML file
 ```
 oc create -f limits.yaml -n wonderland
+```
+10.2. View the results
+```
+ 
 ```
 ## 11. Scaling
 
 ### Task 1
-Manually scale replicas
+Scale an application
 
 ### Requirements
 * Set the replicas to 2
@@ -475,7 +484,7 @@ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
 11.2. Get the deployment RESOURCE
 ```
-oc scale --replicas 2 deploymentconfig.apps.openshift.io/postgresql
+
 ```
 11.3. Increase the amount of replicas
 ```
