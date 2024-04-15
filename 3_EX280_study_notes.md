@@ -7,8 +7,8 @@ echo 'set expandtab tabstop=2 shiftwidth=2' >> ~/.vimrc
 ```
 * The missing manual: `man limitrange`
 ```
+oc explain limitrange --recursive
 oc explain limitrange.spec.limits
-oc explain limitrange --recursive 
 ```
 ## 1. Install the OpenShift CodeReady Container (crc) Platform (Template)
 
