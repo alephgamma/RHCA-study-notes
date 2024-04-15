@@ -33,15 +33,18 @@ that-command
 ### Task
 Configure `htpasswd` as the Identity Provider
 
+### Requirements
+* Users
+  * `manager` / `manager123`
+  * `qauser` / `qauser123`
+  * `devuser` / `devuser123`
+
 ### Task breakdown
 2.1. Install `httpd-tools`
 ```
 sudo yum install httpd-tools -y
 ```
 2.2. Create the `htpasswd` file and add the users
-* `manager` / `manager123`
-* `qauser` / `qauser123`
-* `devuser` / `devuser123`
 ```
 sudo htpasswd -c -B -b /tmp/users.htpasswd manager manager123
 sudo htpasswd -b /tmp/users.htpasswd qauser qauser123
