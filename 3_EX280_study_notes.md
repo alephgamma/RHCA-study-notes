@@ -223,7 +223,9 @@ curl -k hello.apps-crc.testing
   </body>
 </html>
 ```
-
+5.4. Clean up scripts
+```
+```
 ## 6. Secure routes: `passthrough`
 
 ### Task
@@ -272,6 +274,9 @@ curl -k hello.apps-crc.testing
     <h1>Hello, world from nginx!</h1>
   </body>
 </html>
+```
+6.7. Clean up scripts
+```
 ```
 ## 7. Secret literals
 
