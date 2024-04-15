@@ -223,7 +223,7 @@ curl -k hello.apps-crc.testing
   </body>
 </html>
 ```
-5.4. Clean up scripts
+5.5. Clean up scripts
 ```
 ```
 ## 6. Secure routes: `passthrough`
