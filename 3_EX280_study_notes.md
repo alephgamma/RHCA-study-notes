@@ -436,7 +436,7 @@ Create a LimitRange
 oc new-project wonderland-project
 oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
-10.1. Create and apply the `limitrange` YAML CRD: `limits.yaml`
+10.2. Create and apply the `limitrange` YAML CRD: `limits.yaml`
 ```
 apiVersion: v1
 kind: LimitRange
@@ -464,7 +464,7 @@ spec:
 ```
 oc create -f limits.yaml -n wonderland
 ```
-10.2. View the results
+10.3. View the results
 ```
  
 ```
@@ -499,7 +499,7 @@ Horizontal Pod Autoscaling `hpa`
 * cpu percentage: 75
 
 ### Task 2 breakdown
-11.3. Dynamically scale
+11.4. Dynamically scale
 ```
 oc autoscale deployment.app/postgresql --min 1 --max 3 --cpu-percent 75
 ```
