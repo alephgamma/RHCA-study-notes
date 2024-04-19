@@ -165,22 +165,27 @@ Configure Security Context Constraints (SCC)
 * Using project `gitlab-project` deploy a gitlab server from `quay.io/redhattraining/gitlab-ce:8.4.3-ce.0`
 
 ### Task breakdown
-4.1. Create the gitlab project and deploy the app
+4.1. Who am I?
+```
+oc whoami
+developer
+```
+4.2. Create the gitlab project and deploy the app
 ```
 oc new-project gitlab-project
 oc new-app --image quay.io/redhattraining/gitlab-ce:8.4.3-ce.0
 ```
-4.2. Create a serviceaccount `application-sa`
+4.3. Create a serviceaccount `application-sa`
 ```
 oc create serviceaccount application-sa -n gitlab-project
 ```
-4.3. As `kubeadmin` assign the SCC `anyuid` to the Service Account `application-sa`
+4.4. As `kubeadmin` assign the SCC `anyuid` to the Service Account `application-sa`
 ```
 oc login -u kubeadmin -p SUPER-SECRET https://api.crc.testing:6443
 oc adm policy add-scc-to-user anyuid -z application-sa
 oc login -u developer -p developer https://api.crc.testing:6443
 ```
-4.4. Assign the `application-sa` Service Account to the gitlab deployment
+4.5. Assign the `application-sa` Service Account to the gitlab deployment
 ```
 oc set serviceaccount deployment.apps/gitlab-ce application-sa -n gitlab-project
 ```
