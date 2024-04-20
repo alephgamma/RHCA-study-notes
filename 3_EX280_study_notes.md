@@ -80,7 +80,9 @@ spec:
 ```
 oc replace -f oauth.yml
 ```
-
+2.8. Clean up script(s)
+```
+```
 ## 3. Role-Based Access and Groups
 
 ### Task
@@ -155,6 +157,9 @@ oc adm groups add-users admin-group manager -n zland
 oc delete secrets kubeadmin -n kube-system
 ```
 **NOTE**: Do not delete `kubeadmin` from CRC
+3.12. Clean up script(s)
+```
+```
 
 ## 4. Security Context Constraints 
 
@@ -188,7 +193,9 @@ oc login -u developer -p developer https://api.crc.testing:6443
 ```
 oc set serviceaccount deployment.apps/gitlab-ce application-sa -n gitlab-project
 ```
-
+4.6. Clean up script(s)
+```
+```
 ## 5. Secure routes: `edge`
 Create a secure `edge` route to the pod
 
@@ -320,7 +327,9 @@ oc create secret generic mysql-secret \
 ```
 oc set env deployment.apps/mysql-name --from secret/mysql-secret --prefix MYSQL_
 ```
-
+7.4. Clean up script(s)
+```
+```
 ## 8. Labeling nodes
 
 ### Task
@@ -383,7 +392,20 @@ oc get pod -o wide
 NAME                    READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
 hello-b64bdf567-t5r4v   1/1     Running   0          65s   10.10.0.72   master03   <none>           <none>
 ```
-## 9. ResourceQuotas
+8.8. Clean up script(s)
+```
+```
+## 9. Taints
+
+### Task
+Taints
+
+### Requirements
+Taints
+
+### Task breakdown
+
+## 10. ResourceQuotas
 
 ### Task
 Create a ResourceQuota
@@ -394,19 +416,19 @@ Create a ResourceQuota
 * memory: 2 GB
 
 ### Task breakdown
-9.1. Create the project and the app
+10.1. Create the project and the app
 ```
 oc new-project zland-project
 oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
-9.2. What resourcequotas exists? In case there is a template...
+10.2. What resourcequotas exists? In case there is a template...
 ```
 oc get quota
 No resources found in zland-project namespace.
 ```
-9.3. Two ways to create a resourcequota
+10.3. Two ways to create a resourcequota
 
-9.3.1. Create and apply the `resourcequota` YAML CRD: `resource.yml`
+10.3.1. Create and apply the `resourcequota` YAML CRD: `resource.yml`
 ```
 apiVersion: v1
 kind: ResourceQuota
@@ -424,21 +446,21 @@ spec:
 ```
 oc create -f resource.yml
 ```
-9.3.2. Or create the Resource at the CLI
+10.3.2. Or create the Resource at the CLI
 ```
 oc create quota quota-resource --hard pods=3,memory=2Gi,cpu=200m -n zland-project
 ```
-9.4. View the results
+10.4. View the results
 ```
 oc get quota
 NAME             AGE   REQUEST                                 LIMIT
 quota-resource   4s    cpu: 0/200m, memory: 0/2Gi, pods: 1/3
 ```
-9.5. Clean up
+10.5. Clean up script(s)
 ```
 oc delete project zland-project
 ```
-## 10. LimitRanges
+## 11. LimitRanges
 
 ### Task
 Create a LimitRange
@@ -453,17 +475,17 @@ Create a LimitRange
   * cpu: 100 millicores
 
 ### Task breakdown
-10.1. Create the project and the app
+11.1. Create the project and the app
 ```
 oc new-project wonderland-project
 oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
-10.2. What limitranges exist? In case there is a template...
+11.2. What limitranges exist? In case there is a template...
 ```
 oc get limitrange
 No resources found in wonderland-project namespace.
 ```
-10.3. Create and apply the `limitrange` YAML CRD: `limits.yaml`
+11.3. Create and apply the `limitrange` YAML CRD: `limits.yaml`
 ```
 apiVersion: v1
 kind: LimitRange
@@ -491,7 +513,7 @@ spec:
 ```
 oc create -f limits.yaml -n wonderland
 ```
-10.4. View the results
+11.4. View the results
 ```
 oc get limitrange
 NAME              CREATED AT
@@ -507,12 +529,12 @@ Pod         cpu       200m  2    -                -              -
 Container   cpu       200m  2    500m             2              -
 Container   memory    16Mi  1Gi  1Gi              1Gi            -
 ```
-10.3. Clean up
+11.3. Clean up script(s)
 ```
 rm limits.yaml
 oc delete project wonderland-project
 ```
-## 11. Scaling
+## 12. Scaling
 
 ### Task 1
 Manually scale up an application
@@ -521,18 +543,21 @@ Manually scale up an application
 * Set the replicas to 2
 
 ### Task 1 breakdown
-11.1. Create the project and the app
+12.1. Create the project and the app
 ```
 oc new-project zland-project
 oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
-11.2. Get the deployment RESOURCE
+12.2. Get the deployment RESOURCE
 ```
 
 ```
-11.3. Increase the amount of replicas
+12.3. Increase the amount of replicas
 ```
 oc scale --replicas 2 deploymentconfig.apps.openshift.io/postgresql
+```
+12.4. Clean up script(s)
+```
 ```
 ### Task 2
 Configure Horizontal Pod Autoscaling `hpa`
@@ -543,7 +568,10 @@ Configure Horizontal Pod Autoscaling `hpa`
 * cpu percentage: 75
 
 ### Task 2 breakdown
-11.4. Dynamically scale
+12.5. Dynamically scale
 ```
 oc autoscale deployment.app/postgresql --min 1 --max 3 --cpu-percent 75
+```
+12.6. Clean up script(s)
+```
 ```
