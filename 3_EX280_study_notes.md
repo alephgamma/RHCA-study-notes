@@ -537,11 +537,15 @@ oc delete project wonderland-project
 ```
 ## 12. Scaling
 
-### Task 1
-Manually scale up an application
+### Task
+Scale up an application and configure Horizontal Pod Autoscaling `hpa`
 
 ### Requirements
-* Set the replicas to 2
+* Manually set the replicas to 2
+* Autoscale the application to:
+  * min: 1
+  * max: 3
+  * cpu percentage: 75
 
 ### Task 1 breakdown
 12.1. Create the project and the app
@@ -549,7 +553,7 @@ Manually scale up an application
 oc new-project zland-project
 oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
-12.2. Get the deployment RESOURCE
+12.2. Get the deployment RESOURCEs
 ```
 
 ```
@@ -557,22 +561,10 @@ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
 oc scale --replicas 2 deploymentconfig.apps.openshift.io/postgresql
 ```
-12.4. Clean up script(s)
-```
-```
-### Task 2
-Configure Horizontal Pod Autoscaling `hpa`
-
-### Requirements
-* min: 1
-* max: 3
-* cpu percentage: 75
-
-### Task 2 breakdown
-12.5. Dynamically scale
+12.4. Dynamically scale
 ```
 oc autoscale deployment.app/postgresql --min 1 --max 3 --cpu-percent 75
 ```
-12.6. Clean up script(s)
+12.5. Clean up script(s)
 ```
 ```
