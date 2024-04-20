@@ -211,7 +211,7 @@ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
 5.3. Create the `edge` route
 ```
-APPS=`oc whoami --show-console | cut -d'.' -f2,3`
+APPS=`oc whoami --show-console | cut -d'.' -f2-`
 oc create route edge \
 --hostname hello.$APPS \
 --service hello-world-nginx \
