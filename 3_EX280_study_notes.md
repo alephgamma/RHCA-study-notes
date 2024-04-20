@@ -475,7 +475,7 @@ oc create -f limits.yaml -n wonderland
 ## 11. Scaling
 
 ### Task 1
-Scale an application
+Manually scale up an application
 
 ### Requirements
 * Set the replicas to 2
@@ -495,7 +495,7 @@ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 oc scale --replicas 2 deploymentconfig.apps.openshift.io/postgresql
 ```
 ### Task 2
-Horizontal Pod Autoscaling `hpa`
+Configure Horizontal Pod Autoscaling `hpa`
 
 ### Requirements
 * min: 1
