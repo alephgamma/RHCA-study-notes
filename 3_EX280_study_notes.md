@@ -399,9 +399,14 @@ Create a ResourceQuota
 oc new-project zland-project
 oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
-9.2. Two ways to do this
+9.2. What resourcequotas exists? In case there is a template...
+```
+oc get quota
+No resources found in zland-project namespace.
+```
+9.3. Two ways to create a resourcequota
 
-9.2.1. Create and apply the `resourcequota` YAML CRD: `resource.yml`
+9.3.1. Create and apply the `resourcequota` YAML CRD: `resource.yml`
 ```
 apiVersion: v1
 kind: ResourceQuota
@@ -419,12 +424,19 @@ spec:
 ```
 oc create -f resource.yml
 ```
-9.2.2. Or create the Resource at the CLI
+9.3.2. Or create the Resource at the CLI
 ```
 oc create quota quota-resource --hard pods=3,memory=2Gi,cpu=200m -n zland-project
 ```
-9.3. View the results
+9.4. View the results
 ```
+oc get quota
+NAME             AGE   REQUEST                                 LIMIT
+quota-resource   4s    cpu: 0/200m, memory: 0/2Gi, pods: 1/3
+```
+9.5. Clean up
+```
+oc delete project zland-project
 ```
 ## 10. LimitRanges
 
@@ -446,7 +458,12 @@ Create a LimitRange
 oc new-project wonderland-project
 oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
-10.2. Create and apply the `limitrange` YAML CRD: `limits.yaml`
+10.2. What limitranges exist? In case there is a template...
+```
+oc get limitrange
+No resources found in wonderland-project namespace.
+```
+10.3. Create and apply the `limitrange` YAML CRD: `limits.yaml`
 ```
 apiVersion: v1
 kind: LimitRange
@@ -461,8 +478,6 @@ spec:
       min:
         cpu: "200m"
         memory: "16Mi"
-      defaultRequest:
-        cpu: "100m"
     - type: "Container"
       max:
         cpu: "2"
@@ -470,13 +485,32 @@ spec:
       min:
         cpu: "200m"
         memory: "16Mi"
+      defaultRequest:
+        cpu: "500m"
 ```
 ```
 oc create -f limits.yaml -n wonderland
 ```
-10.3. View the results
+10.4. View the results
 ```
- 
+oc get limitrange
+NAME              CREATED AT
+resource-limits   2024-04-20T21:42:12Z
+
+oc describe limitrange
+Name:       resource-limits
+Namespace:  wonderland-project
+Type        Resource  Min   Max  Default Request  Default Limit  Max Limit/Request Ratio
+----        --------  ---   ---  ---------------  -------------  -----------------------
+Pod         memory    16Mi  1Gi  -                -              -
+Pod         cpu       200m  2    -                -              -
+Container   cpu       200m  2    500m             2              -
+Container   memory    16Mi  1Gi  1Gi              1Gi            -
+```
+10.3. Clean up
+```
+rm limits.yaml
+oc delete project wonderland-project
 ```
 ## 11. Scaling
 
