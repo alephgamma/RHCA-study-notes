@@ -157,6 +157,7 @@ oc adm groups add-users admin-group manager -n zland
 oc delete secrets kubeadmin -n kube-system
 ```
 **NOTE**: Do not delete `kubeadmin` from CRC
+
 3.12. Clean up script(s)
 ```
 ```
