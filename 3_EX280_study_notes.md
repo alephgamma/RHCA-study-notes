@@ -547,7 +547,7 @@ Manually scale up an application and configure Horizontal Pod Autoscaling `hpa`
   * max: 3
   * cpu percentage: 75
 
-### Task 1 breakdown
+### Task breakdown
 12.1. Create the project and the app
 ```
 oc new-project zland-project
