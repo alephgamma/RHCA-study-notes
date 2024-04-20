@@ -19,11 +19,11 @@ Install `crc` on RHEL 8.
 * New settings
 
 ### Task breakdown
-1.1. Do this
+1.1. Do ...
 ```
 this-command
 ```
-1.2. And then that
+1.2. And then ...
 ```
 that-command
 ```
