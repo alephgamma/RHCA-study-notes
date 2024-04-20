@@ -165,10 +165,9 @@ Configure Security Context Constraints (SCC)
 * Using project `gitlab-project` deploy a gitlab server from `quay.io/redhattraining/gitlab-ce:8.4.3-ce.0`
 
 ### Task breakdown
-4.1. Who am I?
+4.1. Who am I? *Should be* `developer`
 ```
 oc whoami
-developer
 ```
 4.2. Create the gitlab project and deploy the app
 ```
