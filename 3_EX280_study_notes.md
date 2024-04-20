@@ -229,6 +229,9 @@ curl -k hello.apps-crc.testing
 ```
 5.5. Clean up scripts
 ```
+rm edge.crt
+rm edge.key
+oc delete project hello-secure-project
 ```
 ## 6. Secure routes: `passthrough`
 
@@ -281,6 +284,9 @@ curl -k hello.apps-crc.testing
 ```
 6.7. Clean up scripts
 ```
+rm passthrough.crt
+rm passthrough.key
+oc delete project hello-secure-project
 ```
 ## 7. Secret literals
 
