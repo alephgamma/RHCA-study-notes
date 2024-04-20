@@ -326,7 +326,7 @@ Label a node with a tag **ENV** and set it to values **( key: value )**
 * `master03: dev`
 
 ### Task breakdown
-8.1. As `kubeadmin` (or a user with the `cluster-admin` role) get the nodes
+8.1. As `kubeadmin` (or a user with the `cluster-admin` role) get the node's labels
 ```
 oc get nodes --show-labels
 NAME       STATUS   ROLES           AGE    VERSION           LABELS
