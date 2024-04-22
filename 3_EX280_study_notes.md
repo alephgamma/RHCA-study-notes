@@ -554,7 +554,8 @@ oc create -f limits.yaml -n wonderland
 oc get limitrange
 NAME              CREATED AT
 resource-limits   2024-04-20T21:42:12Z
-
+```
+```
 oc describe limitrange
 Name:       resource-limits
 Namespace:  wonderland-project
