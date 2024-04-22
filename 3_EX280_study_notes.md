@@ -399,13 +399,42 @@ hello-b64bdf567-t5r4v   1/1     Running   0          65s   10.10.0.72   master03
 ## 9. Taints
 
 ### Task
-Taints
+Set node3 to not schedule any workloads. 
 
 ### Requirements
-Taints
+* `master01:`
+* `master02:`
+* `master03: node-role.kubernetes.io/worker:NoSchedule`
 
 ### Task breakdown
-
+9.1. Set a taint on master03
+```
+oc adm taint node master03 node-role.kubernetes.io/worker:NoSchedule
+```
+9.2. View the taint status
+```
+oc describe node master03
+Name:               master03
+Roles:              master,worker
+Labels:             beta.kubernetes.io/arch=amd64
+                    beta.kubernetes.io/os=linux
+                    kubernetes.io/arch=amd64
+                    kubernetes.io/hostname=master03
+                    kubernetes.io/os=linux
+                    node-role.kubernetes.io/master=
+                    node-role.kubernetes.io/worker=
+                    node.openshift.io/os_id=rhcos
+Annotations:        machineconfiguration.openshift.io/controlPlaneTopology: HighlyAvailable
+                    machineconfiguration.openshift.io/currentConfig: rendered-master-50cf6e41adc2a59c12ad5fbe2e791976
+                    machineconfiguration.openshift.io/desiredConfig: rendered-master-50cf6e41adc2a59c12ad5fbe2e791976
+                    machineconfiguration.openshift.io/reason: 
+                    machineconfiguration.openshift.io/state: Done
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Thu, 28 Jul 2022 12:11:26 -0400
+Taints:             node-role.kubernetes.io/worker:NoSchedule
+Unschedulable:      false
+...output omitted...
+```
 ## 10. ResourceQuotas
 
 ### Task
