@@ -380,6 +380,8 @@ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0 --name hello -n
 8.5. Get the node on which the pod is running 
 ```
 oc get pod -o wide
+```
+```
 NAME                     READY   STATUS    RESTARTS   AGE   IP          NODE       NOMINATED NODE   READINESS GATES
 hello-787445fd88-tcqv9   1/1     Running   0          67s   10.9.0.41   master01   <none>           <none>
 ```
@@ -468,6 +470,7 @@ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 10.2. What resourcequotas exists? In case there is a template...
 ```
 oc get quota
+```
 ```
 No resources found in zland-project namespace.
 ```
