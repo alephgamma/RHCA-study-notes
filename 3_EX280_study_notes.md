@@ -407,7 +407,7 @@ Set node3 to not schedule any workloads.
 * `master03: node-role.kubernetes.io/worker:NoSchedule`
 
 ### Task breakdown
-9.1. Set a taint on master03
+9.1. Set a taint on `master03`
 ```
 oc adm taint node master03 node-role.kubernetes.io/worker:NoSchedule
 ```
