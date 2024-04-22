@@ -592,6 +592,8 @@ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 12.2. View the deployment RESOURCEs
 ```
 oc get all
+```
+```
 NAME                                     READY   STATUS    RESTARTS   AGE
 pod/hello-world-nginx-58d7f58f4d-ckgrl   1/1     Running   0          7s
 
@@ -614,7 +616,9 @@ oc scale --replicas 2 deployment.apps/hello-world-nginx
 ```
 12.4. Verify the scaled pods
 ```
-$ oc get pods
+oc get pods
+```
+```
 NAME                                 READY   STATUS    RESTARTS   AGE
 hello-world-nginx-58d7f58f4d-75zxt   1/1     Running   0          23s
 hello-world-nginx-58d7f58f4d-ckgrl   1/1     Running   0          2m31s
@@ -626,6 +630,8 @@ oc autoscale deployment.apps/hello-world-nginx --min 1 --max 3 --cpu-percent 75
 12.5. View the deployment RESOURCEs
 ```
 oc get all
+```
+```
 NAME                                     READY   STATUS    RESTARTS   AGE
 pod/hello-world-nginx-58d7f58f4d-75zxt   1/1     Running   0          2m17s
 pod/hello-world-nginx-58d7f58f4d-ckgrl   1/1     Running   0          4m25s
