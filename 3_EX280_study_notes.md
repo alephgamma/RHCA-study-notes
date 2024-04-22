@@ -67,6 +67,10 @@ oc edit oauth.config.openshift.io/cluster
 ```
 2.6. Edit the oauth file 
 ``` 
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
 spec:
   identityProviders:
   - htpasswd:
