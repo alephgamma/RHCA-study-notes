@@ -414,6 +414,8 @@ oc adm taint node master03 node-role.kubernetes.io/worker:NoSchedule
 9.2. View the taint status
 ```
 oc describe node master03
+```
+```
 Name:               master03
 Roles:              master,worker
 Labels:             beta.kubernetes.io/arch=amd64
