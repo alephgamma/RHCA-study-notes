@@ -58,14 +58,14 @@ oc create secret generic localusers \
 ```
 2.4. Get the oauth cluster RESOURCE, but first make a back up 
 ```
-oc get oauth cluster -o yaml > oauth-original.yml
-cp oauth-original.yml oauth.yml
+oc get oauth cluster -o yaml > oauth-original.yaml
+cp oauth-original.yaml oauth.yaml
 ```
 2.5. Or edit the file in place
 ```
 oc edit oauth.config.openshift.io/cluster
 ```
-2.6. Edit the oauth file 
+2.6. Edit the file `oauth.yaml`
 ``` 
 apiVersion: config.openshift.io/v1
 kind: OAuth
@@ -80,9 +80,9 @@ spec:
     name: htpasswd-file
     type: HTPasswd
 ```
-2.7. Replace the file `oauth.yml`
+2.7. Replace the file `oauth.yaml`
 ```
-oc replace -f oauth.yml
+oc replace -f oauth.yaml
 ```
 2.8. Clean up script(s)
 ```
