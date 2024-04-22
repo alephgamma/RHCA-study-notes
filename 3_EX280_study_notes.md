@@ -591,18 +591,60 @@ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
 12.2. View the deployment RESOURCEs
 ```
+oc get all
+NAME                                     READY   STATUS    RESTARTS   AGE
+pod/hello-world-nginx-58d7f58f4d-ckgrl   1/1     Running   0          7s
 
+NAME                        TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/hello-world-nginx   ClusterIP   172.30.247.188   <none>        8080/TCP   8s
+
+NAME                                READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/hello-world-nginx   1/1     1            1           8s
+
+NAME                                           DESIRED   CURRENT   READY   AGE
+replicaset.apps/hello-world-nginx-58d7f58f4d   1         1         1       7s
+replicaset.apps/hello-world-nginx-5d76f84767   0         0         0       8s
+
+NAME                                               IMAGE REPOSITORY                                                                   TAGS   UPDATED
+imagestream.image.openshift.io/hello-world-nginx   image-registry.openshift-image-registry.svc:5000/zland-project/hello-world-nginx   v1.0   7 seconds ago
 ```
 12.3. Increase the amount of replicas
 ```
-oc scale --replicas 2 deploymentconfig.apps.openshift.io/postgresql
+oc scale --replicas 2 deployment.apps/hello-world-nginx
 ```
-12.4. Dynamically scale
+12.4. Verify the scaled pods
 ```
-oc autoscale deployment.app/postgresql --min 1 --max 3 --cpu-percent 75
+$ oc get pods
+NAME                                 READY   STATUS    RESTARTS   AGE
+hello-world-nginx-58d7f58f4d-75zxt   1/1     Running   0          23s
+hello-world-nginx-58d7f58f4d-ckgrl   1/1     Running   0          2m31s
+```
+12.5. Dynamically scale
+```
+oc autoscale deployment.apps/hello-world-nginx --min 1 --max 3 --cpu-percent 75
 ```
 12.5. View the deployment RESOURCEs
 ```
+oc get all
+NAME                                     READY   STATUS    RESTARTS   AGE
+pod/hello-world-nginx-58d7f58f4d-75zxt   1/1     Running   0          2m17s
+pod/hello-world-nginx-58d7f58f4d-ckgrl   1/1     Running   0          4m25s
+
+NAME                        TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
+service/hello-world-nginx   ClusterIP   172.30.247.188   <none>        8080/TCP   4m26s
+
+NAME                                READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/hello-world-nginx   2/2     2            2           4m26s
+
+NAME                                           DESIRED   CURRENT   READY   AGE
+replicaset.apps/hello-world-nginx-58d7f58f4d   2         2         2       4m25s
+replicaset.apps/hello-world-nginx-5d76f84767   0         0         0       4m26s
+
+NAME                                                    REFERENCE                      TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/hello-world-nginx   Deployment/hello-world-nginx   <unknown>/75%   1         3         0          5s
+
+NAME                                               IMAGE REPOSITORY                                                                   TAGS   UPDATED
+imagestream.image.openshift.io/hello-world-nginx   image-registry.openshift-image-registry.svc:5000/zland-project/hello-world-nginx   v1.0   4 minutes ago
 ```
 12.5. Clean up script(s)
 ```
