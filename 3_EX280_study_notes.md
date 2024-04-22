@@ -349,6 +349,8 @@ Label a node with a tag **ENV** and set it to values **( key: value )**
 8.1. As `kubeadmin` (or a user with the `cluster-admin` role) get the node's labels
 ```
 oc get nodes --show-labels
+```
+```
 NAME       STATUS   ROLES           AGE    VERSION           LABELS
 master01   Ready    master,worker   621d   v1.23.3+e419edf   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=master01,kubernetes.io/os=linux,node-role.kubernetes.io/master=,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos
 master02   Ready    master,worker   621d   v1.23.3+e419edf   beta.kubernetes.io/arch=amd64,beta.kubernetes.io/os=linux,kubernetes.io/arch=amd64,kubernetes.io/hostname=master02,kubernetes.io/os=linux,node-role.kubernetes.io/master=,node-role.kubernetes.io/worker=,node.openshift.io/os_id=rhcos
@@ -363,6 +365,8 @@ oc label node master03 env=dev
 8.3. View the label `env`
 ```
 oc get node -L env
+```
+```
 NAME       STATUS   ROLES           AGE    VERSION           ENV
 master01   Ready    master,worker   621d   v1.23.3+e419edf   prod
 master02   Ready    master,worker   621d   v1.23.3+e419edf   test
@@ -382,6 +386,8 @@ hello-787445fd88-tcqv9   1/1     Running   0          67s   10.9.0.41   master01
 8.6. Edit a deployment to use a tagged node
 ```
 oc edit deployment/hello
+```
+```
 ...output omitted...
 spec:
   template:
@@ -394,6 +400,8 @@ spec:
 8.7. Get the node on which the pod is running 
 ```
 oc get pod -o wide
+```
+```
 NAME                    READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
 hello-b64bdf567-t5r4v   1/1     Running   0          65s   10.10.0.72   master03   <none>           <none>
 ```
@@ -460,6 +468,7 @@ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 10.2. What resourcequotas exists? In case there is a template...
 ```
 oc get quota
+```
 No resources found in zland-project namespace.
 ```
 10.3. Two ways to create a resourcequota
@@ -489,6 +498,8 @@ oc create quota quota-resource --hard pods=3,memory=2Gi,cpu=200m -n zland-projec
 10.4. View the results
 ```
 oc get quota
+```
+```
 NAME             AGE   REQUEST                                 LIMIT
 quota-resource   4s    cpu: 0/200m, memory: 0/2Gi, pods: 1/3
 ```
@@ -519,6 +530,7 @@ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 11.2. What limitranges exist? In case there is a template...
 ```
 oc get limitrange
+```
 No resources found in wonderland-project namespace.
 ```
 11.3. Create and apply the `limitrange` YAML CRD: `limits.yaml`
@@ -552,11 +564,15 @@ oc create -f limits.yaml -n wonderland
 11.4. View the results
 ```
 oc get limitrange
+```
+```
 NAME              CREATED AT
 resource-limits   2024-04-20T21:42:12Z
 ```
 ```
 oc describe limitrange
+```
+```
 Name:       resource-limits
 Namespace:  wonderland-project
 Type        Resource  Min   Max  Default Request  Default Limit  Max Limit/Request Ratio
