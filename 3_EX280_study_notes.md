@@ -647,7 +647,7 @@ hello-world-nginx-58d7f58f4d-ckgrl   1/1     Running   0          2m31s
 ```
 oc autoscale deployment.apps/hello-world-nginx --min 1 --max 3 --cpu-percent 75
 ```
-12.5. View the deployment RESOURCEs
+12.6. View the deployment RESOURCEs
 ```
 oc get all
 ```
@@ -672,6 +672,6 @@ horizontalpodautoscaler.autoscaling/hello-world-nginx   Deployment/hello-world-n
 NAME                                               IMAGE REPOSITORY                                                                   TAGS   UPDATED
 imagestream.image.openshift.io/hello-world-nginx   image-registry.openshift-image-registry.svc:5000/zland-project/hello-world-nginx   v1.0   4 minutes ago
 ```
-12.5. Clean up script(s)
+12.7. Clean up script(s)
 ```
 ```
