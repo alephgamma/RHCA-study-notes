@@ -534,6 +534,7 @@ oc new-app --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
 oc get limitrange
 ```
+```
 No resources found in wonderland-project namespace.
 ```
 11.3. Create and apply the `limitrange` YAML CRD: `limits.yaml`
