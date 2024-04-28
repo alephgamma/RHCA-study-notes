@@ -89,6 +89,9 @@ oc replace -f oauth.yaml
 ```
 2.8. Clean up script(s)
 ```
+rm /tmp/users.htpasswd
+oc delete secret localusers -n openshift-config
+oc replace -f oauth-original.yaml
 ```
 ## 3. Role-Based Access and Groups
 
