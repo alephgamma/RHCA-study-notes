@@ -236,7 +236,9 @@ oc create route edge \
 ```
 5.4. Verify
 ```
-curl -k hello.apps-crc.testing
+curl -k https://hello.$APPS
+```
+```
 <html>
   <body>
     <h1>Hello, world from nginx!</h1>
