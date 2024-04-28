@@ -170,8 +170,12 @@ oc delete secrets kubeadmin -n kube-system
 
 3.12. Clean up script(s)
 ```
+oc delete project wonderland
+oc delete project zland
 ```
-
+```
+for P in wonderland zland ; do oc delete project ${P} ; done
+```
 ## 4. Security Context Constraints 
 
 ### Task
