@@ -322,7 +322,7 @@ Create a secret from **key: value** pair(s) and apply to a deployment
 ```
 oc new-project mysql-project
 oc new-app mysql \
--n mysql \
+-n mysql-project \
 --name=mysql-name \
 -l app=mysql-label
 ```
@@ -340,6 +340,7 @@ oc set env deployment.apps/mysql-name --from secret/mysql-secret --prefix MYSQL_
 ```
 7.4. Clean up script(s)
 ```
+oc delete project mysql-project
 ```
 ## 8. Labeling nodes
 
