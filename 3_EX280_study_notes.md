@@ -685,4 +685,5 @@ imagestream.image.openshift.io/hello-world-nginx   image-registry.openshift-imag
 ```
 12.7. Clean up script(s)
 ```
+oc delete project zland-project
 ```
