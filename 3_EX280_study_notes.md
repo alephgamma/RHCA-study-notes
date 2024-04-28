@@ -68,6 +68,9 @@ cp oauth-original.yaml oauth.yaml
 ```
 oc edit oauth.config.openshift.io/cluster
 ```
+```
+oc edit oauth cluster
+```
 2.6. Edit the file `oauth.yaml`
 ``` 
 apiVersion: config.openshift.io/v1
