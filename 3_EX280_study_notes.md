@@ -428,7 +428,7 @@ Set node3 to not schedule any workloads.
 * `master03: node-role.kubernetes.io/worker:NoSchedule`
 
 ### Task breakdown
-9.1. Set a taint on `master03`
+9.1. As `kubeadmin` (or a user with the `cluster-admin` role) set a taint on `master03`
 ```
 oc adm taint node master03 node-role.kubernetes.io/worker:NoSchedule
 ```
@@ -457,6 +457,10 @@ CreationTimestamp:  Thu, 28 Jul 2022 12:11:26 -0400
 Taints:             node-role.kubernetes.io/worker:NoSchedule
 Unschedulable:      false
 ...output omitted...
+```
+9.3. Remove the taint status
+```
+oc adm taint node master03 node-role.kubernetes.io/worker:NoSchedule-
 ```
 ## 10. ResourceQuotas
 
