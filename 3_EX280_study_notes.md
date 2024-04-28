@@ -27,6 +27,9 @@ this-command
 ```
 that-command
 ```
+1.3. Clean up script(s) to restore the previous settings
+```
+```
 
 ## 2. Identity Providers
 
