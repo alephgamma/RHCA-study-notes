@@ -106,7 +106,7 @@ Create projects, groups and manage users with the respective roles
   * Grant the role `admin` to `manager` to projects `wonderland` `zland`
   * Grant the role `edit` to `devuser` to the project `wonderland`
   * Grant the role `view` to `qauser` to the project `zland`
-* Remove the user `kubadmin`
+* Remove the user `kubeadmin`
 
 ### Task breakdown
 3.1. Grant the role `cluster-admin` to the user `manager`
@@ -203,6 +203,7 @@ oc set serviceaccount deployment.apps/gitlab-ce application-sa -n gitlab-project
 ```
 4.6. Clean up script(s)
 ```
+oc delete project gitlab-project
 ```
 ## 5. Secure routes: `edge`
 Create a secure `edge` route to the pod
