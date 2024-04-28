@@ -589,16 +589,9 @@ spec:
         cpu: "500m"
 ```
 ```
-oc create -f limits.yaml -n wonderland
+oc create -f limits.yaml -n wonderland-project
 ```
 11.4. View the results
-```
-oc get limitrange
-```
-```
-NAME              CREATED AT
-resource-limits   2024-04-20T21:42:12Z
-```
 ```
 oc describe limitrange
 ```
@@ -612,7 +605,7 @@ Pod         cpu       200m  2    -                -              -
 Container   cpu       200m  2    500m             2              -
 Container   memory    16Mi  1Gi  1Gi              1Gi            -
 ```
-11.3. Clean up script(s)
+11.5. Clean up script(s)
 ```
 rm limits.yaml
 oc delete project wonderland-project
