@@ -416,6 +416,10 @@ hello-b64bdf567-t5r4v   1/1     Running   0          65s   10.10.0.72   master03
 ```
 8.8. Clean up script(s)
 ```
+oc delete project pods-project
+oc label node master01 env-
+oc label node master02 env-
+oc label node master03 env-
 ```
 ## 9. Taints
 
