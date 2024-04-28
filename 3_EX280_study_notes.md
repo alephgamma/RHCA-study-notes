@@ -485,7 +485,7 @@ oc get quota
 ```
 No resources found in zland-project namespace.
 ```
-10.3. Two ways to create a resourcequota
+10.3. Two ways to create a `resourcequota`
 
 10.3.1. Create and apply the `resourcequota` YAML CRD: `resource.yml`
 ```
