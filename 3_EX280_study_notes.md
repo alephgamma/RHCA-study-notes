@@ -303,7 +303,8 @@ oc create route passthrough --service hello-secure
 ```
 6.6. Verify
 ```
-curl -k hello.apps-crc.testing
+APPS=`oc whoami --show-console | cut -d'.' -f2-`
+curl -k https://hello.$APPS
 <html>
   <body>
     <h1>Hello, world from nginx!</h1>
