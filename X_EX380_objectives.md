@@ -1,4 +1,4 @@
-## EX380 OpenShift Administration III
+## EX380 OpenShift Administration III (v. 4.10)
 
 1. Deploy Kubernetes applications on OpenShift
    - [ ] Assemble an application from Kubernetes components
