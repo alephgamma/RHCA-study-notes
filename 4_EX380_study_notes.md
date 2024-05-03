@@ -16,7 +16,7 @@ oc explain limitrange.spec.limits
 Basic 'smoke test' to verify minimal functionality.
 
 ### Task
-Install `crc` on RHEL 8. 
+Install `nginx` and verify functionality.
 
 ### Requirements (Optional)
 * New settings
