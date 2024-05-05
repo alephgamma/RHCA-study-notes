@@ -1,4 +1,4 @@
-# EX380 - Summary
+# EX380 v. 4.10 - Summary
 
 ## Prerequisites
 * Set the text editor
