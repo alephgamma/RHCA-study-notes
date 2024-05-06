@@ -5,6 +5,10 @@
 ```
 echo 'set expandtab tabstop=2 shiftwidth=2' >> ~/.vimrc
 ```
+* Set vi just to accept paste without auto-indentation
+```
+:set paste
+```
 * The missing manual: `man limitrange`
 ```
 oc explain limitrange --recursive
