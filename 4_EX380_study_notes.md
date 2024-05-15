@@ -29,6 +29,8 @@ Deploy `nginx` and verify functionality on a `crc` environment
 1.1. Login
 ```
 crc console --credentials
+```
+```
 To login as a regular user, run 'oc login -u developer -p developer https://api.crc.testing:6443'.
 To login as an admin, run 'oc login -u kubeadmin -p THIS-VARIES https://api.crc.testing:6443'
 ```
