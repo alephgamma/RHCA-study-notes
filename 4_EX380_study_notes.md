@@ -55,6 +55,9 @@ echo $APPS
 ```
 apps-crc.testing
 ```
+```
+oc expose service/nginx --hostname hello.$APPS
+```
 1.5. Verify the output
 ```
 curl hello.$APPS
