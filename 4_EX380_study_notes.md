@@ -26,12 +26,18 @@ Deploy `nginx` and verify functionality on a `crc` environment
 * Use the image `quay.io/redhattraining/hello-world-nginx:v1.0`
 
 ### Task breakdown
-1.1. Create the project and deploy the app
+1.1. Login
+```
+crc console --credentials
+To login as a regular user, run 'oc login -u developer -p developer https://api.crc.testing:6443'.
+To login as an admin, run 'oc login -u kubeadmin -p THIS-VARIES https://api.crc.testing:6443'
+```
+1.2. Create the project and deploy the app
 ```
 oc new-project nginx-versioned-project
 oc new-app --name nginx quay.io/redhattraining/hello-world-nginx:v1.0
 ```
-1.2. Get the resource
+1.3. Get the resource
 ```
 oc get service
 ```
@@ -39,7 +45,7 @@ oc get service
 NAME    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
 nginx   ClusterIP   172.30.66.114   <none>        8080/TCP   83s
 ```
-1.3. Expose the app
+1.4. Expose the app
 ```
 APPS=$(oc whoami --show-console | cut -d'.' -f2-)
 echo $APPS
