@@ -71,7 +71,7 @@ curl hello.$APPS
 ```
 1.6. Get the URL from the route using json and jq variables
 
-1.6.1. Use the element of the items array
+1.6.1. Use the first element of the items array
 ```
 oc get route -o jsonpath='{.items[0].spec.host}'
 ```
