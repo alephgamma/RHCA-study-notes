@@ -69,9 +69,15 @@ curl hello.$APPS
   </body>
 </html>
 ```
-1.6. Get the URL from the route using json
+1.6. Get the URL from the route using json and jq variables
 ```
-oc get route -o jsonpath='{.items[*].spec.host}{"\n"}'
+oc get route -o jsonpath='{.items[0].spec.host}'
+```
+hello.apps-crc.testing
+```
+```
+oc get route -o jsonpath='{.items[*].spec.host}'
+```
 hello.apps-crc.testing
 ```
 1.x Clean up script(s) to restore the previous settings
