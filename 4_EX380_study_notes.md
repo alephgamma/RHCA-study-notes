@@ -53,6 +53,17 @@ echo $APPS
 ```
 apps-crc.testing
 ```
-1.x. Clean up script(s) to restore the previous settings
+1.5. Verify the output
+```
+curl hello.$APPS
+```
+```
+<html>
+  <body>
+    <h1>Hello, world from nginx!</h1>
+  </body>
+</html>
+```
+1.x Clean up script(s) to restore the previous settings
 ```
 ```
