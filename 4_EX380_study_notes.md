@@ -51,7 +51,7 @@ APPS=$(oc whoami --show-console | cut -d'.' -f2-)
 echo $APPS
 ```
 ```
-
+apps-crc.testing
 ```
 1.x. Clean up script(s) to restore the previous settings
 ```
