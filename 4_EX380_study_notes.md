@@ -73,6 +73,7 @@ curl hello.$APPS
 ```
 oc get route -o jsonpath='{.items[0].spec.host}'
 ```
+```
 hello.apps-crc.testing
 ```
 ```
