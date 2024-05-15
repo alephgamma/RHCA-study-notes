@@ -17,23 +17,36 @@ oc explain limitrange.spec.limits
 ## 1. Install and configure a simple webserver (Template)
 
 ### Purpose (Optional)
-Basic 'smoke test' to verify minimal functionality.
+Basic `nginx` 'smoke test' to verify minimal functionality.
 
 ### Task
-Install `nginx` and verify functionality.
+Deploy `nginx` and verify functionality on a `crc` environment
 
 ### Requirements (Optional)
-* New settings
+* Use the image `quay.io/redhattraining/hello-world-nginx:v1.0`
 
 ### Task breakdown
-1.1. Do ...
+1.1. Create the project and deploy the app
 ```
-this-command
+oc new-project nginx-versioned-project
+oc new-app --name nginx quay.io/redhattraining/hello-world-nginx:v1.0
 ```
-1.2. And then ...
+1.2. Get the resource
 ```
-that-command
+oc get service
 ```
-1.3. Clean up script(s) to restore the previous settings
+```
+NAME    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+nginx   ClusterIP   172.30.66.114   <none>        8080/TCP   83s
+```
+1.3. Expose the app
+```
+APPS=$(oc whoami --show-console | cut -d'.' -f2-)
+echo $APPS
+```
+```
+
+```
+1.x. Clean up script(s) to restore the previous settings
 ```
 ```
