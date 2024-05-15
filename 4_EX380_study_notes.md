@@ -69,3 +69,23 @@ curl hello.$APPS
 1.x Clean up script(s) to restore the previous settings
 ```
 ```
+## 2. Install the OpenShift CodeReady Container (crc) Platform (Template)
+
+### Task
+Install `crc` on RHEL 8. 
+
+### Requirements (Optional)
+* New settings
+
+### Task breakdown
+2.1. Do ...
+```
+this-command
+```
+2.2. And then ...
+```
+that-command
+```
+3.3. Clean up script(s) to restore the previous settings
+```
+```
