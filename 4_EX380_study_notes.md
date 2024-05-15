@@ -79,6 +79,7 @@ hello.apps-crc.testing
 ```
 oc get route -o jsonpath='{.items[*].spec.host}'
 ```
+```
 hello.apps-crc.testing
 ```
 1.x Clean up script(s) to restore the previous settings
