@@ -16,13 +16,13 @@ oc explain limitrange.spec.limits
 ```
 ## 1. Deploy a simple webserver and get information 
 
-### Purpose (Optional)
+### Purpose
 Basic `nginx` 'smoke test' to verify minimal functionality.
 
 ### Task
 Deploy `nginx` and verify functionality on a `crc` environment
 
-### Requirements (Optional)
+### Requirements
 * Use the image `quay.io/redhattraining/hello-world-nginx:v1.0`
 
 ### Task breakdown
