@@ -14,7 +14,7 @@ echo 'set expandtab tabstop=2 shiftwidth=2' >> ~/.vimrc
 oc explain limitrange --recursive
 oc explain limitrange.spec.limits
 ```
-## 1. Install and configure a simple webserver (Template)
+## 1. Deploy a simple webserver and get information 
 
 ### Purpose (Optional)
 Basic `nginx` 'smoke test' to verify minimal functionality.
