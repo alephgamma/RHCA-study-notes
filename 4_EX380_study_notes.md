@@ -69,6 +69,11 @@ curl hello.$APPS
   </body>
 </html>
 ```
+1.6. Get the URL from the route using json
+```
+oc get route -o jsonpath='{.items[*].spec.host}{"\n"}'
+hello.apps-crc.testing
+```
 1.x Clean up script(s) to restore the previous settings
 ```
 ```
