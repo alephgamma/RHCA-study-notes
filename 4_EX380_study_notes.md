@@ -5,7 +5,7 @@
 ```
 echo 'set expandtab tabstop=2 shiftwidth=2' >> ~/.vimrc
 ```
-* Set `vi` just to accept paste without auto-indentation
+* Set `vi` just to accept paste without auto-indentation from initial '#'
 ```
 :set paste
 ```
