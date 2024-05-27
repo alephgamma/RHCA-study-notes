@@ -95,18 +95,18 @@ Configure LDAP as an IdP
 
 ### Requirements (Optional)
 * bindPassword: supersecret
-* CA Certificate available on http://ca.example.com/ca.crt
+* CA Certificate available on `http://ca.example.com/ca.crt`
 
 ### Task breakdown
 2.1. Login
 ```
 oc login -u admin -p supersecret https://api.example.com:6443
 ```
-2.2. Create the ldap-bind-secret
+2.2. Create the `ldap-bind-secret`
 ```
 oc create secret generic ldap-bind-secret --from-literal bindPassword='supersecret' -n openshift-config
 ```
-2.3. Get and create the ca-cert-configmap
+2.3. Get and create the `ca-cert-configmap`
 ```
 wget http://ca.example.com/ca.crt
 ```
