@@ -109,7 +109,8 @@ oc create secret generic ldap-bind-secret --from-literal bindPassword='supersecr
 2.3. Get and create the ca-cert-configmap
 ```
 wget http://ca.example.com/ca.crt
-
+```
+```
 oc create configmap ca-cert-configmap -n openshift-config --from-file=ca.crt
 ```
 2.4. Edit the LDAP custom recource file
