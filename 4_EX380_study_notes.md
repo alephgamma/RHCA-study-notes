@@ -151,7 +151,7 @@ spec:
       insecure: false
       url: "ldaps://ca.example.com/cn=users,cn=accounts,dc=example,dc=com?uid"
 ```
-2.5 Apply the LDAP custom resource
+2.5. Apply the LDAP custom resource
 ```
 oc apply -f ldap-cr.yaml
 ```
@@ -188,17 +188,17 @@ Set a message of the day (motd) to all `worker` nodes
 * Set the `motd` to `Official Banner`
 
 ### Task breakdown
-3.1. Login
+4.1. Login
 ```
 ```
-3.2. Create the text
+4.2. Create the text
 ```
 echo "Official Banner" | base64
 ```
 ```
 T2ZmaWNpYWwgQmFubmVyCg==
 ```
-3.3. The `machineconfig` custom resource file
+4.3. The `machineconfig` custom resource file
 ```
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
@@ -218,6 +218,6 @@ spec:
         mode: 0644
         path: /etc/motd
 ```
-3.x Clean up script(s) to restore the previous settings
+4.x Clean up script(s) to restore the previous settings
 ```
-``
+```
