@@ -93,7 +93,7 @@ hello.apps-crc.testing
 ### Task
 Configure LDAP as an IdP
 
-### Requirements (Optional)
+### Requirements
 * bindPassword: supersecret
 * CA Certificate available on `http://ca.example.com/ca.crt`
 
@@ -156,5 +156,23 @@ spec:
 oc apply -f ldap-cr.yaml
 ```
 2.x Clean up script(s) to restore the previous settings
+```
+```
+## 3. LDAP user credentials and the REST API
+
+### Purpose
+Familiarization with LDAP user credentials and practice with the REST API
+
+### Task
+Login using LDAP user credentials and use the REST API
+
+### Requirements
+* ldap user: 
+
+### Task breakdown
+3.1. Login
+```
+```
+3.x Clean up script(s) to restore the previous settings
 ```
 ```
