@@ -17,7 +17,7 @@ oc explain limitrange.spec.limits
 ## 1. Deploy a simple webserver and get resource data using json
 
 ### Purpose
-Basic `nginx` 'smoke test' to verify minimal functionality.
+Basic `nginx` 'smoke test' to verify minimal functionality
 
 ### Task
 Deploy `nginx` and verify functionality on a `crc` environment
@@ -176,3 +176,48 @@ Login using LDAP user credentials and use the REST API
 3.x Clean up script(s) to restore the previous settings
 ```
 ```
+## 4. `machineconfig`
+
+### Purpose
+Use a `machineconfig` for node configuration settings 
+
+### Task
+Set a message of the day (motd) to all `worker` nodes
+
+### Requirements
+* Set the `motd` to `Official Banner`
+
+### Task breakdown
+3.1. Login
+```
+```
+3.2. Create the text
+```
+echo "Official Banner" | base64
+```
+```
+T2ZmaWNpYWwgQmFubmVyCg==
+```
+3.3. The `machineconfig` custom resource file
+```
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: worker
+  name: 50-motd
+spec:
+  config:
+    ignition:
+      version: 3.2.0
+    storage:
+      files:
+      - contents:
+          source: data:text/plain;charset=utf-8;base64,T2ZmaWNpYWwgQmFubmVyCg==
+        filesystem: root
+        mode: 0644
+        path: /etc/motd
+```
+3.x Clean up script(s) to restore the previous settings
+```
+``
