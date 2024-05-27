@@ -151,6 +151,10 @@ spec:
       insecure: false
       url: "ldaps://ca.example.com/cn=users,cn=accounts,dc=example,dc=com?uid"
 ```
+2.5 Apply the LDAP custom resource
+```
+oc apply -f ldap-cr.yaml
+```
 2.x Clean up script(s) to restore the previous settings
 ```
 ```
