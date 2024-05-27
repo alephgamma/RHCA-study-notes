@@ -88,23 +88,68 @@ hello.apps-crc.testing
 1.x Clean up script(s) to restore the previous settings
 ```
 ```
-## 2. Install the OpenShift CodeReady Container (crc) Platform (Template)
+## 2. LDAP as an IdentityProvider (IdP)
 
 ### Task
-Install `crc` on RHEL 8. 
+Configure LDAP as an IdP
 
 ### Requirements (Optional)
-* New settings
+* bindPassword: supersecret
+* CA Certificate available on http://ca.example.com/ca.crt
 
 ### Task breakdown
-2.1. Do ...
+2.1. Login
 ```
-this-command
+oc login -u admin -p supersecret https://api.example.com:6443
 ```
-2.2. And then ...
+2.2. Create the ldap-bind-secret
 ```
-that-command
+oc create secret generic ldap-bind-secret --from-literal bindPassword='supersecret' -n openshift-config
 ```
-3.3. Clean up script(s) to restore the previous settings
+2.3. Get and create the ca-cert-configmap
+```
+wget http://ca.example.com/ca.crt
+
+oc create configmap ca-cert-configmap -n openshift-config --from-file=ca.crt
+```
+2.4. Edit the LDAP custom recource file
+```
+vi ldap-cr.yaml
+```
+```
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
+spec:
+  identityProviders:
+  - name: htpasswd-idp
+    mappingMethod: claim
+    type: HTPasswd
+    htpasswd:
+      fileData:
+        name: htpasswd-secret
+  - name: RH Identity Manager
+    mappingMethod: claim
+    type: LDAP
+    ldap:
+      attributes:
+        id:
+        - dn
+        email:
+        - mail
+        name:
+        - cn
+        preferredUsername:
+        - uid
+      bindDN: "uid=admin,cn=users,cn=accounts,dc=example,dc=com"
+      bindPassword:
+        name: ldap-bind-secret
+      ca:
+        name: ca-config-map
+      insecure: false
+      url: "ldaps://ca.example.com/cn=users,cn=accounts,dc=example,dc=com?uid"
+```
+2.x Clean up script(s) to restore the previous settings
 ```
 ```
