@@ -147,7 +147,7 @@ spec:
       bindPassword:
         name: ldap-bind-secret
       ca:
-        name: ca-config-map
+        name: ca-cert-configmap
       insecure: false
       url: "ldaps://ca.example.com/cn=users,cn=accounts,dc=example,dc=com?uid"
 ```
