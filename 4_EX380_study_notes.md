@@ -94,7 +94,7 @@ hello.apps-crc.testing
 Configure LDAP as an IdP
 
 ### Requirements
-* bindPassword: supersecret
+* bindPassword: `supersecret`
 * CA Certificate available on `http://ca.example.com/ca.crt`
 
 ### Task breakdown
