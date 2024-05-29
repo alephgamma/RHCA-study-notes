@@ -167,11 +167,32 @@ Familiarization with LDAP user credentials and practice with the REST API
 Login using LDAP user credentials and use the REST API
 
 ### Requirements
-* ldap user: 
+* ldap user: ldapadmin / supersupersecret
 
 ### Task breakdown
 3.1. Login
 ```
+oc login -u ldapadmin -p supersecret https://api.example.com:6443
+```
+3.2. Get the authorization TOKEN
+```
+TOKEN=$(oc whoami -t)
+API=$(oc whoami --show-server | cut -d'/' -f3-)
+curl -sk -H "Authorization: Bearer $TOKEN" -X https://$API/api
+```
+```
+{
+  "kind": "APIVersions",
+  "versions": [
+    "v1"
+  ],
+  "serverAddressByClientCIDRs": [
+    {
+      "clientCIDR": "0.0.0.0/0",
+      "serverAddress": "10.15.69.221:6443"
+    }
+  ]
+}
 ```
 3.x Clean up script(s) to restore the previous settings
 ```
