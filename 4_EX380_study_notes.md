@@ -172,7 +172,7 @@ Login using LDAP user credentials and use the REST API
 ### Task breakdown
 3.1. Login
 ```
-oc login -u ldapadmin -p supersecret https://api.example.com:6443
+oc login -u ldapadmin -p supersupersecret https://api.example.com:6443
 ```
 3.2. Get the authorization TOKEN
 ```
