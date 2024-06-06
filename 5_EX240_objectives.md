@@ -33,6 +33,6 @@
 9. Product definition
    - [ ] Configure methods and metrics
 10. Service integration
-   - [ ] Configure API gateway to point to private API
-   - [ ] Promote API gateway to staging and production
-   - [ ] Create and maintain custom service policies
+    - [ ] Configure API gateway to point to private API
+    - [ ] Promote API gateway to staging and production
+    - [ ] Create and maintain custom service policies
