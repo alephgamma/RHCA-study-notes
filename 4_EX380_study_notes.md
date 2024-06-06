@@ -97,8 +97,8 @@ Configure LDAP as an IdP
 ### Requirements
 * bindPassword: `supersecret`
 * CA Certificate available on `http://ca.example.com/ca.crt`
-* bindDN: "uid=admin,cn=users,cn=accounts,dc=example,dc=com"
-* url: "ldaps://ca.example.com/cn=users,cn=accounts,dc=example,dc=com?uid"
+* bindDN: `uid=admin,cn=users,cn=accounts,dc=example,dc=com`
+* url: `ldaps://ca.example.com/cn=users,cn=accounts,dc=example,dc=com?uid`
 
 ### Task breakdown
 2.1. Login
