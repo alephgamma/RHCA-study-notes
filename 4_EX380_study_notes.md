@@ -87,6 +87,7 @@ hello.apps-crc.testing
 ```
 1.x Clean up script(s) to restore the previous settings
 ```
+oc delete project nginx-versioned-project
 ```
 ## 2. LDAP as an IdentityProvider (IdP)
 
@@ -96,6 +97,8 @@ Configure LDAP as an IdP
 ### Requirements
 * bindPassword: `supersecret`
 * CA Certificate available on `http://ca.example.com/ca.crt`
+* bindDN: "uid=admin,cn=users,cn=accounts,dc=example,dc=com"
+* url: "ldaps://ca.example.com/cn=users,cn=accounts,dc=example,dc=com?uid"
 
 ### Task breakdown
 2.1. Login
