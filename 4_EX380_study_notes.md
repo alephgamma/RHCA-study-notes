@@ -105,18 +105,36 @@ Configure LDAP as an IdP
 ```
 oc login -u admin -p supersecret https://api.example.com:6443
 ```
-2.2. Create the `ldap-bind-secret`
+2.2. Make a backup of the current IdP settings and clean up the file
+```
+oc get oauth cluster -o yaml > oauth.yaml
+```
+```
+apiVersion: config.openshift.io/v1
+kind: OAuth
+metadata:
+  name: cluster
+spec:
+  identityProviders:
+  - name: htpasswd-idp
+    mappingMethod: claim
+    type: HTPasswd
+    htpasswd:
+      fileData:
+        name: htpasswd-secret
+```
+2.3. Create the `ldap-bind-secret`
 ```
 oc create secret generic ldap-bind-secret --from-literal bindPassword='supersecret' -n openshift-config
 ```
-2.3. Get and create the `ca-cert-configmap`
+2.4. Get and create the `ca-cert-configmap`
 ```
 wget http://ca.example.com/ca.crt
 ```
 ```
 oc create configmap ca-cert-configmap -n openshift-config --from-file=ca.crt
 ```
-2.4. Edit the LDAP custom recource file
+2.5. Edit the LDAP custom recource file
 ```
 vi ldap-cr.yaml
 ```
@@ -154,12 +172,13 @@ spec:
       insecure: false
       url: "ldaps://ca.example.com/cn=users,cn=accounts,dc=example,dc=com?uid"
 ```
-2.5. Apply the LDAP custom resource
+2.6. Apply the LDAP custom resource
 ```
 oc apply -f ldap-cr.yaml
 ```
-2.x Clean up script(s) to restore the previous settings
+2.7. Clean up script(s) to restore the previous settings
 ```
+
 ```
 ## 3. LDAP user credentials and the REST API
 
