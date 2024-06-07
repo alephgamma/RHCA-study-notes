@@ -85,7 +85,7 @@ oc get route -o jsonpath='{.items[*].spec.host}'
 ```
 hello.apps-crc.testing
 ```
-1.x Clean up script(s) to restore the previous settings
+1.7. Clean up script(s) to restore the previous settings
 ```
 oc delete project nginx-versioned-project
 ```
@@ -182,11 +182,8 @@ oc apply -f ldap-cr.yaml
 ```
 ## 3. LDAP user credentials and the REST API
 
-### Purpose
-Familiarization with LDAP user credentials and the REST API
-
 ### Task
-Login using LDAP user credentials and use the REST API
+Configure LDAP as an IdP, login using LDAP user credentials and use the REST API
 
 ### Requirements
 * ldap user: ldapadmin / supersupersecret
@@ -221,11 +218,8 @@ curl -sk -H "Authorization: Bearer $TOKEN" -X https://$API/api
 ```
 ## 4. `machineconfig`
 
-### Purpose
-Use a `machineconfig` for node configuration settings 
-
 ### Task
-Set a message of the day (motd) to all `worker` nodes
+Use a `machineconfig` to set a message of the day (motd) on all `worker` nodes
 
 ### Requirements
 * Set the `motd` to `Official Banner`
@@ -261,16 +255,13 @@ spec:
         mode: 0644
         path: /etc/motd
 ```
-4.x Clean up script(s) to restore the previous settings
+4.4. Clean up script(s) to restore the previous settings
 ```
 ```
 ## 5. Ansible and OpenShift
 
-### Purpose
-Use ansible with OpenShift modules 
-
 ### Task
-Ensure OpenShift application runs and provides webpages
+Use ansible with OpenShift modules to deploy application and verify webpages are available
 
 ### Requirements
 * Playbook finishes
