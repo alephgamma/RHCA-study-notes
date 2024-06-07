@@ -127,14 +127,14 @@ spec:
 ```
 oc create secret generic ldap-bind-secret --from-literal bindPassword='supersecret' -n openshift-config
 ```
-2.4. Get and create the `ca-cert-configmap`
+2.4. Get `ca.crt` and create the `ca-cert-configmap`
 ```
 wget http://ca.example.com/ca.crt
 ```
 ```
 oc create configmap ca-cert-configmap -n openshift-config --from-file=ca.crt
 ```
-2.5. Edit the LDAP custom recource file
+2.5. Edit the LDAP custom resource file
 ```
 vi ldap-cr.yaml
 ```
@@ -183,7 +183,7 @@ oc apply -f ldap-cr.yaml
 ## 3. LDAP user credentials and the REST API
 
 ### Purpose
-Familiarization with LDAP user credentials and practice with the REST API
+Familiarization with LDAP user credentials and the REST API
 
 ### Task
 Login using LDAP user credentials and use the REST API
@@ -262,5 +262,23 @@ spec:
         path: /etc/motd
 ```
 4.x Clean up script(s) to restore the previous settings
+```
+```
+## 5. Ansible and OpenShift
+
+### Purpose
+Use ansible with OpenShift modules 
+
+### Task
+Ensure OpenShift application runs and provides webpages
+
+### Requirements
+* Playbook finishes
+
+### Task breakdown
+5.1. Start here
+```
+```
+5.x Clean up script(s) to restore the previous settings
 ```
 ```
