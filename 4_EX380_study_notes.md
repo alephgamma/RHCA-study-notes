@@ -95,8 +95,10 @@ oc delete project nginx-versioned-project
 Configure LDAP as an IdP
 
 ### Requirements
-* bindPassword: `supersecret`
-* CA Certificate available on `http://ca.example.com/ca.crt`
+* Create a generic secret with a literal named: `ldap-bind-secret`
+  * --from-literal bindPassword: `supersecret`
+* Create a configmap with a file named: `ca-cert-configmap`
+  * CA Certificate available on `http://ca.example.com/ca.crt`
 * bindDN: `uid=admin,cn=users,cn=accounts,dc=example,dc=com`
 * url: `ldaps://ca.example.com/cn=users,cn=accounts,dc=example,dc=com?uid`
 
