@@ -263,7 +263,7 @@ spec:
 ## 5. Ansible and OpenShift
 
 ### Task
-Use ansible with OpenShift modules to deploy application and verify webpages are available
+Use ansible with OpenShift modules to deploy an application and verify webpages are available
 
 ### Requirements
 * Playbook finishes
