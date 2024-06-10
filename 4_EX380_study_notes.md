@@ -351,3 +351,41 @@ ansible-playbook hello-world.yaml
 5.x Clean up script(s) to restore the previous settings
 ```
 ```
+## 6. cronjob Automation
+
+### Task
+Configure a cronjob
+
+### Requirements
+* Run at noon on the 1st and 15th of the month
+* History limit: `14`
+* Use serviceAccountName: `auditor`
+* Run the script: `dothis.sh`
+
+### Task breakdown
+6.1. The cronjob CRD: `cronjob.yaml`
+```
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: audit-cron
+  namespace: automation-scripts
+spec:
+  schedule: "0 12 1,15 * *"
+  successfulJobsHistoryLimit: 14
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: auditor
+          restartPolicy: Never
+          containers:
+          - name: audit-sh
+            image: registry.ocp4.example.com:8443/openshift4/ose-cli:v4.10
+            command: ["/bin/sh", "-c"]
+            args:
+              - "dothis.sh"
+```
+6.x Clean up script(s) to restore the previous settings
+```
+```
