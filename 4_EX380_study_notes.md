@@ -403,8 +403,8 @@ Configure a cronjob
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: audit-cron
-  namespace: automation-scripts
+  name: cron-dothis
+  namespace: cronjob-automation
 spec:
   schedule: "0 12 1,15 * *"
   successfulJobsHistoryLimit: 14
