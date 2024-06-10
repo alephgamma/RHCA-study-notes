@@ -276,6 +276,41 @@ Use ansible with OpenShift modules to deploy an application and verify webpages 
 ### Task breakdown
 5.1. The Custom Resource Definition file: `hello.yaml`
 ```
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      labels:
+        app: hello
+    spec:
+      containers:
+        - image: quay.io/redhattraining/hello-world-nginx:v1.0
+          name: hello
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-svc
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: hello
+  type: ClusterIP
+...
 ```
 5.2. The playbook: `hello-world.yaml`
 ```
@@ -380,8 +415,8 @@ spec:
           serviceAccountName: auditor
           restartPolicy: Never
           containers:
-          - name: audit-sh
-            image: registry.ocp4.example.com:8443/openshift4/ose-cli:v4.10
+          - name: dothis.sh
+            image: quay.io/redhattraining/hello-world-nginx:v1.0
             command: ["/bin/sh", "-c"]
             args:
               - "dothis.sh"
