@@ -16,7 +16,7 @@ oc explain limitrange.spec.limits
 ```
 ## 1. Deploy a simple webserver and get resource data using json
 
-### Purpose
+### Purpose (Optional)
 Basic `nginx` 'smoke test' to verify minimal functionality
 
 ### Task
@@ -107,9 +107,10 @@ Configure LDAP as an IdP
 ```
 oc login -u admin -p supersecret https://api.example.com:6443
 ```
-2.2. Make a backup of the current IdP settings and clean up the file
+2.2. Get the current oauth settings, create a backup of the current IdP settings and clean up the file
 ```
 oc get oauth cluster -o yaml > oauth.yaml
+cp oauth.yaml oauth.yaml-orig
 ```
 ```
 apiVersion: config.openshift.io/v1
@@ -178,9 +179,8 @@ spec:
 ```
 oc apply -f ldap-cr.yaml
 ```
-2.7. Clean up script(s) to restore the previous settings
+2.x. Clean up script(s) to restore the previous settings
 ```
-
 ```
 ## 3. LDAP user credentials and the REST API
 
@@ -257,7 +257,7 @@ spec:
         mode: 0644
         path: /etc/motd
 ```
-4.4. Clean up script(s) to restore the previous settings
+4.x. Clean up script(s) to restore the previous settings
 ```
 ```
 ## 5. Ansible and OpenShift
