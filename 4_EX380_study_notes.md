@@ -269,8 +269,74 @@ Use ansible with OpenShift modules to deploy an application and verify webpages 
 * Playbook finishes
 
 ### Task breakdown
-5.1. Start here
+5.1. The playbook: `hello-world.yaml`
 ```
+---
+- name: First play
+  hosts: localhost
+  become: false
+  gather_facts: false
+
+  tasks:
+    - name: Get the access token for the user developer and put in auth_results
+      redhat.openshift.openshift_auth:
+        host: https://api.crc.testing:6443
+        username: developer
+        password: developer
+        ca_cert: /etc/pki/tls/certs/ca-bundle.crt
+      register: auth_results
+
+- name: Second play - Deploy the the application
+  hosts: localhost
+  become: false
+  gather_facts: false
+  vars:
+    project: hello-world
+  module_defaults:
+    group/redhat.openshift.openshift:
+      namespace: "{{ project }}"
+      api_key: "{{ auth_results['openshift_auth']['api_key'] }}"
+      host: https://api.crc.testing:6443
+      ca_cert: /etc/pki/tls/certs/ca-bundle.crt
+    group/kubernetes.core.k8s:
+      namespace: "{{ project }}"
+      api_key: "{{ auth_results['openshift_auth']['api_key'] }}"
+      host: https://api.crc.testing:6443
+      ca_cert: /etc/pki/tls/certs/ca-bundle.crt
+
+  tasks:
+    - name: Create the project - oc new-project hello-world
+      redhat.openshift.k8s:
+        state: present
+        resource_definition:
+          apiVersion: project.openshift.io/v1
+          kind: Project
+          metadata:
+            name: "{{ project }}"
+
+    - name: Deploy the application - oc apply -f hello.yml
+      redhat.openshift.k8s:
+        state: present
+        src: hello.yml
+
+    - name: Expose the route - oc expose service hello-svc
+      redhat.openshift.openshift_route:
+        service: hello-svc
+      register: route
+
+    - name: Does the application respond?
+      uri:
+        url: "http://{{ route['result']['spec']['host'] }}"
+        return_content: true
+      register: response
+      until: response['status'] == 200
+      retries: 10
+      delay: 5
+
+    - name: Verify
+      debug:
+        var: response['content']
+
 ```
 5.x Clean up script(s) to restore the previous settings
 ```
