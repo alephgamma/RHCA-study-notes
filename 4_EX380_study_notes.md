@@ -386,7 +386,7 @@ ansible-playbook hello-world.yaml
 5.x Clean up script(s) to restore the previous settings
 ```
 ```
-## 6. cronjob Automation
+## 6. `cronjob` Automation
 
 ### Task
 Configure a cronjob
