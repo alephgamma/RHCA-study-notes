@@ -267,10 +267,10 @@ Use ansible with OpenShift modules to deploy an application and verify webpages 
 
 ### Requirements
 * Ansible OpenShift and Kubernetes modules:
-  * redhat.openshift.openshift_auth
-  * redhat.openshift.openshift_route
-  * redhat.openshift.k8s
-  * kubernetes.core.k8s
+  * `redhat.openshift.openshift_auth`
+  * `redhat.openshift.openshift_route`
+  * `redhat.openshift.k8s`
+  * `kubernetes.core.k8s`
 * Playbook finishes
 
 ### Task breakdown
