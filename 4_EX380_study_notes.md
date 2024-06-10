@@ -317,7 +317,7 @@ Use ansible with OpenShift modules to deploy an application and verify webpages 
     - name: Deploy the application - oc apply -f hello.yml
       redhat.openshift.k8s:
         state: present
-        src: hello.yml
+        src: hello.yaml
 
     - name: Expose the route - oc expose service hello-svc
       redhat.openshift.openshift_route:
@@ -336,7 +336,9 @@ Use ansible with OpenShift modules to deploy an application and verify webpages 
     - name: Verify
       debug:
         var: response['content']
-
+```
+```
+ansible-playbook hello-world.yaml
 ```
 5.x Clean up script(s) to restore the previous settings
 ```
