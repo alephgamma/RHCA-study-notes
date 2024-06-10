@@ -314,7 +314,7 @@ Use ansible with OpenShift modules to deploy an application and verify webpages 
           metadata:
             name: "{{ project }}"
 
-    - name: Deploy the application - oc apply -f hello.yml
+    - name: Deploy the application - oc apply -f hello.yaml
       redhat.openshift.k8s:
         state: present
         src: hello.yaml
