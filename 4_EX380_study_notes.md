@@ -269,7 +269,10 @@ Use ansible with OpenShift modules to deploy an application and verify webpages 
 * Playbook finishes
 
 ### Task breakdown
-5.1. The playbook: `hello-world.yaml`
+5.1. The Custom Resource Definition file: `hello.yaml`
+```
+```
+5.2. The playbook: `hello-world.yaml`
 ```
 ---
 - name: First play
