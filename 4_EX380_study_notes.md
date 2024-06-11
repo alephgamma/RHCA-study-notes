@@ -107,7 +107,17 @@ Configure LDAP as an IdP
 ```
 oc login -u admin -p supersecret https://api.example.com:6443
 ```
-2.2. Get the current oauth settings, create a backup of the current IdP settings and clean up the file
+2.2. Monitor the IdP pods
+```
+oc get pods -n openshift-authentication
+```
+```
+NAME                           READY    STATUS        RESTARTS   AGE
+oauth-openshift-221ea95f-4952  1/1      Running       0          40m
+oauth-openshift-5d2b9182-29de  1/1      Running       0          41m
+oauth-openshift-57f86789-j7gz  1/1      Running       0          45m
+```
+2.3. Get the current oauth settings, create a backup of the current IdP settings and clean up the file
 ```
 oc get oauth cluster -o yaml > oauth.yaml
 cp oauth.yaml oauth.yaml-orig
@@ -126,20 +136,20 @@ spec:
       fileData:
         name: htpasswd-secret
 ```
-2.3. Create the `ldap-bind-secret`
+2.4. Create the `ldap-bind-secret`
 ```
 oc create secret generic ldap-bind-secret --from-literal bindPassword='supersecret' -n openshift-config
 ```
-2.4. Get `ca.crt` and create the `ca-cert-configmap`
+2.5. Get `ca.crt` and create the `ca-cert-configmap`
 ```
 wget http://ca.example.com/ca.crt
 ```
 ```
 oc create configmap ca-cert-configmap -n openshift-config --from-file=ca.crt
 ```
-2.5. Edit the LDAP custom resource file
+2.6. Edit the LDAP custom resource file
 ```
-vi ldap-cr.yaml
+vi oauth.yaml
 ```
 ```
 apiVersion: config.openshift.io/v1
@@ -175,9 +185,20 @@ spec:
       insecure: false
       url: "ldaps://ca.example.com/cn=users,cn=accounts,dc=example,dc=com?uid"
 ```
-2.6. Apply the LDAP custom resource
+2.7. Apply the LDAP custom resource
 ```
-oc apply -f ldap-cr.yaml
+oc apply -f oauth.yaml
+```
+2.8. Verify by viewing the pods restarting
+```
+oc get pods -n openshift-authentication
+```
+```
+NAME                           READY    STATUS        RESTARTS   AGE
+oauth-openshift-221ea95f-4952  1/1      Running       0          40s
+oauth-openshift-5d2b9182-29de  1/1      Running       0          31s
+oauth-openshift-57f86789-j7gz  0/1      Pending       0          5s
+oauth-openshift-57f865bb-44cq  1/1      Terminating   0          10m43s
 ```
 2.x. Clean up script(s) to restore the previous settings
 ```
