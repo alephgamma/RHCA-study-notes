@@ -209,7 +209,7 @@ oauth-openshift-57f865bb-44cq  1/1      Terminating   0          10m43s
 Configure LDAP as an IdP, login using LDAP user credentials and use the REST API
 
 ### Requirements
-* ldap user: ldapadmin / supersupersecret
+* ldap user: `ldapadmin` / `supersupersecret`
 
 ### Task breakdown
 3.1. Login
