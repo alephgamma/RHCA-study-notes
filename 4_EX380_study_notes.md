@@ -117,10 +117,11 @@ oauth-openshift-221ea95f-4952  1/1      Running       0          40m
 oauth-openshift-5d2b9182-29de  1/1      Running       0          41m
 oauth-openshift-57f86789-j7gz  1/1      Running       0          45m
 ```
-2.3. Get the current oauth settings, create a backup of the current IdP settings and clean up the file
+2.3. Get the current oauth settings, create a backup of the current IdP settings and clean up the `oauth.yaml` file
 ```
 oc get oauth cluster -o yaml > oauth.yaml
 cp oauth.yaml oauth-orig.yaml
+vi oauth.yaml
 ```
 ```
 apiVersion: config.openshift.io/v1
@@ -140,7 +141,7 @@ spec:
 ```
 oc create secret generic ldap-bind-secret --from-literal bindPassword='supersecret' -n openshift-config
 ```
-2.5. Get `ca.crt` and create the `ca-cert-configmap`
+2.5. Get the `ca.crt` and create the `ca-cert-configmap`
 ```
 wget http://ca.example.com/ca.crt
 ```
@@ -249,29 +250,41 @@ curl -sk -H "Authorization: Bearer $TOKEN" -X https://$API/api
 Use a `machineconfig` to set one message of the day (motd) on all `worker` nodes and another for the `master` nodes
 
 ### Requirements
-* On the `worker` nodes set the `motd` to `Official Worker Banner`
-* On the `master` nodes set the `motd` to `Official Master Banner`
+* On the `worker` nodes set the `motd` to `Official Worker Banner` and name the mc `50-worker-motd` 
+* On the `master` nodes set the `motd` to `Official Master Banner` and name the mc `50-master-motd`
 
 ### Task breakdown
-4.1. Login
+4.1. Get the template - from where ... the docs:  `post-install-machine-configuration`
 ```
-oc login -u admin -p supersecret https://api.example.com:6443
-```
-4.2. Create the text
-```
-echo "Official Banner" | base64
+vi 60-worker-motd.bu
 ```
 ```
-T2ZmaWNpYWwgQmFubmVyCg==
+variant: openshift
+version: 4.10.0
+metadata:
+  name: 50-worker-motd
+  labels:
+    machineconfiguration.openshift.io/role: worker
+storage:
+  files:
+  - path: /etc/motd
+    mode: 0644
+    overwrite: true
+    contents:
+      inline: |
+        Official Worker Banner
 ```
-4.3. The `machineconfig` custom resource file
+4.2. Create the `machineconfig` mc file 
+```
+butane 50-worker-motd.bu -o 50-worker-motdy.yaml
+```
 ```
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
 metadata:
   labels:
     machineconfiguration.openshift.io/role: worker
-  name: 50-motd
+  name: 50-worker-motd
 spec:
   config:
     ignition:
