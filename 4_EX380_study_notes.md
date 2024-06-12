@@ -5,7 +5,7 @@
 ```
 echo 'set expandtab tabstop=2 shiftwidth=2' >> ~/.vimrc
 ```
-* Set `vi` just to accept paste without auto-indentation from initial '#'
+* Set `vi` just to accept paste without auto-indentation from initial octothorpes: `#`
 ```
 :set paste
 ```
@@ -120,7 +120,7 @@ oauth-openshift-57f86789-j7gz  1/1      Running       0          45m
 2.3. Get the current oauth settings, create a backup of the current IdP settings and clean up the file
 ```
 oc get oauth cluster -o yaml > oauth.yaml
-cp oauth.yaml oauth.yaml-orig
+cp oauth.yaml oauth-orig.yaml
 ```
 ```
 apiVersion: config.openshift.io/v1
@@ -145,7 +145,7 @@ oc create secret generic ldap-bind-secret --from-literal bindPassword='supersecr
 wget http://ca.example.com/ca.crt
 ```
 ```
-oc create configmap ca-cert-configmap -n openshift-config --from-file=ca.crt
+oc create configmap ca-cert-configmap --from-file=ca.crt -n openshift-config
 ```
 2.6. Edit the LDAP custom resource file
 ```
@@ -200,21 +200,25 @@ oauth-openshift-5d2b9182-29de  1/1      Running       0          31s
 oauth-openshift-57f86789-j7gz  0/1      Pending       0          5s
 oauth-openshift-57f865bb-44cq  1/1      Terminating   0          10m43s
 ```
-2.x. Clean up script(s) to restore the previous settings
+2.9. Clean up script(s) to restore the previous settings
 ```
+oc apply -f oauth-orig.yaml
+oc delete secret ldap-bind-secret -n openshift-config
+oc delete configmap ca-cert-configmap -n openshift-config
+rm ca.crt
 ```
 ## 3. LDAP user credentials and the REST API
 
 ### Task
-Configure LDAP as an IdP, login using LDAP user credentials and use the REST API
+After LDAP is configured as an IdP, login using LDAP user credentials and use the REST API
 
 ### Requirements
-* ldap user: `ldapadmin` / `supersupersecret`
+* ldap user: `ocpadmin` / `supersupersecret`
 
 ### Task breakdown
 3.1. Login
 ```
-oc login -u ldapadmin -p supersupersecret https://api.example.com:6443
+oc login -u ocpadmin -p supersupersecret https://api.example.com:6443
 ```
 3.2. Get the authorization TOKEN
 ```
@@ -239,17 +243,19 @@ curl -sk -H "Authorization: Bearer $TOKEN" -X https://$API/api
 3.x Clean up script(s) to restore the previous settings
 ```
 ```
-## 4. `machineconfig`
+## 4. `machineconfig` Message of the Day
 
 ### Task
-Use a `machineconfig` to set a message of the day (motd) on all `worker` nodes
+Use a `machineconfig` to set one message of the day (motd) on all `worker` nodes and another for the `master` nodes
 
 ### Requirements
-* Set the `motd` to `Official Banner`
+* On the `worker` nodes set the `motd` to `Official Worker Banner`
+* On the `master` nodes set the `motd` to `Official Master Banner`
 
 ### Task breakdown
 4.1. Login
 ```
+oc login -u admin -p supersecret https://api.example.com:6443
 ```
 4.2. Create the text
 ```
