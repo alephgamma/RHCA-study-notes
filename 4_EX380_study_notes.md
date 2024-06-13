@@ -372,6 +372,7 @@ spec:
 ```
 vi Service.yaml
 ```
+```
 apiVersion: v1
 kind: Service
 metadata:
@@ -458,6 +459,7 @@ spec:
 ansible-playbook hello-world.yaml
 ```
 ```
+...
 TASK [Ensure the application responds] ***********************************************************************************************
 FAILED - RETRYING: [localhost]: Ensure the application responds (10 retries left).
 FAILED - RETRYING: [localhost]: Ensure the application responds (9 retries left).
