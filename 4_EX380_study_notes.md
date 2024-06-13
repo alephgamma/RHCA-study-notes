@@ -342,7 +342,7 @@ Use ansible with OpenShift modules to deploy an application and verify webpages 
 * Playbook finishes
 
 ### Task breakdown
-5.1. The resource files
+5.1. The resource files: `Deployment.yaml` and `Service.yaml`
 ```
 vi Deployment.yaml
 ```
