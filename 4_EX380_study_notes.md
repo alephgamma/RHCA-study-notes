@@ -342,7 +342,10 @@ Use ansible with OpenShift modules to deploy an application and verify webpages 
 * Playbook finishes
 
 ### Task breakdown
-5.1. The Custom Resource Definition file: `hello.yaml`
+5.1. The resource files
+```
+vi Deployment.yaml
+```
 ```
 ---
 apiVersion: apps/v1
@@ -365,7 +368,10 @@ spec:
           ports:
             - containerPort: 8080
               protocol: TCP
----
+```
+```
+vi Service.yaml
+```
 apiVersion: v1
 kind: Service
 metadata:
@@ -378,7 +384,6 @@ spec:
   selector:
     app: hello
   type: ClusterIP
-...
 ```
 5.2. The playbook: `hello-world.yaml`
 ```
@@ -428,7 +433,7 @@ spec:
     - name: The Deploy resource - oc apply -f hello.yaml
       redhat.openshift.k8s:
         state: present
-        src: Deploy.yaml
+        src: Deployment.yaml
 
     - name: The Service resource- oc apply -f hello.yaml
       redhat.openshift.k8s:
@@ -448,13 +453,18 @@ spec:
       until: response['status'] == 200
       retries: 10
       delay: 5
-
-    - name: Verify
-      debug:
-        var: response['content']
 ```
 ```
 ansible-playbook hello-world.yaml
+```
+```
+TASK [Ensure the application responds] ***********************************************************************************************
+FAILED - RETRYING: [localhost]: Ensure the application responds (10 retries left).
+FAILED - RETRYING: [localhost]: Ensure the application responds (9 retries left).
+ok: [localhost]
+PLAY RECAP ***************************************************************************************************************************
+localhost                  : ok=7    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
 ```
 5.x Clean up script(s) to restore the previous settings
 ```
