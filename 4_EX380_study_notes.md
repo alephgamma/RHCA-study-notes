@@ -376,7 +376,7 @@ vi Service.yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-svc
+  name: hello-service
 spec:
   ports:
     - port: 8080
@@ -443,7 +443,7 @@ spec:
 
     - name: Expose the route - oc expose service hello-svc
       redhat.openshift.openshift_route:
-        service: hello-svc
+        service: hello-service
       register: route
 
     - name: Does the application respond?
@@ -455,6 +455,7 @@ spec:
       retries: 10
       delay: 5
 ```
+5.3. Run the playbook: `hello-world.yaml`
 ```
 ansible-playbook hello-world.yaml
 ```
@@ -466,7 +467,6 @@ FAILED - RETRYING: [localhost]: Ensure the application responds (9 retries left)
 ok: [localhost]
 PLAY RECAP ***************************************************************************************************************************
 localhost                  : ok=7    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
-
 ```
 5.x Clean up script(s) to restore the previous settings
 ```
