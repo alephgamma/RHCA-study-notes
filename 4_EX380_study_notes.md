@@ -280,9 +280,9 @@ storage:
       inline: |
         Official Worker Banner
 ```
-4.2. Create the `machineconfig` mc file 
+4.2. Create the `machineconfig` or `mc` file 
 ```
-butane 50-worker-motd.bu -o 50-worker-motdy.yaml
+butane 50-worker-motd.bu -o 50-worker-motd.yaml
 ```
 ```
 apiVersion: machineconfiguration.openshift.io/v1
@@ -383,7 +383,7 @@ spec:
 5.2. The playbook: `hello-world.yaml`
 ```
 ---
-- name: First play
+- name: First play - Get the token
   hosts: localhost
   become: false
   gather_facts: false
@@ -425,10 +425,15 @@ spec:
           metadata:
             name: "{{ project }}"
 
-    - name: Deploy the application - oc apply -f hello.yaml
+    - name: The Deploy resource - oc apply -f hello.yaml
       redhat.openshift.k8s:
         state: present
-        src: hello.yaml
+        src: Deploy.yaml
+
+    - name: The Service resource- oc apply -f hello.yaml
+      redhat.openshift.k8s:
+        state: present
+        src: Service.yaml
 
     - name: Expose the route - oc expose service hello-svc
       redhat.openshift.openshift_route:
