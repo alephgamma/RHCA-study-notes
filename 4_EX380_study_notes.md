@@ -250,7 +250,13 @@ curl -sk -H "Authorization: Bearer $TOKEN" -X https://$API/api
 Use a `machineconfig` to set one message of the day (motd) on all `worker` nodes and another for the `master` nodes
 
 ### Requirements
-* On the `worker` nodes set the `motd` to `Official Worker Banner` and name the mc `50-worker-motd` 
+* On the `worker` nodes set the `motd` to
+  ```
+  ##########################
+  # Official Worker Banner #
+  ##########################
+  ```
+   and name the mc `50-worker-motd` 
 * On the `master` nodes set the `motd` to `Official Master Banner` and name the mc `50-master-motd`
 
 ### Task breakdown
@@ -291,11 +297,31 @@ spec:
       version: 3.2.0
     storage:
       files:
-      - contents:
-          source: data:text/plain;charset=utf-8;base64,T2ZmaWNpYWwgQmFubmVyCg==
-        filesystem: root
-        mode: 0644
-        path: /etc/motd
+        - contents:
+            compression: ""
+            source: data:,Official%20Worker%20Banner%0A
+          mode: 420
+          overwrite: true
+          path: /etc/motd
+```
+4.3. Verify the `mc`
+```
+oc get mc 50-worker-motd
+```
+```
+NAME             GENERATEDBYCONTROLLER   IGNITIONVERSION   AGE
+50-worker-motd                           3.2.0             9m13s
+```
+4.4. Check on the node
+```
+for i in `oc get nodes -o name`; do oc debug $i -- chroot /host cat /etc/motd; done
+Temporary namespace openshift-debug-kmvsl is created for debugging node...
+Starting pod/ip-10-0-105-140us-east-2computeinternal-debug-l75h2 ...
+To use host binaries, run `chroot /host`
+Official Worker Banner
+
+Removing debug pod ...
+...
 ```
 4.x. Clean up script(s) to restore the previous settings
 ```
