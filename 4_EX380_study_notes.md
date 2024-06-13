@@ -298,8 +298,8 @@ spec:
     storage:
       files:
         - contents:
-            compression: ""
-            source: data:,Official%20Worker%20Banner%0A
+            compression: gzip
+            source: data:;base64,H4sIAAAAAAAC/1LGCbiUFfzT0jKTMxNzFMLzi7JTixScEvPyUosUlLnw6AIEAAD//zeOc61RAAAA
           mode: 420
           overwrite: true
           path: /etc/motd
@@ -318,7 +318,9 @@ for i in `oc get nodes -o name`; do oc debug $i -- chroot /host cat /etc/motd; d
 Temporary namespace openshift-debug-kmvsl is created for debugging node...
 Starting pod/ip-10-0-105-140us-east-2computeinternal-debug-l75h2 ...
 To use host binaries, run `chroot /host`
-Official Worker Banner
+##########################
+# Official Worker Banner #
+##########################
 
 Removing debug pod ...
 ...
