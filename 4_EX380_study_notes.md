@@ -441,7 +441,7 @@ spec:
         state: present
         src: Service.yaml
 
-    - name: Expose the route - oc expose service hello-svc
+    - name: Expose the route - oc expose service hello-service
       redhat.openshift.openshift_route:
         service: hello-service
       register: route
