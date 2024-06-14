@@ -351,7 +351,7 @@ vi Deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello
+  name: hello-deployment
 spec:
   replicas: 1
   selector:
@@ -431,12 +431,12 @@ spec:
           metadata:
             name: "{{ project }}"
 
-    - name: The Deploy resource - oc apply -f hello.yaml
+    - name: The Deployment resource - oc apply -f Deployment.yaml
       redhat.openshift.k8s:
         state: present
         src: Deployment.yaml
 
-    - name: The Service resource- oc apply -f hello.yaml
+    - name: The Service resource- oc apply -f Service.yaml
       redhat.openshift.k8s:
         state: present
         src: Service.yaml
