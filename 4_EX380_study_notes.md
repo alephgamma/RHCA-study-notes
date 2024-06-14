@@ -247,7 +247,7 @@ curl -sk -H "Authorization: Bearer $TOKEN" -X https://$API/api
 ## 4. `machineconfig` Message of the Day
 
 ### Task
-Use a `machineconfig` to set one message of the day (motd) on all `worker` nodes and another for the `master` nodes
+Use a `machineconfig` or `mc` to set one message of the day (motd) on all `worker` nodes and another for the `master` nodes
 
 ### Requirements
 * On the `worker` nodes set the `motd` to
@@ -256,13 +256,13 @@ Use a `machineconfig` to set one message of the day (motd) on all `worker` nodes
   # Official Worker Banner #
   ##########################
   ```
-   and name the mc `50-worker-motd` 
+   and `mc` with the name `50-worker-motd` 
 * On the `master` nodes set the `motd` to `Official Master Banner` and name the mc `50-master-motd`
 
 ### Task breakdown
 4.1. Get the template - from where ... the docs:  `post-install-machine-configuration`
 ```
-vi 60-worker-motd.bu
+vi 50-worker-motd.bu
 ```
 ```
 variant: openshift
@@ -278,7 +278,9 @@ storage:
     overwrite: true
     contents:
       inline: |
-        Official Worker Banner
+          ##########################
+          # Official Worker Banner #
+          ##########################
 ```
 4.2. Create the `machineconfig` or `mc` file 
 ```
