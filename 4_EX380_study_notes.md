@@ -247,17 +247,23 @@ curl -sk -H "Authorization: Bearer $TOKEN" -X https://$API/api
 Use a `machineconfig` or `mc` to set one message of the day (motd) on all `worker` nodes and another for the `master` nodes
 
 ### Requirements
-* On the `worker` nodes set the `motd` to
+* On the `worker` nodes set the `motd` to:
   ```
   ##########################
   # Official Worker Banner #
   ##########################
   ```
-   and `mc` with the name `50-worker-motd` 
-* On the `master` nodes set the `motd` to `Official Master Banner` and name the mc `50-master-motd`
+  and set the `mc` name to `50-worker-motd` 
+* On the `master` nodes set the `motd` to:
+  ```
+  --------------------------
+  | Official MASTER Banner |
+  --------------------------
+  ```
+ and set the `mc` name to `50-master-motd` 
 
 ### Task breakdown
-4.1. Get the template - from where ... the docs:  `post-install-machine-configuration`
+4.1. Get the template and modify it. From where ... the docs:  `post-install-machine-configuration`
 ```
 vi 50-worker-motd.bu
 ```
@@ -279,7 +285,7 @@ storage:
           # Official Worker Banner #
           ##########################
 ```
-4.2. Create the `machineconfig` or `mc` file 
+4.2. Create the `machineconfig` or `mc` file for the worker nodes.
 ```
 butane 50-worker-motd.bu -o 50-worker-motd.yaml
 ```
@@ -311,7 +317,31 @@ oc get mc 50-worker-motd
 NAME             GENERATEDBYCONTROLLER   IGNITIONVERSION   AGE
 50-worker-motd                           3.2.0             9m13s
 ```
-4.4. Check on the node
+4.4. Create the master `mc`
+```
+vi 50-worker-motd.bu
+vi 50-worker-motd.bu
+```
+```
+variant: openshift
+version: 4.10.0
+metadata:
+  name: 50-worker-motd
+  labels:
+    machineconfiguration.openshift.io/role: worker
+storage:
+  files:
+  - path: /etc/motd
+    mode: 0644
+    overwrite: true
+    contents:
+      inline: |
+          ##########################
+          # Official Worker Banner #
+          ##########################
+```
+
+4.4. Check on the nodes
 ```
 for i in `oc get nodes -o name`; do oc debug $i -- chroot /host cat /etc/motd; done
 Temporary namespace openshift-debug-kmvsl is created for debugging node...
