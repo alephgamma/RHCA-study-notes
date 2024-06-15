@@ -260,7 +260,7 @@ Use a `machineconfig` or `mc` to set one message of the day (motd) on all `worke
   | Official MASTER Banner |
   --------------------------
   ```
- and set the `mc` name to `50-master-motd` 
+  and set the `mc` name to `50-master-motd` 
 
 ### Task breakdown
 4.1. Get the template and modify it. From where ... the docs:  `post-install-machine-configuration`
