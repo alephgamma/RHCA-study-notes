@@ -250,15 +250,15 @@ Use a `machineconfig` or `mc` to set one message of the day (motd) on all `worke
 * On the `worker` nodes set the `motd` to:
   ```
   ##########################
-  # Official Worker Banner #
+  # Official worker Banner #
   ##########################
   ```
   and set the `mc` name to `50-worker-motd` 
 * On the `master` nodes set the `motd` to:
   ```
-  --------------------------
-  | Official MASTER Banner |
-  --------------------------
+  **************************
+  * Official master Banner *
+  **************************
   ```
   and set the `mc` name to `50-master-motd` 
 
@@ -282,7 +282,7 @@ storage:
     contents:
       inline: |
           ##########################
-          # Official Worker Banner #
+          # Official worker Banner #
           ##########################
 ```
 4.2. Create the `machineconfig` or `mc` file for the worker nodes.
@@ -320,15 +320,16 @@ NAME             GENERATEDBYCONTROLLER   IGNITIONVERSION   AGE
 4.4. Create the master `mc`
 ```
 cp 50-worker-motd.bu 50-master-motd.bu
-
+sed 's/worker/master/g' 50-worker-motd.bu > temp.bu
+sed 's/\#/\*/g' temp.bu > 50-master-motd.bu
 ```
 ```
 variant: openshift
 version: 4.10.0
 metadata:
-  name: 50-worker-motd
+  name: 50-master-motd
   labels:
-    machineconfiguration.openshift.io/role: worker
+    machineconfiguration.openshift.io/role: master
 storage:
   files:
   - path: /etc/motd
@@ -336,9 +337,9 @@ storage:
     overwrite: true
     contents:
       inline: |
-          ##########################
-          # Official Worker Banner #
-          ##########################
+          **************************
+          * Official master Banner *
+          **************************
 ```
 
 4.4. Check on the nodes
