@@ -241,9 +241,6 @@ curl -sk -H "Authorization: Bearer $TOKEN" -X https://$API/api
   ]
 }
 ```
-3.x Clean up script(s) to restore the previous settings
-```
-```
 ## 4. `machineconfig` Message of the Day
 
 ### Task
