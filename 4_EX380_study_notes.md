@@ -319,8 +319,8 @@ NAME             GENERATEDBYCONTROLLER   IGNITIONVERSION   AGE
 ```
 4.4. Create the master `mc`
 ```
-vi 50-worker-motd.bu
-vi 50-worker-motd.bu
+cp 50-worker-motd.bu 50-master-motd.bu
+
 ```
 ```
 variant: openshift
