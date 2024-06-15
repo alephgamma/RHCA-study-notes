@@ -244,7 +244,7 @@ curl -sk -H "Authorization: Bearer $TOKEN" -X https://$API/api
 ## 4. `machineconfig` Message of the Day
 
 ### Task
-Use a `machineconfig` or `mc` to set one message of the day (motd) on all `worker` nodes and another for the `master` nodes
+Use a `machineconfig` or `mc` to set one Message of the Day (motd) on all `worker` nodes and another for the `master` nodes
 
 ### Requirements
 * On the `worker` nodes set the `motd` to:
