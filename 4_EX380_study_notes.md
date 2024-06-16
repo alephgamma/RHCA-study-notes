@@ -309,7 +309,11 @@ spec:
           overwrite: true
           path: /etc/motd
 ```
-4.3. Verify the `mc`
+4.3. Apply the `mc`
+```
+oc apply -f mc 50-worker-motd.yaml
+```
+4.4. Verify the `mc`
 ```
 oc get mc 50-worker-motd
 ```
@@ -317,11 +321,12 @@ oc get mc 50-worker-motd
 NAME             GENERATEDBYCONTROLLER   IGNITIONVERSION   AGE
 50-worker-motd                           3.2.0             9m13s
 ```
-4.4. Create the master `mc`
+4.5. Create the master `mc`
 ```
 cp 50-worker-motd.bu 50-master-motd.bu
 sed 's/worker/master/g' 50-worker-motd.bu > temp.bu
 sed 's/\#/\*/g' temp.bu > 50-master-motd.bu
+cat 50-master-motd.bu
 ```
 ```
 variant: openshift
@@ -342,7 +347,7 @@ storage:
         **************************
 ```
 
-4.4. Check on the nodes
+4.6. Check on the nodes
 ```
 for i in `oc get nodes -o name`; do oc debug $i -- chroot /host cat /etc/motd; done
 Temporary namespace openshift-debug-kmvsl is created for debugging node...
@@ -355,8 +360,12 @@ To use host binaries, run `chroot /host`
 Removing debug pod ...
 ...
 ```
-4.x. Clean up script(s) to restore the previous settings
+4.7. Clean up script(s) to restore the previous settings
 ```
+oc delete -f 50-master-motd.yaml
+oc delete -f 50-worker-motd.yaml
+rm temp.bu 50-worker-motd.bu 50-master-motd.bu
+rm 50-worker-motd.yaml 50-master-motd.yaml
 ```
 ## 5. Ansible and OpenShift
 
