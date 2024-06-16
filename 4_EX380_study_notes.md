@@ -520,16 +520,87 @@ localhost                  : ok=7    changed=4    unreachable=0    failed=0    s
 ## 6. `cronjob` Automation
 
 ### Task
-Configure a cronjob
+Configure a cronjob to run a python one-liner.
 
 ### Requirements
-* Run at noon on the 1st and 15th of the month
+* Create a new-project: `cronjob-project` 
+* Use the image: `docker.io/library/python`
+  to get the current timestamp using the one-liner: `python -c 'import datetime as d; print(d.datetime.now())'`
+* Run every 2nd minute
+  * Run at noon on the 1st and 15th of the month
 * History limit: `14`
-* Use serviceAccountName: `auditor`
-* Run the script: `dothis.sh`
+* Use serviceAccountName: `python-sa`
 
 ### Task breakdown
-6.1. The cronjob CRD: `cronjob.yaml`
+6.1. Create the project
+```
+oc new-project cronjob-project
+```
+6.2. Get a template... 
+
+6.2.1. This isn't any clear documentation on this process.
+```
+oc create cronjob --dry-run=client -o yaml python-date-test --image docker.io/library/python --schedule='*/2 * * * *' -- python -c 'import platform;print(platform.python_version())'
+```
+```
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  creationTimestamp: null
+  name: python-date-test
+spec:
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      name: python-date-test
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - command:
+            - python
+            - -c
+            - import platform;print(platform.python_version())
+            image: docker.io/library/python
+            name: python-date-test
+            resources: {}
+          restartPolicy: OnFailure
+  schedule: '*/2 * * * *'
+status: {}
+```
+6.2.2. `cronjob-python.yaml` Clean-up needed?
+```
+oc create cronjob --dry-run=client -o yaml python-date-test --image docker.io/library/python --schedule='*/2 * * * *' -- python -c 'import platform;print(platform.python_version())' > cronjob-python.yaml
+vi cronjob-python.yaml
+```
+```
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: python-date-test
+  namespace: cronjob-project
+spec:
+  jobTemplate:
+    metadata:
+      name: python-date-test
+    spec:
+      template:
+        metadata:
+        spec:
+          containers:
+          - command:
+            - python
+            - -c
+            - import datetime as d; print(d.datetime.now())
+            image: docker.io/library/python
+            name: python-date-test
+          restartPolicy: OnFailure
+  schedule: '*/1 * * * *'
+  successfulJobsHistoryLimit: 14
+```
+6.3. The cronjob CRD: `cronjob.yaml`
 ```
 apiVersion: batch/v1
 kind: CronJob
