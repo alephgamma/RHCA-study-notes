@@ -514,8 +514,9 @@ ok: [localhost]
 PLAY RECAP ***************************************************************************************************************************
 localhost                  : ok=7    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
-5.x Clean up script(s) to restore the previous settings
+5.4. Clean up script(s) to restore the previous settings
 ```
+oc delete project hello-world
 ```
 ## 6. `cronjob` Automation
 
