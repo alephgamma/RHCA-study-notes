@@ -281,9 +281,9 @@ storage:
     overwrite: true
     contents:
       inline: |
-          ##########################
-          # Official worker Banner #
-          ##########################
+        ##########################
+        # Official worker Banner #
+        ##########################
 ```
 4.2. Create the `machineconfig` or `mc` file for the worker nodes.
 ```
@@ -337,9 +337,9 @@ storage:
     overwrite: true
     contents:
       inline: |
-          **************************
-          * Official master Banner *
-          **************************
+        **************************
+        * Official master Banner *
+        **************************
 ```
 
 4.4. Check on the nodes
