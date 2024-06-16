@@ -524,13 +524,10 @@ Configure a cronjob to run a python one-liner.
 
 ### Requirements
 * Create a new-project: `cronjob-project`
-  Use the service account: `python-sa`
+* Use the service account: `python-sa`
 * Use the image: `docker.io/library/python` to get the current timestamp using the one-liner: `python -c 'import datetime as d; print(d.datetime.now())'`
 * Run every 2nd minute
-  * Run at noon on the 1st and 15th of the month
 * History rotating-log limit: `5`
-  * History limit: `14`
-
 
 ### Task breakdown
 6.1. Create the project to make the namespace.
@@ -543,7 +540,7 @@ oc create serviceaccount python-sa -n cronjob-project
 ```
 6.3. Get a template... 
 
-6.3.1. There isn't any clear documentation on the process to create the `command` section.
+6.3.1. There isn't any clear documentation on the process to (manually) create the `command` section.
 ```
 oc create cronjob --dry-run=client -o yaml python-date-test --image docker.io/library/python --schedule='*/2 * * * *' -- python -c 'import platform;print(platform.python_version())'
 ```
@@ -575,7 +572,7 @@ spec:
   schedule: '*/2 * * * *'
 status: {}
 ```
-6.3.2. `cronjob-python.yaml` Clean-up needed?
+6.3.2. Edit `cronjob-python.yaml` Clean-up needed?
 ```
 oc create cronjob --dry-run=client -o yaml python-date-test --image docker.io/library/python --schedule='*/2 * * * *' -- python -c 'import platform;print(platform.python_version())' > cronjob-python.yaml
 vi cronjob-python.yaml
