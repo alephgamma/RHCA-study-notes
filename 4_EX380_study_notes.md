@@ -309,26 +309,7 @@ spec:
           overwrite: true
           path: /etc/motd
 ```
-4.3. Apply the `mc`
-```
-oc apply -f mc 50-worker-motd.yaml
-```
-4.4. Verify the `mc`
-```
-oc get mc 50-worker-motd
-```
-```
-NAME             GENERATEDBYCONTROLLER   IGNITIONVERSION   AGE
-50-worker-motd                           3.2.0             9m13s
-```
-```
-oc get mc 50-master-motd
-```
-```
-NAME             GENERATEDBYCONTROLLER   IGNITIONVERSION   AGE
-50-master-motd                           3.2.0             3m10s
-```
-4.5. Create the master `mc`
+4.3. Create the master `mc`
 ```
 cp 50-worker-motd.bu 50-master-motd.bu
 sed 's/worker/master/g' 50-worker-motd.bu > temp.bu
@@ -352,6 +333,26 @@ storage:
         **************************
         * Official master Banner *
         **************************
+```
+4.4. Apply the `mc` files
+```
+oc apply -f mc 50-worker-motd.yaml
+oc apply -f mc 50-master-motd.yaml
+```
+4.5. Verify the `mc` 
+```
+oc get mc 50-worker-motd
+```
+```
+NAME             GENERATEDBYCONTROLLER   IGNITIONVERSION   AGE
+50-worker-motd                           3.2.0             9m13s
+```
+```
+oc get mc 50-master-motd
+```
+```
+NAME             GENERATEDBYCONTROLLER   IGNITIONVERSION   AGE
+50-master-motd                           3.2.0             3m10s
 ```
 4.6. Check on the nodes
 ```
