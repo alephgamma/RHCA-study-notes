@@ -555,3 +555,18 @@ spec:
 6.x Clean up script(s) to restore the previous settings
 ```
 ```
+## 7. Registries
+
+### Task
+Working with registries
+
+### Requirements
+* X
+
+### Task breakdown
+7.1. What do we have?
+```
+```
+7.x Clean up script(s) to restore the previous settings
+```
+```
