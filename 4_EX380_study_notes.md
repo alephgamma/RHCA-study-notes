@@ -321,6 +321,13 @@ oc get mc 50-worker-motd
 NAME             GENERATEDBYCONTROLLER   IGNITIONVERSION   AGE
 50-worker-motd                           3.2.0             9m13s
 ```
+```
+oc get mc 50-master-motd
+```
+```
+NAME             GENERATEDBYCONTROLLER   IGNITIONVERSION   AGE
+50-master-motd                           3.2.0             3m10s
+```
 4.5. Create the master `mc`
 ```
 cp 50-worker-motd.bu 50-master-motd.bu
@@ -346,7 +353,6 @@ storage:
         * Official master Banner *
         **************************
 ```
-
 4.6. Check on the nodes
 ```
 for i in `oc get nodes -o name`; do oc debug $i -- chroot /host cat /etc/motd; done
