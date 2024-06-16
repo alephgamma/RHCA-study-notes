@@ -541,7 +541,7 @@ oc create serviceaccount python-sa -n cronjob-project
 ```
 6.3. Get a template... 
 
-6.3.1. There isn't any clear documentation on the process to (manually) create the `command` section.
+6.3.1. There isn't any clear documentation on the process to (manually) create the `command` section. Not every human being - even those above average - can parse `args` like BASH into "human-readable" YAML.
 ```
 oc create cronjob --dry-run=client -o yaml python-date-test --image docker.io/library/python --schedule='*/2 * * * *' -- python -c 'import platform;print(platform.python_version())'
 ```
