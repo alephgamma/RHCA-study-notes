@@ -532,13 +532,13 @@ Configure a cronjob to run a python one-liner.
 * Use serviceAccountName: `python-sa`
 
 ### Task breakdown
-6.1. Create the project
+6.1. Create the project.
 ```
 oc new-project cronjob-project
 ```
 6.2. Get a template... 
 
-6.2.1. This isn't any clear documentation on this process.
+6.2.1. There isn't any clear documentation on the process to create the `command` section.
 ```
 oc create cronjob --dry-run=client -o yaml python-date-test --image docker.io/library/python --schedule='*/2 * * * *' -- python -c 'import platform;print(platform.python_version())'
 ```
@@ -600,28 +600,47 @@ spec:
   schedule: '*/1 * * * *'
   successfulJobsHistoryLimit: 14
 ```
-6.3. The cronjob CRD: `cronjob.yaml`
+6.3. Verify the cronjobs
 ```
-apiVersion: batch/v1
-kind: CronJob
-metadata:
-  name: cron-dothis
-  namespace: cronjob-automation
-spec:
-  schedule: "0 12 1,15 * *"
-  successfulJobsHistoryLimit: 14
-  jobTemplate:
-    spec:
-      template:
-        spec:
-          serviceAccountName: auditor
-          restartPolicy: Never
-          containers:
-          - name: dothis.sh
-            image: quay.io/redhattraining/hello-world-nginx:v1.0
-            command: ["/bin/sh", "-c"]
-            args:
-              - "dothis.sh"
+oc get all
+```
+```
+NAME                                  READY   STATUS      RESTARTS   AGE
+pod/python-date-test-28642711-2tffc   0/1     Completed   0          14m
+pod/python-date-test-28642712-vjdc5   0/1     Completed   0          13m
+pod/python-date-test-28642713-6wt45   0/1     Completed   0          12m
+pod/python-date-test-28642714-92pr8   0/1     Completed   0          11m
+pod/python-date-test-28642715-zv7l8   0/1     Completed   0          10m
+pod/python-date-test-28642716-nc428   0/1     Completed   0          9m3s
+pod/python-date-test-28642717-5mhjp   0/1     Completed   0          8m3s
+pod/python-date-test-28642718-kb42w   0/1     Completed   0          7m3s
+pod/python-date-test-28642719-d9p8r   0/1     Completed   0          6m3s
+pod/python-date-test-28642720-kg6sz   0/1     Completed   0          5m3s
+pod/python-date-test-28642721-w79l8   0/1     Completed   0          4m3s
+pod/python-date-test-28642722-8ldng   0/1     Completed   0          3m3s
+pod/python-date-test-28642723-ghsn2   0/1     Completed   0          2m3s
+pod/python-date-test-28642724-g7f77   0/1     Completed   0          63s
+pod/python-date-test-28642725-mw8zd   0/1     Completed   0          3s
+
+NAME                             SCHEDULE      SUSPEND   ACTIVE   LAST SCHEDULE   AGE
+cronjob.batch/python-date-test   */1 * * * *   False     1        3s              31m
+
+NAME                                  COMPLETIONS   DURATION   AGE
+job.batch/python-date-test-28642711   1/1           3s         14m
+job.batch/python-date-test-28642712   1/1           3s         13m
+job.batch/python-date-test-28642713   1/1           3s         12m
+job.batch/python-date-test-28642714   1/1           3s         11m
+job.batch/python-date-test-28642715   1/1           4s         10m
+job.batch/python-date-test-28642716   1/1           4s         9m3s
+job.batch/python-date-test-28642717   1/1           4s         8m3s
+job.batch/python-date-test-28642718   1/1           3s         7m3s
+job.batch/python-date-test-28642719   1/1           3s         6m3s
+job.batch/python-date-test-28642720   1/1           3s         5m3s
+job.batch/python-date-test-28642721   1/1           3s         4m3s
+job.batch/python-date-test-28642722   1/1           4s         3m3s
+job.batch/python-date-test-28642723   1/1           4s         2m3s
+job.batch/python-date-test-28642724   1/1           4s         63s
+job.batch/python-date-test-28642725   0/1           3s         3s
 ```
 6.x Clean up script(s) to restore the previous settings
 ```
