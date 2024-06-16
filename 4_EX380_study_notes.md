@@ -539,9 +539,7 @@ oc new-project cronjob-project
 ```
 oc create serviceaccount python-sa -n cronjob-project
 ```
-6.3. Get a template... 
-
-6.3.1. There isn't any clear documentation on the process to (manually) create the `command` section. Not every human being - even those above average - can parse `args` like BASH into "human-readable" YAML.
+6.3. Get a template... There isn't any clear documentation on the process to (manually) create the `command` section. Not every human being - even those above average - can parse `args` like BASH into "human-readable" YAML.
 ```
 oc create cronjob --dry-run=client -o yaml python-date-test --image docker.io/library/python --schedule='*/2 * * * *' -- python -c 'import platform;print(platform.python_version())'
 ```
@@ -573,7 +571,7 @@ spec:
   schedule: '*/2 * * * *'
 status: {}
 ```
-6.3.2. Edit `cronjob-python.yaml` Clean-up needed?
+6.4. Edit `cronjob-python.yaml` Clean-up needed?
 ```
 oc create cronjob --dry-run=client -o yaml python-date-test --image docker.io/library/python --schedule='*/2 * * * *' -- python -c 'import platform;print(platform.python_version())' > cronjob-python.yaml
 vi cronjob-python.yaml
@@ -604,7 +602,11 @@ spec:
   schedule: '*/1 * * * *'
   successfulJobsHistoryLimit: 5
 ```
-6.4. Verify the cronjobs
+6.5. Apply the CronJob RESOURCE
+```
+oc apply -f cronjob-python.yaml
+```
+6.6. Verify the cronjobs
 ```
 oc get all
 ```
@@ -632,7 +634,7 @@ oc logs job.batch/python-date-test-28642725
 ```
 2024-06-16 18:45:01.319555
 ```
-6.5. Clean up script(s) to restore the previous settings
+6.7. Clean up script(s) to restore the previous settings
 ```
 oc delete project cronjob-project
 ```
