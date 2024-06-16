@@ -385,7 +385,7 @@ Use ansible with OpenShift modules to deploy an application and verify webpages 
   * `redhat.openshift.openshift_route`
   * `redhat.openshift.k8s`
   * `kubernetes.core.k8s`
-* Playbook finishes
+* Playbook finishes without failures
 
 ### Task breakdown
 5.1. The resource files: `Deployment.yaml` and `Service.yaml`
@@ -523,23 +523,27 @@ localhost                  : ok=7    changed=4    unreachable=0    failed=0    s
 Configure a cronjob to run a python one-liner.
 
 ### Requirements
-* Create a new-project: `cronjob-project` 
-* Use the image: `docker.io/library/python`
-  to get the current timestamp using the one-liner: `python -c 'import datetime as d; print(d.datetime.now())'`
+* Create a new-project: `cronjob-project`
+  Use the service account: `python-sa`
+* Use the image: `docker.io/library/python` to get the current timestamp using the one-liner: `python -c 'import datetime as d; print(d.datetime.now())'`
 * Run every 2nd minute
   * Run at noon on the 1st and 15th of the month
 * History rotating-log limit: `5`
   * History limit: `14`
-* Use serviceAccountName: `python-sa`
+
 
 ### Task breakdown
-6.1. Create the project.
+6.1. Create the project to make the namespace.
 ```
 oc new-project cronjob-project
 ```
-6.2. Get a template... 
+6.2. Create the service account.
+```
+oc create serviceaccount python-sa -n cronjob-project
+```
+6.3. Get a template... 
 
-6.2.1. There isn't any clear documentation on the process to create the `command` section.
+6.3.1. There isn't any clear documentation on the process to create the `command` section.
 ```
 oc create cronjob --dry-run=client -o yaml python-date-test --image docker.io/library/python --schedule='*/2 * * * *' -- python -c 'import platform;print(platform.python_version())'
 ```
@@ -571,7 +575,7 @@ spec:
   schedule: '*/2 * * * *'
 status: {}
 ```
-6.2.2. `cronjob-python.yaml` Clean-up needed?
+6.3.2. `cronjob-python.yaml` Clean-up needed?
 ```
 oc create cronjob --dry-run=client -o yaml python-date-test --image docker.io/library/python --schedule='*/2 * * * *' -- python -c 'import platform;print(platform.python_version())' > cronjob-python.yaml
 vi cronjob-python.yaml
@@ -590,6 +594,7 @@ spec:
       template:
         metadata:
         spec:
+          serviceAccountName: python-sa
           containers:
           - command:
             - python
@@ -599,9 +604,9 @@ spec:
             name: python-date-test
           restartPolicy: OnFailure
   schedule: '*/1 * * * *'
-  successfulJobsHistoryLimit: 14
+  successfulJobsHistoryLimit: 5
 ```
-6.3. Verify the cronjobs
+6.4. Verify the cronjobs
 ```
 oc get all
 ```
@@ -629,8 +634,9 @@ oc logs job.batch/python-date-test-28642725
 ```
 2024-06-16 18:45:01.319555
 ```
-6.x Clean up script(s) to restore the previous settings
+6.5. Clean up script(s) to restore the previous settings
 ```
+oc delete project cronjob-project
 ```
 ## 7. Registries
 
