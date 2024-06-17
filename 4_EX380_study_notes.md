@@ -653,3 +653,18 @@ Work with registries
 7.x Clean up script(s) to restore the previous settings
 ```
 ```
+## 8. Cluster Logging
+
+### Task
+Work with registries
+
+### Requirements
+* X
+
+### Task breakdown
+8.1. What do we have?
+```
+```
+8.x Clean up script(s) to restore the previous settings
+```
+```
