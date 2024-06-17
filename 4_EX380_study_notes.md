@@ -683,3 +683,18 @@ Configure cluster logging
 9.x Clean up script(s) to restore the previous settings
 ```
 ```
+## 10. Scheduling and Troubleshooting
+
+### Task
+Configure cluster logging
+
+### Requirements
+* X
+
+### Task breakdown
+10.1. What do we have?
+```
+```
+10.x Clean up script(s) to restore the previous settings
+```
+```
