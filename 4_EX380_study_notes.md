@@ -641,7 +641,7 @@ oc delete project cronjob-project
 ## 7. Registries
 
 ### Task
-Working with registries
+Work with registries
 
 ### Requirements
 * X
