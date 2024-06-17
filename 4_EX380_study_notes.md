@@ -656,7 +656,7 @@ Work with registries
 ## 8. Operators
 
 ### Task
-Configure cluster logging
+Install an Operator
 
 ### Requirements
 * X
