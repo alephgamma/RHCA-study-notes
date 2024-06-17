@@ -656,7 +656,7 @@ Work with registries
 ## 8. Cluster Logging
 
 ### Task
-Work with registries
+Configure cluster logging
 
 ### Requirements
 * X
