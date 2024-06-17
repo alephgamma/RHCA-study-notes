@@ -653,7 +653,7 @@ Work with registries
 7.x Clean up script(s) to restore the previous settings
 ```
 ```
-## 8. Cluster Logging
+## 8. Operators
 
 ### Task
 Configure cluster logging
@@ -666,5 +666,20 @@ Configure cluster logging
 ```
 ```
 8.x Clean up script(s) to restore the previous settings
+```
+```
+## 9. Cluster Logging
+
+### Task
+Configure cluster logging
+
+### Requirements
+* X
+
+### Task breakdown
+9.1. What do we have?
+```
+```
+9.x Clean up script(s) to restore the previous settings
 ```
 ```
