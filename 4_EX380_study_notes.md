@@ -334,6 +334,9 @@ storage:
         * Official master Banner *
         **************************
 ```
+```
+butane 50-master-motd.bu -o 50-master-motd.yaml
+```
 4.4. Apply the `mc` files
 ```
 oc apply -f mc 50-worker-motd.yaml
@@ -663,6 +666,8 @@ Install an Operator
 
 ### Requirements
 * X
+* Y
+* Z
 
 ### Task breakdown
 8.1. What do we have?
@@ -689,7 +694,7 @@ Configure cluster logging
 ## 10. Scheduling and Troubleshooting
 
 ### Task
-Configure cluster logging
+Fix me
 
 ### Requirements
 * X
