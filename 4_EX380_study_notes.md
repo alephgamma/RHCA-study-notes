@@ -659,10 +659,10 @@ Work with registries
 7.x Clean up script(s) to restore the previous settings
 ```
 ```
-## 8. Registries 
+## 8. Run a Kubernetes application on OpenShift 
 
 ### Task
-Work with registries
+Run a Kubernetes application on OpenShift
 
 ### Requirements
 * X
