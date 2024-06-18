@@ -337,6 +337,8 @@ storage:
 4.4. Apply the `mc` files
 ```
 oc apply -f mc 50-worker-motd.yaml
+```
+```
 oc apply -f mc 50-master-motd.yaml
 ```
 4.5. Verify the `mc` 
@@ -383,6 +385,7 @@ Use ansible with OpenShift modules to deploy an application and verify webpages 
 * Ansible OpenShift and Kubernetes modules:
   * `redhat.openshift.openshift_auth`
   * `redhat.openshift.openshift_route`
+
   * `redhat.openshift.k8s`
   * `kubernetes.core.k8s`
 * Playbook finishes without failures
