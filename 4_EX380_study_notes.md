@@ -648,10 +648,10 @@ oc logs job.batch/python-date-test-28642725
 ```
 oc delete project cronjob-project
 ```
-## 7. Images and Registries from Kubernetes
+## 7. Run a Kubernetes application on OpenShift
 
 ### Task
-Given an image and Deployment file from Kubernetes make the image available on Quay and run the Deployment on OpenShift.
+Given an image and Custom Resource Definition files from Kubernetes make the image available on Quay and run the Deployment on OpenShift.
 
 ### Requirements
 * Put `versioned-hello.xyz` in a registry
@@ -770,25 +770,7 @@ spec:
 7.x Clean up script(s) to restore the previous settings
 ```
 ```
-## 8. Run a Kubernetes application on OpenShift 
-
-### Task
-Run a Kubernetes application on OpenShift
-
-### Requirements
-* X
-
-### Task breakdown
-8.1. What do we have?
-```
-quay.io/redhattraining/versioned-hello
-```
-8.2.
-
-8.x Clean up script(s) to restore the previous settings
-```
-```
-## 9. Operators
+## 8. Operators
 
 ### Task
 Install an Operator
@@ -799,16 +781,31 @@ Install an Operator
 * Z
 
 ### Task breakdown
+8.1. What do we have?
+```
+```
+8.x Clean up script(s) to restore the previous settings
+```
+```
+## 9. Cluster Logging
+
+### Task
+Configure cluster logging
+
+### Requirements
+* X
+
+### Task breakdown
 9.1. What do we have?
 ```
 ```
 9.x Clean up script(s) to restore the previous settings
 ```
 ```
-## 10. Cluster Logging
+## 10. Scheduling and Troubleshooting
 
 ### Task
-Configure cluster logging
+Fix me
 
 ### Requirements
 * X
@@ -820,18 +817,3 @@ Configure cluster logging
 10.x Clean up script(s) to restore the previous settings
 ```
 ```
-## 11. Scheduling and Troubleshooting
-
-### Task
-Fix me
-
-### Requirements
-* X
-
-### Task breakdown
-11.1. What do we have?
-```
-```
-11.x Clean up script(s) to restore the previous settings
-```
-``
