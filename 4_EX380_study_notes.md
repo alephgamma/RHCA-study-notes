@@ -681,6 +681,7 @@ $ skopeo inspect docker-archive:versioned-hello-v1_0.xyz
 }
 ```
 Yes
+
 7.2. Import the image into the podman images *magic bucket*...
 ```
 podman import versioned-hello-v1_0.xyz registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
