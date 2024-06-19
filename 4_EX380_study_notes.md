@@ -648,17 +648,18 @@ oc logs job.batch/python-date-test-28642725
 ```
 oc delete project cronjob-project
 ```
-## 7. Registries 
+## 7. Images and Registries from Kubernetes
 
 ### Task
-Work with registries
+Given an image and Deployment file from Kubernetes make the image available on Quay and run the Deployment on OpenShift.
 
 ### Requirements
-* X
+* Put image.xyz in a registry
 
 ### Task breakdown
 7.1. What do we have?
 ```
+skopeo inspect docker-archive:image.xyz
 ```
 7.x Clean up script(s) to restore the previous settings
 ```
