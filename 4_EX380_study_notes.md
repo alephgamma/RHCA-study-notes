@@ -654,7 +654,7 @@ oc delete project cronjob-project
 Given an image and Custom Resource Definition files from Kubernetes make the image available on Quay and run the Deployment on OpenShift.
 
 ### Requirements
-* Put `versioned-hello.xyz` in a registry
+* Put the tar file `versioned-hello.xyz` in a registry
 * The registry: `registry.apps.example.com`
 
 ### Task breakdown
