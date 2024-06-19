@@ -693,11 +693,15 @@ sha256:0eaa9fabedcb155bc41fb416018da080b909aad62ee77530e65516ec5bf5fc49
 ```
 7.3. Verify the `podman images`
 ```
-
+$ podman images
+```
+```
+REPOSITORY                                                TAG      IMAGE ID      CREATED            SIZE
+registry.apps.example.com/myorg/myrepo/versioned-hello    v1.0     0eaa9fabedcb  About an hour ago  99.5 MB
 ```
 7.4. Push the image up to the registry
 ```
-podman push versioned-hello-v1_0.xyz registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
+podman push registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
 ```
 7.5. Create the project
 ```
@@ -714,14 +718,14 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hello
+      app: versioned-hello
   template:
     metadata:
       labels:
         app: versioned-hello
     spec:
       containers:
-        - image: quay.io/redhattraining/versioned-hello:v1.0
+        - image: registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
           name: hello
           ports:
             - containerPort: 8080
