@@ -695,7 +695,11 @@ sha256:0eaa9fabedcb155bc41fb416018da080b909aad62ee77530e65516ec5bf5fc49
 ```
 podman push versioned-hello-v1_0.xyz registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
 ```
-7.2. The Deployment file: `deploy-versioned-hello.yaml`
+7.2. Create the project
+```
+oc new-project versioned-hello
+```
+7.3. The Deployment file: `deploy-versioned-hello.yaml`
 ```
 apiVersion: apps/v1
 kind: Deployment
@@ -719,7 +723,7 @@ spec:
             - containerPort: 8080
               protocol: TCP
 ```
-7.2. The Service file: `svc-versioned-hello.yaml`
+7.4. The Service file: `svc-versioned-hello.yaml`
 ```
 apiVersion: v1
 kind: Service
@@ -735,7 +739,7 @@ spec:
     app: hello
   type: ClusterIP
 ```
-7.2. The Ingress file: `ingress-versioned-hello.yaml`
+7.5. The Ingress file: `ingress-versioned-hello.yaml`
 ```
 apiVersion: networking.k8s.io/v1
 kind: Ingress
