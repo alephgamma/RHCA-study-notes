@@ -654,12 +654,88 @@ oc delete project cronjob-project
 Given an image and Deployment file from Kubernetes make the image available on Quay and run the Deployment on OpenShift.
 
 ### Requirements
-* Put image.xyz in a registry
+* Put `versioned-hello.xyz` in a registry
+* The registry: `registry.apps.example.com`
 
 ### Task breakdown
 7.1. What do we have?
 ```
-skopeo inspect docker-archive:image.xyz
+$ ls -1
+```
+```
+versioned-hello-v1_0.xyz
+versioned-hello.yaml
+```
+7.1. But is it an image?
+```
+$ skopeo inspect docker-archive:versioned-hello-v1_0.xyz 
+{
+    "Digest": "sha256:9590110743f483caa5565264daef78259a999270c2160e9ebe07c03f14719137",
+    "RepoTags": [],
+    "Created": "2020-03-10T18:58:43.869429665Z",
+    "DockerVersion": "",
+    "Labels": {
+       ...
+    },
+    ...
+}
+```
+7.2. The Deployment file: `versioned-hello.yaml`
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-deployment
+  namespace: versioned-hello
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello
+  template:
+    metadata:
+      labels:
+        app: versioned-hello
+    spec:
+      containers:
+        - image: quay.io/redhattraining/versioned-hello:v1.0
+          name: hello
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-service
+  namespace: versioned-hello
+spec:
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: hello
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: hello-ingress
+  namespace: versioned-hello
+spec:
+  rules:
+    - host: deploy-k8s.apps-crc.testing
+      http:
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: hello
+                port:
+                  number: 8080
+---
 ```
 7.x Clean up script(s) to restore the previous settings
 ```
@@ -675,7 +751,10 @@ Run a Kubernetes application on OpenShift
 ### Task breakdown
 8.1. What do we have?
 ```
+quay.io/redhattraining/versioned-hello
 ```
+8.2.
+
 8.x Clean up script(s) to restore the previous settings
 ```
 ```
