@@ -394,7 +394,11 @@ Use ansible with OpenShift modules to deploy an application and verify webpages 
 * Playbook finishes without failures
 
 ### Task breakdown
-5.1. The resource files: `Deployment.yaml` and `Service.yaml`
+5.1. What is available?
+```
+ansible-galaxy collection list
+```
+5.2. The resource files: `Deployment.yaml` and `Service.yaml`
 ```
 vi Deployment.yaml
 ```
@@ -438,7 +442,7 @@ spec:
     app: hello
   type: ClusterIP
 ```
-5.2. The playbook: `hello-world.yaml`
+5.3. The playbook: `hello-world.yaml`
 ```
 ---
 - name: First play - Get the token
@@ -507,7 +511,7 @@ spec:
       retries: 10
       delay: 5
 ```
-5.3. Run the playbook: `hello-world.yaml`
+5.4. Run the playbook: `hello-world.yaml`
 ```
 ansible-playbook hello-world.yaml
 ```
@@ -520,7 +524,7 @@ ok: [localhost]
 PLAY RECAP ***************************************************************************************************************************
 localhost                  : ok=7    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 ```
-5.4. Clean up script(s) to restore the previous settings
+5.5. Clean up script(s) to restore the previous settings
 ```
 oc delete project hello-world
 ```
