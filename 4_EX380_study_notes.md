@@ -804,15 +804,14 @@ spec:
 7.x Clean up script(s) to restore the previous settings
 ```
 ```
-## 8. Operators
+## 8. Operators and Cluster Logging
 
 ### Task
-Install an Operator
+Configure Operators and Cluster-Logging
 
 ### Requirements
-* X
-* Y
-* Z
+* Red Hat OpenShift Logging
+* OpenShift Elastic Operator
 
 ### Task breakdown
 8.1. What do we have?
@@ -821,10 +820,10 @@ Install an Operator
 8.x Clean up script(s) to restore the previous settings
 ```
 ```
-## 9. Cluster Logging
+## 9. Scheduling and Troubleshooting
 
 ### Task
-Configure cluster logging
+Fix me
 
 ### Requirements
 * X
@@ -834,20 +833,5 @@ Configure cluster logging
 ```
 ```
 9.x Clean up script(s) to restore the previous settings
-```
-```
-## 10. Scheduling and Troubleshooting
-
-### Task
-Fix me
-
-### Requirements
-* X
-
-### Task breakdown
-10.1. What do we have?
-```
-```
-10.x Clean up script(s) to restore the previous settings
 ```
 ```
