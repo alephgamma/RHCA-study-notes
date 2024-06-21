@@ -683,7 +683,7 @@ oc delete project cronjob-project
 ## 7. Run a Kubernetes Application on OpenShift
 
 ### Task
-Given an image and Custom Resource Definition files from Kubernetes make the image available on Quay and run the Deployment on OpenShift.
+Given an image and Custom Resource Definition files from Kubernetes, make the image available on Quay and run the Deployment on OpenShift.
 
 ### Requirements
 * Put the tar file `versioned-hello.xyz` in a registry
@@ -737,11 +737,14 @@ registry.apps.example.com/myorg/myrepo/versioned-hello    v1.0     0eaa9fabedcb 
 ```
 podman push registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
 ```
-7.6. Create the project
+7.6. Login as: `developer`
+```
+```
+7.7. Create the project: What is the namespapce?
 ```
 oc new-project versioned-hello
 ```
-7.7. The Deployment file: `deploy-versioned-hello.yaml`
+7.8. The Deployment file *availability over consistency*: `deploy-versioned-hello.yaml`
 ```
 apiVersion: apps/v1
 kind: Deployment
@@ -765,7 +768,7 @@ spec:
             - containerPort: 8080
               protocol: TCP
 ```
-7.8. The Service file: `svc-versioned-hello.yaml`
+7.9. The Service file: `svc-versioned-hello.yaml`
 ```
 apiVersion: v1
 kind: Service
@@ -781,7 +784,7 @@ spec:
     app: hello
   type: ClusterIP
 ```
-7.9. The Ingress file: `ingress-versioned-hello.yaml`
+7.10. The Ingress file: `ingress-versioned-hello.yaml`
 ```
 apiVersion: networking.k8s.io/v1
 kind: Ingress
