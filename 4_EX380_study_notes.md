@@ -680,7 +680,7 @@ oc logs job.batch/python-date-test-28642725
 ```
 oc delete project cronjob-project
 ```
-## 7. Run a Kubernetes application on OpenShift
+## 7. Run a Kubernetes Application on OpenShift
 
 ### Task
 Given an image and Custom Resource Definition files from Kubernetes make the image available on Quay and run the Deployment on OpenShift.
