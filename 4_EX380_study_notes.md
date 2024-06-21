@@ -403,9 +403,31 @@ ansible-galaxy collection list
 Collection                    Version
 ----------------------------- -------
 kubernetes.core               5.0.0
-redhat.openshift              4.0.0
 
 ...
+```
+```
+ansible-galaxy collection install redhat-openshift-4.0.0.tar.gz
+```
+```
+Starting galaxy collection install process
+Process install dependency map
+Starting collection install process
+Downloading https://galaxy.ansible.com/api/v3/plugin/ansible/content/published/collections/artifacts/kubernetes-core-5.0.0.tar.gz to /home/ec2-user/.ansible/tmp/ansible-local-135153ks4d6m5/tmptx9ezhws/kubernetes-core-5.0.0-v8dy8ga0
+Installing 'redhat.openshift:4.0.0' to '/home/ec2-user/.ansible/collections/ansible_collections/redhat/openshift'
+redhat.openshift:4.0.0 was installed successfully
+Installing 'kubernetes.core:5.0.0' to '/home/ec2-user/.ansible/collections/ansible_collections/kubernetes/core'
+kubernetes.core:5.0.0 was installed successfully
+```
+```
+ansible-galaxy collection list
+```
+```
+# /home/ec2-user/.ansible/collections/ansible_collections
+Collection                    Version
+----------------------------- -------
+kubernetes.core               5.0.0
+redhat.openshift              4.0.0
 ```
 5.2. The resource files: `Deployment.yaml` and `Service.yaml`
 ```
