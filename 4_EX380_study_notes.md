@@ -784,7 +784,7 @@ spec:
     app: hello
   type: ClusterIP
 ```
-7.10. Make the exposed route: hello-k8s-application.deploy-k8s.apps-crc.testing
+7.10. Make the exposed route: `hello-k8s-application.deploy-k8s.apps-crc.testing`
 ```
 oc expose service/hello-service --hostname hello-k8s-application.deploy-k8s.apps-crc.testing
 ```
