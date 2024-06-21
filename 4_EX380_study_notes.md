@@ -714,7 +714,7 @@ $ skopeo inspect docker-archive:versioned-hello-v1_0.xyz
 ```
 Yes
 
-7.3. Import the image into the `podman images` *magic bucket*...
+7.3. Import the image into the `podman images` *local storage AKA magic bucket*...
 ```
 podman import versioned-hello-v1_0.xyz registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
 ```
@@ -733,12 +733,13 @@ $ podman images
 REPOSITORY                                                TAG      IMAGE ID      CREATED            SIZE
 registry.apps.example.com/myorg/myrepo/versioned-hello    v1.0     0eaa9fabedcb  About an hour ago  99.5 MB
 ```
-7.5. Push the image up to the registry
+7.5. Push the image up to the registry.
 ```
 podman push registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
 ```
 7.6. Login as: `developer`
 ```
+oc login -u developer -p developer
 ```
 7.7. Create the Project. *What is the NAMESPACE?*
 ```
@@ -767,6 +768,11 @@ spec:
           ports:
             - containerPort: 8080
               protocol: TCP
+```
+oc apply -f deploy-versioned-hello.yaml
+```
+```
+```
 ```
 7.9. The Service file: `svc-versioned-hello.yaml`
 ```
@@ -810,6 +816,8 @@ curl the image
 ```
 7.x Clean up script(s) to restore the previous settings
 ```
+skopeo delete docker://registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
+podman rmi registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
 ```
 ## 8. Operators and Cluster Logging
 
