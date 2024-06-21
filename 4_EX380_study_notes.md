@@ -744,7 +744,7 @@ podman push registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
 ```
 oc new-project versioned-hello
 ```
-7.8. The Deployment file *availability over consistency*: `deploy-versioned-hello.yaml`
+7.8. The Deployment file emphasizes *availability over consistency*: `deploy-versioned-hello.yaml`
 ```
 apiVersion: apps/v1
 kind: Deployment
