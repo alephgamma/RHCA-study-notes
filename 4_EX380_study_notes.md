@@ -788,6 +788,14 @@ spec:
 ```
 oc expose service/hello-service --hostname hello-k8s-application.deploy-k8s.apps-crc.testing
 ```
+7.11. Import the image into the local OpenShift Registry
+```
+oc import-image registry.apps.example.com/myorg/myrepo/versioned-hello --confirm --scheduled
+```
+7.12. Set the trigger on the image
+```
+oc set triggers deployment.apps/hello --from-image versioned-hello:latest -c hello
+```
 7.x Clean up script(s) to restore the previous settings
 ```
 ```
