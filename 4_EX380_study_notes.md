@@ -398,6 +398,15 @@ Use ansible with OpenShift modules to deploy an application and verify webpages 
 ```
 ansible-galaxy collection list
 ```
+```
+# /home/ec2-user/.ansible/collections/ansible_collections
+Collection                    Version
+----------------------------- -------
+kubernetes.core               5.0.0
+redhat.openshift              4.0.0
+
+...
+```
 5.2. The resource files: `Deployment.yaml` and `Service.yaml`
 ```
 vi Deployment.yaml
