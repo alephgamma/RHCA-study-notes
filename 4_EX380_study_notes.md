@@ -842,3 +842,17 @@ Fix me
 9.x Clean up script(s) to restore the previous settings
 ```
 ```
+## 10. Storage
+### Task
+Fix me
+
+### Requirements
+* X
+
+### Task breakdown
+10.1. What do we have?
+```
+```
+10.x Clean up script(s) to restore the previous settings
+```
+```
