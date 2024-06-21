@@ -796,6 +796,18 @@ oc import-image registry.apps.example.com/myorg/myrepo/versioned-hello:latest --
 ```
 oc set triggers deployment.apps/hello --from-image versioned-hello:latest -c hello
 ```
+7.13. Verify that the page responds
+```
+curl hello.apps-crc.testing
+```
+```
+Hi!
+```
+7.12. Verify the image updates
+```
+Update the image
+curl the image
+```
 7.x Clean up script(s) to restore the previous settings
 ```
 ```
