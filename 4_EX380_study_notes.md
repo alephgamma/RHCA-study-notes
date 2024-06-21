@@ -740,7 +740,7 @@ podman push registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
 7.6. Login as: `developer`
 ```
 ```
-7.7. Create the project: What is the namespapce?
+7.7. Create the Project. *What is the NAMESPACE?*
 ```
 oc new-project versioned-hello
 ```
@@ -784,25 +784,9 @@ spec:
     app: hello
   type: ClusterIP
 ```
-7.10. The Ingress file: `ingress-versioned-hello.yaml`
+7.10. Make the exposed route: hello-k8s-application.deploy-k8s.apps-crc.testing
 ```
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: hello-ingress
-  namespace: versioned-hello
-spec:
-  rules:
-    - host: deploy-k8s.apps-crc.testing
-      http:
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: hello
-                port:
-                  number: 8080
+oc expose service/hello-service --hostname hello-k8s-application.deploy-k8s.apps-crc.testing
 ```
 7.x Clean up script(s) to restore the previous settings
 ```
