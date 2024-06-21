@@ -406,6 +406,7 @@ kubernetes.core               5.0.0
 
 ...
 ```
+Get the collection: https://console.redhat.com/ansible/automation-hub/repo/published/redhat/openshift/
 ```
 ansible-galaxy collection install redhat-openshift-4.0.0.tar.gz
 ```
