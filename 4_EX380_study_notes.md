@@ -678,6 +678,7 @@ oc logs job.batch/python-date-test-28642725
 ```
 6.7. Clean up script(s) to restore the previous settings
 ```
+rm cronjob-python.yaml
 oc delete project cronjob-project
 ```
 ## 7. Run a Kubernetes Application on OpenShift
