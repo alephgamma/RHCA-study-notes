@@ -727,7 +727,7 @@ Copying config 0eaa9fabed done   |
 Writing manifest to image destination
 sha256:0eaa9fabedcb155bc41fb416018da080b909aad62ee77530e65516ec5bf5fc49
 ```
-7.3.2. Verify the `podman images`
+7.3.2. Verify the `podman` local storage.
 ```
 $ podman images
 ```
@@ -739,7 +739,7 @@ registry.apps.example.com/myorg/myrepo/versioned-hello    v1.0     0eaa9fabedcb 
 ```
 podman push registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
 ```
-7.3.3. This method changes the sha digest
+7.3.3. **NOTE:** This method changes the sha digest
 
 7.4. Or copy the tarball straight into the registry.
 ```
@@ -784,10 +784,8 @@ spec:
             - containerPort: 8080
               protocol: TCP
 ```
+```
 oc apply -f deploy-versioned-hello.yaml
-```
-```
-```
 ```
 7.9. The Service file: `svc-versioned-hello.yaml`
 ```
