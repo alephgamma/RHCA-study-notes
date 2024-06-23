@@ -739,7 +739,7 @@ registry.apps.example.com/myorg/myrepo/versioned-hello    v1.0     0eaa9fabedcb 
 ```
 podman push registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
 ```
-7.3.3. **NOTE:** This method changes the sha digest
+**NOTE:** This method changes the sha digest
 
 7.4. Or copy the tarball straight into the registry.
 ```
