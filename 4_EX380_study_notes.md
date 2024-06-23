@@ -714,7 +714,9 @@ $ skopeo inspect docker-archive:versioned-hello-v1_0.xyz
 ```
 Yes
 
-7.3. Import the image into the `podman images` *local storage AKA magic bucket*...
+7.3. The round-about way ...
+
+7.3.1. Import the image into the `podman images` *local storage AKA magic bucket*...
 ```
 podman import versioned-hello-v1_0.xyz registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
 ```
@@ -725,7 +727,7 @@ Copying config 0eaa9fabed done   |
 Writing manifest to image destination
 sha256:0eaa9fabedcb155bc41fb416018da080b909aad62ee77530e65516ec5bf5fc49
 ```
-7.4. Verify the `podman images`
+7.3.2. Verify the `podman images`
 ```
 $ podman images
 ```
@@ -733,9 +735,22 @@ $ podman images
 REPOSITORY                                                TAG      IMAGE ID      CREATED            SIZE
 registry.apps.example.com/myorg/myrepo/versioned-hello    v1.0     0eaa9fabedcb  About an hour ago  99.5 MB
 ```
-7.5. Push the image up to the registry.
+7.3.3. Push the image up to the registry.
 ```
 podman push registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
+```
+7.3.3. This method changes the sha digest
+
+7.4. Copy the tarball straight into the registry.
+```
+skopeo copy tarball:versioned-hello.xyz docker://registry.ocp4.example.com:8443/developer/versioned-hello:latest
+```
+```
+Getting image source signatures
+Copying blob 64007b54c609 done
+Copying config 14b41e3a61 done
+Writing manifest to image destination
+Storing signatures
 ```
 7.6. Login as: `developer`
 ```
