@@ -379,7 +379,7 @@ oc delete -f 50-worker-motd.yaml
 rm temp.bu 50-worker-motd.bu 50-master-motd.bu
 rm 50-worker-motd.yaml 50-master-motd.yaml
 ```
-## 5. Ansible and OpenShift
+## 5. `ansible` and OpenShift
 
 ### Task
 Use ansible with OpenShift modules to deploy an application and verify webpages are available
