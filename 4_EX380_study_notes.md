@@ -712,11 +712,11 @@ $ skopeo inspect docker-archive:versioned-hello-v1_0.xyz
     ...
 }
 ```
-Yes
+**Yes**
 
-7.3. The round-about way ...
+7.3. The round-about way to get the image on the registry.
 
-7.3.1. Import the image into the `podman images` *local storage AKA magic bucket*...
+7.3.1. Import the image into the `podman images` *local storage AKA magic bucket*
 ```
 podman import versioned-hello-v1_0.xyz registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
 ```
@@ -741,7 +741,7 @@ podman push registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
 ```
 7.3.3. This method changes the sha digest
 
-7.4. Copy the tarball straight into the registry.
+7.4. Or copy the tarball straight into the registry.
 ```
 skopeo copy tarball:versioned-hello.xyz docker://registry.ocp4.example.com:8443/developer/versioned-hello:latest
 ```
