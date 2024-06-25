@@ -9,10 +9,14 @@ echo 'set expandtab tabstop=2 shiftwidth=2' >> ~/.vimrc
 ```
 :set paste
 ```
-* The missing manual: `man limitrange`
+* The missing manual, AKA: `man limitrange`
 ```
 oc explain limitrange --recursive
 oc explain limitrange.spec.limits
+```
+* Create the events alias
+```
+alias ov='oc get events --sort-by .lastTimestamp'
 ```
 ## 1. Deploy a simple webserver and get resource data using json
 
