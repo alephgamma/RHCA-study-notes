@@ -843,8 +843,8 @@ podman rmi registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
 Configure Operators and Cluster-Logging
 
 ### Requirements
-* Red Hat OpenShift Logging
 * OpenShift Elastic Operator
+* * Red Hat OpenShift Logging
 
 ### Task breakdown
 8.1. What do we have?
