@@ -844,7 +844,7 @@ Configure Operators and Cluster-Logging
 
 ### Requirements
 * OpenShift Elastic Operator
-* * Red Hat OpenShift Logging
+* Red Hat OpenShift Logging
 
 ### Task breakdown
 8.1. What do we have?
