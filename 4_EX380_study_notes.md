@@ -770,17 +770,17 @@ oc new-project versioned-hello
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-deployment
+  name: hello
   namespace: versioned-hello
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: versioned-hello
+      app: hello
   template:
     metadata:
       labels:
-        app: versioned-hello
+        app: hello
     spec:
       containers:
         - image: registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
@@ -812,11 +812,11 @@ spec:
 ```
 oc expose service/hello-service --hostname hello-k8s-application.deploy-k8s.apps-crc.testing
 ```
-7.11. Import the image into the local OpenShift Registry as **latest**
+7.11. Import the image into the local OpenShift Registry as `latest`
 ```
 oc import-image registry.apps.example.com/myorg/myrepo/versioned-hello:latest --confirm --scheduled
 ```
-7.12. Set the trigger on the image
+7.12. Set the `trigger` on the image
 ```
 oc set triggers deployment.apps/hello --from-image versioned-hello:latest -c hello
 ```
