@@ -14,7 +14,7 @@ echo 'set expandtab tabstop=2 shiftwidth=2' >> ~/.vimrc
 oc explain limitrange --recursive
 oc explain limitrange.spec.limits
 ```
-* Create the events alias
+* Create an `events` alias
 ```
 alias ov='oc get events --sort-by .lastTimestamp'
 ```
