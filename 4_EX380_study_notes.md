@@ -366,6 +366,8 @@ NAME             GENERATEDBYCONTROLLER   IGNITIONVERSION   AGE
 4.6. Check on the nodes
 ```
 for i in `oc get nodes -o name`; do oc debug $i -- chroot /host cat /etc/motd; done
+```
+```
 Temporary namespace openshift-debug-kmvsl is created for debugging node...
 Starting pod/ip-10-0-105-140us-east-2computeinternal-debug-l75h2 ...
 To use host binaries, run `chroot /host`
