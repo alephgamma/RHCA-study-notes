@@ -767,7 +767,7 @@ oc login -u developer -p developer
 ```
 oc new-project versioned-hello
 ```
-7.8. The Deployment file emphasizes *availability over consistency*: `deploy-versioned-hello.yaml`
+7.8. The Deployment file emphasizes *availability over consistency*: `deployment-versioned-hello.yaml`
 ```
 apiVersion: apps/v1
 kind: Deployment
@@ -794,12 +794,12 @@ spec:
 ```
 oc apply -f deploy-versioned-hello.yaml
 ```
-7.9. The Service file: `svc-versioned-hello.yaml`
+7.9. The Service file: `service-versioned-hello.yaml`
 ```
 apiVersion: v1
 kind: Service
 metadata:
-  name: hello-service
+  name: hello
   namespace: versioned-hello
 spec:
   ports:
@@ -812,7 +812,7 @@ spec:
 ```
 7.10. Make the exposed route: `hello-k8s-application.deploy-k8s.apps-crc.testing`
 ```
-oc expose service/hello-service --hostname hello-k8s-application.deploy-k8s.apps-crc.testing
+oc expose service/hello --hostname hello-k8s-application.deploy-k8s.apps-crc.testing
 ```
 7.11. Import the image into the local OpenShift Registry as `latest`
 ```
