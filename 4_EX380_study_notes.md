@@ -816,11 +816,11 @@ oc expose service/hello --hostname hello-k8s-application.deploy-k8s.apps-crc.tes
 ```
 7.11. Import the image into the local OpenShift Registry as `latest` by creating an image-stream. NOTE implicit `NAMESAPCE`
 
-7.11.1. v 4.10 - *Only ?*
+7.11.1. For OCP v 4.10 - *Only ?*
 ```
 oc import-image myregistry.apps.example.com/myorg/myrepo/versioned-hello:latest --confirm --scheduled
 ```
-7.11.1. v 4.10 - *Greater?*
+7.11.1. For OCP v 4.10 - *Greater?*
 ```
 oc import-image mystreamname --from myregistry.apps.example.com/myorg/myrepo/versioned-hello:latest --confirm --scheduled
 ```
