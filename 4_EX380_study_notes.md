@@ -814,9 +814,9 @@ spec:
 ```
 oc expose service/hello --hostname hello-k8s-application.deploy-k8s.apps-crc.testing
 ```
-7.11. Import the image into the local OpenShift Registry as `latest`
+7.11. Import the image into the local OpenShift Registry as `latest` by creating an image-stream
 ```
-oc import-image registry.apps.example.com/myorg/myrepo/versioned-hello:latest --confirm --scheduled
+oc import-image mystream --from myregistry.apps.example.com/myorg/myrepo/versioned-hello:latest --confirm --scheduled
 ```
 7.12. Set the `trigger` on the image
 ```
