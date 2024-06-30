@@ -750,7 +750,7 @@ podman push registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
 
 7.4. Or copy the tarball straight into the registry.
 ```
-skopeo copy tarball:versioned-hello.xyz docker://registry.ocp4.example.com:8443/developer/versioned-hello:latest
+skopeo copy docker-archive:versioned-hello.xyz docker://registry.ocp4.example.com:8443/developer/versioned-hello:latest
 ```
 ```
 Getting image source signatures
