@@ -695,6 +695,7 @@ Given an image and Custom Resource Definition files from Kubernetes, make the im
 ### Requirements
 * Put the tar file `versioned-hello.xyz` in a registry with the tag: `latest`
 * The registry: `registry.apps.example.com`
+* Set a trigger on updates to the registry
 
 ### Task breakdown
 7.1. What do we have?
@@ -896,14 +897,88 @@ Fix me
 ```
 ## 10. Storage
 ### Task
-Fix me
+Configure an `nginx` to use a `pvc`
 
 ### Requirements
-* X
+* Configure a Persistent Volume `pv` named: `pv-share'
+* Configure a Persistent Volume Claim `pvc` named: `pvc-share'
+* Configure nginx to use `pvc-share`
+* In the `deployment.yaml`
+  * Use the image: `registry.ocp4.example.com/training/versioned-hello:v1.0`
+  * Use 2 replicas
+
+### Assumptions
+* An NFS server is serving out a share
+* The NFS StrageCalass is configured correctly nfs-storage 
 
 ### Task breakdown
-10.1. What do we have?
+10.1. Create thae NAMESPACE / project
 ```
+oc new-project nginx-storage
+```
+10.2. Create the `pv`
+```
+Clicketty click the GUI
+```
+10.3. Create thae `pvc`
+```
+Clicketty click the GUI
+```
+10.4. Edit the `deployment.yaml` and apply
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  namespace: nginx-storage
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - image: registry.ocp4.example.com/training/versioned-hello:v1.0
+        name: nginx
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /var/www/html/data
+          name: data
+      restartPolicy: Always
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: pvc-share
+```
+```
+oc apply -f deployment.yaml
+```
+10.5. Edit the `service.yaml` and apply
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  namespace: nginx-storage
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    app: nginx
+```
+```
+oc apply -f service.yaml
+```
+10.6. Export
+```
+oc export service/nginx
 ```
 10.x Clean up script(s) to restore the previous settings
 ```
