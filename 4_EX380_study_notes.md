@@ -900,8 +900,8 @@ Fix me
 Configure `nginx` to use a `pvc`
 
 ### Requirements
-* Configure a Persistent Volume `pv` named: `pv-share'
-* Configure a Persistent Volume Claim `pvc` named: `pvc-share'
+* Configure a Persistent Volume `pv` named: `pv-share`
+* Configure a Persistent Volume Claim `pvc` named: `pvc-share`
 * Configure nginx to use `pvc-share`
 * In the `deployment.yaml`
   * Use the image: `registry.ocp4.example.com/training/versioned-hello:v1.0`
