@@ -589,7 +589,7 @@ oc create serviceaccount python-sa -n cronjob-project
 ```
 6.3. Get a template... There isn't any clear documentation on the process to (manually) create the `command` section. Not every human being - even those above average - can parse `args` like BASH into "human-readable" YAML.
 ```
-oc create cronjob --dry-run=client -o yaml python-date-test --image docker.io/library/python --schedule='*/2 * * * *' -- python -c 'import platform;print(platform.python_version())'
+oc create cronjob --dry-run=client -o=yaml --image=docker.io/library/python --schedule='*/2 * * * *' python-date-test -- python -c 'import platform;print(platform.python_version())' 
 ```
 ```
 apiVersion: batch/v1
@@ -621,7 +621,7 @@ status: {}
 ```
 6.4. Edit `cronjob-python.yaml` Clean-up needed?
 ```
-oc create cronjob --dry-run=client -o yaml python-date-test --image docker.io/library/python --schedule='*/2 * * * *' -- python -c 'import platform;print(platform.python_version())' > cronjob-python.yaml
+oc create cronjob --dry-run=client -o=yaml --image=docker.io/library/python --schedule='*/2 * * * *' python-date-test -- python -c 'import platform;print(platform.python_version())' > cronjob-python.yaml
 vi cronjob-python.yaml
 ```
 ```
@@ -743,7 +743,7 @@ oc new-project versioned-hello
 ```
 7.6. Create the Deployment file name: `deployment-versioned-hello.yaml`. NOTE: The Deployment file emphasizes *availability over consistency*.
 ```
-oc create deployment --dry-run=client -o yaml --image registry.ocp4.example.com:8443/developer/versioned-hello:latest --port 8080 versioned-hello
+oc create deployment --dry-run=client -o=yaml --image=registry.ocp4.example.com:8443/developer/versioned-hello:latest --port=8080 versioned-hello
 ```
 ```
 apiVersion: apps/v1
@@ -774,11 +774,11 @@ spec:
 status: {}
 ```
 ```
-oc create deployment --dry-run=client -o yaml --image registry.ocp4.example.com:8443/developer/versioned-hello:latest --port 8080 versioned-hello | oc apply -f -
+oc create deployment --dry-run=client -o=yaml --image=registry.ocp4.example.com:8443/developer/versioned-hello:latest --port=8080 versioned-hello | oc apply -f -
 ```
 7.7. Create the Service file: `service-versioned-hello.yaml`. 
 ```
-oc create service clusterip --tcp=8080:8080 --dry-run=client -o=yaml 'versioned-hello'
+oc create service clusterip --dry-run=client -o=yaml --tcp=8080:8080 versioned-hello
 ```
 ```
 apiVersion: v1
