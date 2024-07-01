@@ -897,7 +897,7 @@ Fix me
 ```
 ## 10. Storage
 ### Task
-Configure an `nginx` to use a `pvc`
+Configure `nginx` to use a `pvc`
 
 ### Requirements
 * Configure a Persistent Volume `pv` named: `pv-share'
@@ -912,7 +912,7 @@ Configure an `nginx` to use a `pvc`
 * The NFS StrageCalass is configured correctly nfs-storage 
 
 ### Task breakdown
-10.1. Create thae NAMESPACE / project
+10.1. Create the NAMESPACE / project
 ```
 oc new-project nginx-storage
 ```
@@ -920,7 +920,7 @@ oc new-project nginx-storage
 ```
 Clicketty click the GUI
 ```
-10.3. Create thae `pvc`
+10.3. Create the `pvc`
 ```
 Clicketty click the GUI
 ```
