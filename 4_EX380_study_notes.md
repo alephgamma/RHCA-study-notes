@@ -851,13 +851,12 @@ skopeo copy docker-archive:versioned-hello-v1-1.xyz docker://registry.ocp4.examp
 ```
 oc import-image registry.ocp4.example.com:8443/developer/versioned-hello:latest --confirm --scheduled
 ```
-7.13. Verify that the page responds or updated
+7.14. Verify that the page responds or updated
 ```
 curl hello.apps.ocp4.example.com
 ```
 ```
 Hi! v1.1
-```
 ```
 7.x Clean up script(s) to restore the previous settings
 ```
