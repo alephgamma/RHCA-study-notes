@@ -41,7 +41,7 @@ To login as an admin, run 'oc login -u kubeadmin -p THIS-VARIES https://api.crc.
 1.2. Create the project and deploy the app
 ```
 oc new-project nginx-versioned-project
-oc new-app --name nginx quay.io/redhattraining/hello-world-nginx:v1.0
+oc new-app --name nginx quay.io/redtraining/hello-world-nginx:v1.0
 ```
 1.3. Get the resource
 ```
