@@ -695,7 +695,7 @@ Given an image and Custom Resource Definition files from Kubernetes, make the im
 ### Requirements
 * Put the tar file `versioned-hello.xyz` in a registry with the tag: `latest`
 * The registry: `registry.apps.example.com`
-* Set a trigger on updates to the registry
+* Set a `trigger` on updates to the registry tag
 
 ### Task breakdown
 7.1. What do we have?
