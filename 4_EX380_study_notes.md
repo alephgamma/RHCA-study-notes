@@ -742,7 +742,7 @@ oc new-project versioned-hello
 ```
 7.6. Create the Deployment file name: `deployment-versioned-hello.yaml`. NOTE: The Deployment file emphasizes *availability over consistency*.
 ```
-oc create deployment --dry-run=client -o yaml --image registry.ocp4.example.com:8443/redhattraining/versioned-hello:latest --port 8080 versioned-hello
+oc create deployment --dry-run=client -o yaml --image registry.ocp4.example.com:8443/developer/versioned-hello:latest --port 8080 versioned-hello
 ```
 ```
 apiVersion: apps/v1
@@ -765,7 +765,7 @@ spec:
         app: versioned-hello
     spec:
       containers:
-      - image: registry.ocp4.example.com:8443/redhattraining/versioned-hello:latest
+      - image: registry.ocp4.example.com:8443/developer/versioned-hello:latest
         name: versioned-hello
         ports:
         - containerPort: 8080
@@ -773,7 +773,7 @@ spec:
 status: {}
 ```
 ```
-oc create deployment --dry-run=client -o yaml --image registry.ocp4.example.com:8443/redhattraining/versioned-hello:latest --port 8080 versioned-hello | oc apply -f -
+oc create deployment --dry-run=client -o yaml --image registry.ocp4.example.com:8443/developer/versioned-hello:latest --port 8080 versioned-hello | oc apply -f -
 ```
 7.7. Create the Service file: `service-versioned-hello.yaml`. 
 ```
@@ -831,29 +831,33 @@ Hi!
 ```
 7.10. Import the image into the local OpenShift Registry as `latest` by creating an image-stream. NOTE implicit `NAMESAPCE`
 
-7.11.1. For OCP v 4.10 - *Only ?*
+7.10.1. For OCP v 4.10 - *Only ?*
 ```
 oc import-image registry.ocp4.example.com:8443/developer/versioned-hello:latest --confirm --scheduled
 ```
-7.11.2. For OCP v 4.10 - *Greater?*
+7.10.2. For OCP v 4.10 - *Greater ?*
 ```
 oc import-image mystreamname --from registry.ocp4.example.com:8443/developer/versioned-hello:latest --confirm --scheduled
 ```
-7.12. Set the `trigger` on the image in the Deployment
+7.11. Set the `trigger` on the image in the Deployment
 ```
 oc set triggers deployment.apps/hello --from-image versioned-hello:latest -c versioned-hello
 ```
-7.13. Verify that the page responds
+7.12. Update the image for OCP v 4.10
 ```
-curl hello.apps-crc.testing
+skopeo copy docker-archive:versioned-hello-v1-1.xyz docker://registry.ocp4.example.com:8443/developer/versioned-hello:latest
+```
+7.13. Force an update
+```
+oc import-image registry.ocp4.example.com:8443/developer/versioned-hello:latest --confirm --scheduled
+```
+7.13. Verify that the page responds or updated
+```
+curl hello.apps.ocp4.example.com
 ```
 ```
-Hi!
+Hi! v1.1
 ```
-7.12. Verify the image updates
-```
-Update the image
-curl the image
 ```
 7.x Clean up script(s) to restore the previous settings
 ```
