@@ -693,7 +693,7 @@ oc delete project cronjob-project
 Given an image and Custom Resource Definition files from Kubernetes, make the image available on Quay and run the Deployment on OpenShift.
 
 ### Requirements
-* Put the tar file `versioned-hello.xyz` in a registry
+* Put the tar file `versioned-hello.xyz` in a registry with the tag: `latest`
 * The registry: `registry.apps.example.com`
 
 ### Task breakdown
@@ -721,34 +721,7 @@ $ skopeo inspect docker-archive:versioned-hello-v1_0.xyz
 ```
 **Yes**
 
-7.3. The round-about way to get the image on the registry.
-
-7.3.1. Import the image into the `podman images` *local storage AKA magic bucket*
-```
-podman import versioned-hello-v1_0.xyz registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
-```
-```
-Getting image source signatures
-Copying blob a3dfd502eae4 done   | 
-Copying config 0eaa9fabed done   | 
-Writing manifest to image destination
-sha256:0eaa9fabedcb155bc41fb416018da080b909aad62ee77530e65516ec5bf5fc49
-```
-7.3.2. Verify the `podman` local storage.
-```
-$ podman images
-```
-```
-REPOSITORY                                                TAG      IMAGE ID      CREATED            SIZE
-registry.apps.example.com/myorg/myrepo/versioned-hello    v1.0     0eaa9fabedcb  About an hour ago  99.5 MB
-```
-7.3.3. Push the image up to the registry.
-```
-podman push registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
-```
-**NOTE:** This method changes the sha digest
-
-7.4. Or copy the tarball straight into the registry.
+7.3. Copy the tarball straight into the registry.
 ```
 skopeo copy docker-archive:versioned-hello.xyz docker://registry.ocp4.example.com:8443/developer/versioned-hello:latest
 ```
@@ -759,42 +732,74 @@ Copying config 14b41e3a61 done
 Writing manifest to image destination
 Storing signatures
 ```
-7.6. Login as: `developer`
+7.4. Login as: `developer`
 ```
 oc login -u developer -p developer
 ```
-7.7. Create the Project. *What is the NAMESPACE?*
+7.5. Create the Project. *What is the NAMESPACE?*
 ```
 oc new-project versioned-hello
 ```
-7.8. The Deployment file emphasizes *availability over consistency*: `deployment-versioned-hello.yaml`
+7.6. Create the Deployment file name: `deployment-versioned-hello.yaml`. NOTE: The Deployment file emphasizes *availability over consistency*.
+```
+oc create deployment --dry-run=client -o yaml --image registry.ocp4.example.com:8443/redhattraining/versioned-hello:latest --port 8080 versioned-hello
+```
 ```
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello
-  namespace: versioned-hello
+  creationTimestamp: null
+  labels:
+    app: versioned-hello
+  name: versioned-hello
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hello
+      app: versioned-hello
+  strategy: {}
   template:
     metadata:
+      creationTimestamp: null
       labels:
-        app: hello
+        app: versioned-hello
     spec:
       containers:
-        - image: registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
-          name: hello
-          ports:
-            - containerPort: 8080
-              protocol: TCP
+      - image: registry.ocp4.example.com:8443/redhattraining/versioned-hello:latest
+        name: versioned-hello
+        ports:
+        - containerPort: 8080
+        resources: {}
+status: {}
 ```
 ```
-oc apply -f deploy-versioned-hello.yaml
+oc create deployment --dry-run=client -o yaml --image registry.ocp4.example.com:8443/redhattraining/versioned-hello:latest --port 8080 versioned-hello | oc apply -f -
 ```
-7.9. The Service file: `service-versioned-hello.yaml`
+7.7. Create the Service file: `service-versioned-hello.yaml`. 
+```
+oc create service clusterip --tcp=8080:8080 --dry-run=client -o=yaml 'versioned-hello'
+```
+```
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: versioned-hello
+  name: versioned-hello
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: versioned-hello
+  type: ClusterIP
+status:
+  loadBalancer: {}
+```
+Cleanup
 ```
 apiVersion: v1
 kind: Service
@@ -810,23 +815,33 @@ spec:
     app: hello
   type: ClusterIP
 ```
-7.10. Make the exposed route: `hello-k8s-application.deploy-k8s.apps-crc.testing`
 ```
-oc expose service/hello --hostname hello-k8s-application.deploy-k8s.apps-crc.testing
+oc apply -f service-versioned-hello.yaml
 ```
-7.11. Import the image into the local OpenShift Registry as `latest` by creating an image-stream. NOTE implicit `NAMESAPCE`
+7.8. Make the exposed route: `hello.apps.ocp4.example.com`
+```
+oc expose service/hello --hostname hello.apps.ocp4.example.com
+```
+7.9. Verify that the page responds
+```
+curl hello.apps.ocp4.example.com
+```
+```
+Hi!
+```
+7.10. Import the image into the local OpenShift Registry as `latest` by creating an image-stream. NOTE implicit `NAMESAPCE`
 
 7.11.1. For OCP v 4.10 - *Only ?*
 ```
-oc import-image myregistry.apps.example.com/myorg/myrepo/versioned-hello:latest --confirm --scheduled
+oc import-image registry.ocp4.example.com:8443/developer/versioned-hello:latest --confirm --scheduled
 ```
 7.11.2. For OCP v 4.10 - *Greater?*
 ```
-oc import-image mystreamname --from myregistry.apps.example.com/myorg/myrepo/versioned-hello:latest --confirm --scheduled
+oc import-image mystreamname --from registry.ocp4.example.com:8443/developer/versioned-hello:latest --confirm --scheduled
 ```
 7.12. Set the `trigger` on the image in the Deployment
 ```
-oc set triggers deployment.apps/hello --from-image versioned-hello:latest -c hello
+oc set triggers deployment.apps/hello --from-image versioned-hello:latest -c versioned-hello
 ```
 7.13. Verify that the page responds
 ```
