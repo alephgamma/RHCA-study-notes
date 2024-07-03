@@ -695,9 +695,17 @@ Given an image and Custom Resource Definition files from Kubernetes, make the im
 ### Requirements
 * Put the tar file `versioned-hello.xyz` in a registry with the tag: `latest`
 * The registry: `registry.apps.example.com`
+* Create the Deployment abd Service Resources from the Resource file provided
+  * `deployment-versioned-hello.yaml`
+  * `service-versioned-hello.yaml`
+* Expose the route as: `hello.apps.ocp4.example.com`
 * Set a `trigger` on updates to the registry tag
 
 ### Task breakdown
+7.0. Create the Project
+```
+oc new-project versioned-heelo
+```
 7.1. What do we have?
 ```
 $ ls -1
@@ -859,10 +867,10 @@ curl hello.apps.ocp4.example.com
 ```
 Hi! v1.1
 ```
-7.15 Clean up script(s) to restore the previous settings
+7.15. Clean up script(s) to restore the previous settings
 ```
 skopeo delete docker://registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
-podman rmi registry.apps..example.com/myorg/myrepo/versioned-hello:v1.0
+oc delete project versioned-heelo
 ```
 ## 8. Operators and Cluster Logging
 
@@ -902,33 +910,41 @@ Configure `nginx` to use a `pvc`
 ### Requirements
 * Configure a Persistent Volume `pv` named: `pv-share`
 * Configure a Persistent Volume Claim `pvc` named: `pvc-share`
-* Configure nginx to use `pvc-share`
-* In the `deployment.yaml`
+* Configure `nginx` to use `pvc-share`
+* Create a Deploymeny Resource: `deployment.yaml`
   * Use the image: `registry.ocp4.example.com/training/versioned-hello:v1.0`
   * Use 2 replicas
 
 ### Assumptions
 * An NFS server is serving out a share
-* The NFS StrageCalass is configured correctly nfs-storage 
+  * NFS Server: 172.0.0.1
+  * Path: /data
+* The NFS StorageClass is configured correctly as `nfs-storage` 
 
 ### Task breakdown
-10.1. Create the NAMESPACE / project
+10.1. Create the Project (NAMESPACE)
 ```
 oc new-project nginx-storage
 ```
 10.2. Create the `pv`
 ```
-Clicketty click the GUI
+Clicketty click the GUI and ensure the corrent nfs path and server IP.
 ```
 10.3. Create the `pvc`
 ```
-Clicketty click the GUI
+Clicketty click the GUI and ensure the volumeName is `pv-share` and storageClassName is `nfs-storage`
 ```
-10.4. Edit the `deployment.yaml` and apply
+10.4. Create and apply a Deployment file named: `deployment.yaml` 
+```
+oc create deployment --dry-run=client -o=yaml --image=quay.io/redhattraining/versioned-hello:v1.0 --port=8080 --replicas=2 --namespace=nginx-storage nginx > deployment.yaml
+```
 ```
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx
   name: nginx
   namespace: nginx-storage
 spec:
@@ -936,42 +952,48 @@ spec:
   selector:
     matchLabels:
       app: nginx
+  strategy: {}
   template:
     metadata:
+      creationTimestamp: null
       labels:
         app: nginx
     spec:
       containers:
-      - image: registry.ocp4.example.com/training/versioned-hello:v1.0
-        name: nginx
+      - image: quay.io/redhattraining/versioned-hello:v1.0
+        name: versioned-hello
         ports:
         - containerPort: 8080
-          protocol: TCP
-        volumeMounts:
-        - mountPath: /var/www/html/data
-          name: data
-      restartPolicy: Always
-      volumes:
-      - name: data
-        persistentVolumeClaim:
-          claimName: pvc-share
+        resources: {}
+status: {}
 ```
 ```
 oc apply -f deployment.yaml
 ```
-10.5. Edit the `service.yaml` and apply
+10.5. Create and apply a Service file named: `service.yaml`
+```
+oc create service clusterip --dry-run=client -o=yaml --tcp=8080:8080 nginx
+```
 ```
 apiVersion: v1
 kind: Service
 metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx
   name: nginx
   namespace: nginx-storage
 spec:
   ports:
-    - port: 8080
-      targetPort: 8080
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
   selector:
     app: nginx
+  type: ClusterIP
+status:
+  loadBalancer: {}
 ```
 ```
 oc apply -f service.yaml
