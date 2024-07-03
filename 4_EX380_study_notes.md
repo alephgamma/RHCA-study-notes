@@ -690,7 +690,7 @@ oc delete project cronjob-project
 ## 7. Run a Kubernetes Application on OpenShift
 
 ### Task
-Given an image and Custom Resource Definition files from Kubernetes, make the image available on Quay and run the Deployment on OpenShift.
+Given an image and Custom Resource Definition files from Kubernetes, make the image available on Quay and run the Deployment on OpenShift and manage changes to the application.
 
 ### Requirements
 * Put the tar file `versioned-hello.xyz` in a registry with the tag: `latest`
@@ -848,7 +848,7 @@ oc set triggers deployment.apps/hello --from-image versioned-hello:latest -c ver
 ```
 skopeo copy docker-archive:versioned-hello-v1-1.xyz docker://registry.ocp4.example.com:8443/developer/versioned-hello:latest
 ```
-7.13. Force an update
+7.13. Force an update since it may time due to the periodic checks - (15 min?)
 ```
 oc import-image registry.ocp4.example.com:8443/developer/versioned-hello:latest --confirm --scheduled
 ```
@@ -859,10 +859,10 @@ curl hello.apps.ocp4.example.com
 ```
 Hi! v1.1
 ```
-7.x Clean up script(s) to restore the previous settings
+7.15 Clean up script(s) to restore the previous settings
 ```
 skopeo delete docker://registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
-podman rmi registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
+podman rmi registry.apps..example.com/myorg/myrepo/versioned-hello:v1.0
 ```
 ## 8. Operators and Cluster Logging
 
