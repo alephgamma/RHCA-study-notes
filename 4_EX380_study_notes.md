@@ -972,7 +972,7 @@ oc apply -f deployment.yaml
 ```
 10.5. Create and apply a Service file named: `service.yaml`
 ```
-oc create service clusterip --dry-run=client -o=yaml --tcp=8080:8080 nginx
+oc create service clusterip --dry-run=client -o=yaml --tcp=8080:8080 nginx > service.yaml
 ```
 ```
 apiVersion: v1
