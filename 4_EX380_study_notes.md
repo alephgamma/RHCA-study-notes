@@ -41,7 +41,7 @@ To login as an admin, run 'oc login -u kubeadmin -p THIS-VARIES https://api.crc.
 1.2. Create the project and deploy the app
 ```
 oc new-project nginx-versioned-project
-oc new-app --name nginx quay.io/redtraining/hello-world-nginx:v1.0
+oc new-app --name nginx --image quay.io/redhattraining/hello-world-nginx:v1.0
 ```
 1.3. Get the resource
 ```
@@ -1019,7 +1019,7 @@ NAME                               DESIRED   CURRENT   READY   AGE
 replicaset.apps/nginx-7fb9878c6f   0         0         0       72m
 replicaset.apps/nginx-b79b8bd4c    2         2         2       58m
 ```
-10.7. Export
+10.7. Expose the application
 ```
 oc export service/nginx
 ```
