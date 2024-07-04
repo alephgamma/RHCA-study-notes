@@ -1051,15 +1051,101 @@ replicaset.apps/nginx-b79b8bd4c    2         2         2       73m
 ```
 10.10. Add persistent storage
 ```
-oc set volume deployment.apps/nginx --add --type pvc --mount-path /var/www/html/data --name data --claim-class cnfs-storage --claim-mode rwm --claim-size 1Gi --claim-name nginx-pvc
+oc set volume deployment.apps/nginx --add --type pvc --mount-path /var/www/html/data --name data --claim-class nfs-storage --claim-mode rwm --claim-size 1Gi --claim-name nginx-pvc
 ```
-10.10. 
-
-10.x Clean up script(s) to restore the previous settings
 ```
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "7"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"creationTimestamp":null,"labels":{"app":"nginx"},"name":"nginx","namespace":"nginx-storage"},"spec":{"replicas":2,"selector":{"matchLabels":{"app":"nginx"}},"strategy":{},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"nginx"}},"spec":{"containers":[{"image":"quay.io/redhattraining/versioned-hello:v1.0","name":"versioned-hello","ports":[{"containerPort":8080}],"resources":{}}]}}},"status":{}}
+  creationTimestamp: "2024-07-03T21:28:13Z"
+  generation: 7
+  labels:
+    app: nginx
+  name: nginx
+  namespace: nginx-storage
+  resourceVersion: "65393"
+  uid: b7cb5525-9853-4df0-8a7e-6626c7065459
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: nginx
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - image: quay.io/redhattraining/versioned-hello:v1.0
+        imagePullPolicy: IfNotPresent
+        name: hello-nginx
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/www/html/data
+          name: data
+        - mountPath: /var/www/html/data
+          name: data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: nginx-pvc
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2024-07-04T01:32:27Z"
+    lastUpdateTime: "2024-07-04T01:37:27Z"
+    message: ReplicaSet "nginx-64b5559cfc" is progressing.
+    reason: ReplicaSetUpdated
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2024-07-04T01:37:29Z"
+    lastUpdateTime: "2024-07-04T01:37:29Z"
+    message: Deployment does not have minimum availability.
+    reason: MinimumReplicasUnavailable
+    status: "False"
+    type: Available
+  observedGeneration: 7
+  readyReplicas: 1
+  replicas: 3
+  unavailableReplicas: 2
+  updatedReplicas: 2
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  name: nginx-pvc
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: nfs-storage
+status: {}
 ```
-
 10.x Clean up script(s) to restore the previous settings
 ```
 ```
