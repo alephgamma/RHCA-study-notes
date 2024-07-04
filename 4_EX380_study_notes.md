@@ -808,7 +808,7 @@ spec:
 status:
   loadBalancer: {}
 ```
-Cleanup
+Cleanup - Needed?
 ```
 apiVersion: v1
 kind: Service
@@ -827,7 +827,7 @@ spec:
 ```
 oc apply -f service-versioned-hello.yaml
 ```
-7.8. Make the exposed route: `hello.apps.ocp4.example.com`
+7.8. Exposed the route: `hello.apps.ocp4.example.com`
 ```
 oc expose service/hello --hostname hello.apps.ocp4.example.com
 ```
@@ -912,6 +912,8 @@ Configure `nginx` to use a `pvc`
   * accessMode: ReadWriteMany
   * size: 30Gi
 * Configure a Persistent Volume Claim `pvc` named: `pvc-share`
+  * accessMode: ReadWriteMany
+  * size: 1Gi
 * Configure `nginx` to use `pvc-share`
 * Create a Deploymeny Resource: `deployment.yaml`
   * Use the image: `registry.ocp4.example.com/training/versioned-hello:v1.0`
@@ -1000,37 +1002,11 @@ status:
 ```
 oc apply -f service.yaml
 ```
-10.6. What is the deployment name
-```
-oc get all
-```
-```
-NAME                        READY   STATUS    RESTARTS   AGE
-pod/nginx-b79b8bd4c-frs5c   1/1     Running   0          58m
-pod/nginx-b79b8bd4c-jr72q   1/1     Running   0          58m
-
-NAME            TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
-service/nginx   ClusterIP   10.217.5.115   <none>        8080/TCP   71m
-
-NAME                    READY   UP-TO-DATE   AVAILABLE   AGE
-deployment.apps/nginx   2/2     2            2           72m
-
-NAME                               DESIRED   CURRENT   READY   AGE
-replicaset.apps/nginx-7fb9878c6f   0         0         0       72m
-replicaset.apps/nginx-b79b8bd4c    2         2         2       58m
-```
-10.7. Expose the application
+10.6. Expose the application
 ```
 oc export service/nginx
 ```
-10.8. Verify
-```
-curl nginx-nginx-storage.apps-crc.testing
-```
-```
-Hi!
-```
-10.9. What do we have?
+10.7. What do we have?
 ```
 oc get all
 ```
@@ -1049,7 +1025,14 @@ NAME                               DESIRED   CURRENT   READY   AGE
 replicaset.apps/nginx-7fb9878c6f   0         0         0       86m
 replicaset.apps/nginx-b79b8bd4c    2         2         2       73m
 ```
-10.10. Add persistent storage
+10.8. Verify
+```
+curl nginx-nginx-storage.apps-crc.testing
+```
+```
+Hi!
+```
+10.9. Add persistent storage to the Deployment
 ```
 oc set volume deployment.apps/nginx --add --type pvc --mount-path /var/www/html/data --name data --claim-class nfs-storage --claim-mode rwm --claim-size 1Gi --claim-name nginx-pvc
 ```
