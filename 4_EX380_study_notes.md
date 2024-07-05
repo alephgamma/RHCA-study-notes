@@ -875,11 +875,11 @@ oc delete project versioned-heelo
 ## 8. Operators and Cluster Logging
 
 ### Task
-Configure Operators and Cluster-Logging
+Configure Cluster-Logging Operators and Kibana Index Patterns
 
 ### Requirements
-* OpenShift Elastic Operator
 * Red Hat OpenShift Logging
+* OpenShift Elastic Operator
 
 ### Task breakdown
 8.1. What do we have?
