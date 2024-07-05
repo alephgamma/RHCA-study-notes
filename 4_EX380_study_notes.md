@@ -918,7 +918,7 @@ spec:
         maxAge: 7d
     elasticsearch:
       nodeSelector:
-        node-role.kubernetes.io/woker: ''
+        node-role.kubernetes.io/worker: ''
       nodeCount: 3
       storage:
         storageClassName: nfs-storage
