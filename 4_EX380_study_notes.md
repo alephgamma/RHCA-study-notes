@@ -992,13 +992,47 @@ Configure `nginx` to use a `pvc`
 ```
 oc new-project nginx-storage
 ```
-10.2. Create the `pv`
+10.2. Create the `pv` using `pvc.yaml`
+For the `nfs-storage` storage class: Clicketty click the GUI and ensure the corrent nfs path and server IP are used.
+* `server: 172.0.0.1`
+* `path: /export`
+
+For CRC, the storage class is `crc-csi-hostpath-provisioner`
 ```
-Clicketty click the GUI and ensure the corrent nfs path and server IP.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-share
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-storage
+  nfs:
+    path: /export
+    server: 172.0.0.1
 ```
-10.3. Create the `pvc`
 ```
+oc apply -f pv.yaml
+```
+10.3. Create the `pvc` using `pvc.yaml`
 Clicketty click the GUI and ensure the volumeName is `pv-share` and storageClassName is `nfs-storage`
+```
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-landing
+  namespace: nginx-storage
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeName: pv-landing
+  storageClassName: nfs-storage
+  resources:
+    requests:
+      storage: 1Gi
 ```
 10.4. Create and apply a Deployment file named: `deployment.yaml` 
 ```
@@ -1066,7 +1100,7 @@ oc apply -f service.yaml
 ```
 10.6. Expose the application
 ```
-oc export service/nginx
+oc expose service/nginx
 ```
 10.7. What do we have?
 ```
@@ -1086,6 +1120,10 @@ deployment.apps/nginx   2/2     2            2           86m
 NAME                               DESIRED   CURRENT   READY   AGE
 replicaset.apps/nginx-7fb9878c6f   0         0         0       86m
 replicaset.apps/nginx-b79b8bd4c    2         2         2       73m
+
+NAME                             HOST/PORT                                   PATH   SERVICES   PORT        TERMINATION   WILDCARD
+route.route.openshift.io/nginx   nginx-nginx-storage.apps.ocp4.example.com          nginx      8080-8080                 None
+
 ```
 10.8. Verify
 ```
