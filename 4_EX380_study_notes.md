@@ -884,6 +884,19 @@ Configure Operators and Cluster-Logging
 ### Task breakdown
 8.1. What do we have?
 ```
+oc get nodes
+```
+```
+NAME       STATUS   ROLES    AGE    VERSION
+master01   Ready    master   652d   v1.23.5+3afdacb
+master02   Ready    master   652d   v1.23.5+3afdacb
+master03   Ready    master   652d   v1.23.5+3afdacb
+worker01   Ready    worker   652d   v1.23.5+3afdacb
+worker02   Ready    worker   652d   v1.23.5+3afdacb
+worker03   Ready    worker   652d   v1.23.5+3afdacb
+worker04   Ready    worker   652d   v1.23.5+3afdacb
+worker05   Ready    worker   652d   v1.23.5+3afdacb
+worker06   Ready    worker   652d   v1.23.5+3afdacb
 ```
 8.2. Configure me
 ```
@@ -933,8 +946,6 @@ spec:
     logs:
       type: fluentd
       fluentd: {}
-```
-```
 ```
 8.x Clean up script(s) to restore the previous settings
 ```
