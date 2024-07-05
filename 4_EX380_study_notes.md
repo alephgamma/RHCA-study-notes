@@ -1117,7 +1117,7 @@ Hi!
 ```
 10.8. Add persistent storage to the Deployment
 ```
-oc set volume deployment.apps/nginx --add --type pvc --mount-path /var/www/html/data --name data --claim-class nfs-storage --claim-mode rwm --claim-size 1Gi --claim-name nginx-pvc
+oc set volume deployment.apps/nginx --add --type pvc --mount-path /var/www/html/data --name data --claim-class nfs-storage --claim-mode rwm --claim-size 1Gi --claim-name pvc-share
 ```
 ```
 apiVersion: apps/v1
