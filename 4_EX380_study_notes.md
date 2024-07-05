@@ -885,6 +885,57 @@ Configure Operators and Cluster-Logging
 8.1. What do we have?
 ```
 ```
+8.2. Configure me
+```
+apiVersion:  logging.openshift.io/v1
+kind: ClusterLogging
+metadata:
+  name: instance
+  namespace: openshift-logging
+spec:
+  managementState: Managed
+  logStore:
+    type: elasticsearch
+    retentionPolicy:
+      application:
+        maxAge: 1d
+      infra:
+        maxAge: 7d
+      audit:
+        maxAge: 7d
+    elasticsearch:
+      nodeSelector:
+        node-role.kubernetes.io/woker: ''
+      nodeCount: 3
+      storage:
+        storageClassName: nfs-storage
+        size: 20G
+      redundancyPolicy: MultipleRedundancy
+      resources:
+        limits:
+          memory: 8Gi
+        requests:
+          cpu: 1
+          memory: 8Gi
+      proxy:
+        resources:
+          limits:
+            memory: 256Mi
+          requests:
+            memory: 256Mi
+  visualization:
+    type: kibana
+    kibana:
+      nodeSelector:
+        node-role.kubernetes.io/worker: ''
+      replicas: 1
+  collection:
+    logs:
+      type: fluentd
+      fluentd: {}
+```
+```
+```
 8.x Clean up script(s) to restore the previous settings
 ```
 ```
