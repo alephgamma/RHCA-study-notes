@@ -530,7 +530,7 @@ spec:
         state: present
         src: Deployment.yaml
 
-    - name: The Service resource- oc apply -f Service.yaml
+    - name: The Service resource - oc apply -f Service.yaml
       redhat.openshift.k8s:
         state: present
         src: Service.yaml
