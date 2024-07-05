@@ -992,8 +992,8 @@ Configure `nginx` to use a `pvc`
 ```
 oc new-project nginx-storage
 ```
-10.2. Create the `pv` using `pvc.yaml`
-For the `nfs-storage` storage class: Clicketty click the GUI and ensure the corrent nfs path and server IP are used.
+10.2. Create the `pv` using `pv.yaml`
+For the `nfs-storage` storage class clicketty click the GUI and ensure the correct server IP and nfs path are used.
 * `server: 172.0.0.1`
 * `path: /export`
 
@@ -1017,24 +1017,7 @@ spec:
 ```
 oc apply -f pv.yaml
 ```
-10.3. Create the `pvc` using `pvc.yaml`
-Clicketty click the GUI and ensure the volumeName is `pv-share` and storageClassName is `nfs-storage`
-```
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: pvc-landing
-  namespace: nginx-storage
-spec:
-  accessModes:
-    - ReadWriteMany
-  volumeName: pv-landing
-  storageClassName: nfs-storage
-  resources:
-    requests:
-      storage: 1Gi
-```
-10.4. Create and apply a Deployment file named: `deployment.yaml` 
+10.3. Create and apply a Deployment file named: `deployment.yaml` 
 ```
 oc create deployment --dry-run=client -o=yaml --image=quay.io/redhattraining/versioned-hello:v1.0 --port=8080 --replicas=2 --namespace=nginx-storage nginx > deployment.yaml
 ```
@@ -1070,7 +1053,7 @@ status: {}
 ```
 oc apply -f deployment.yaml
 ```
-10.5. Create and apply a Service file named: `service.yaml`
+10.4. Create and apply a Service file named: `service.yaml`
 ```
 oc create service clusterip --dry-run=client -o=yaml --tcp=8080:8080 nginx > service.yaml
 ```
@@ -1098,11 +1081,11 @@ status:
 ```
 oc apply -f service.yaml
 ```
-10.6. Expose the application
+10.5. Expose the application
 ```
 oc expose service/nginx
 ```
-10.7. What do we have?
+10.6. What do we have?
 ```
 oc get all
 ```
@@ -1125,14 +1108,14 @@ NAME                             HOST/PORT                                   PAT
 route.route.openshift.io/nginx   nginx-nginx-storage.apps.ocp4.example.com          nginx      8080-8080                 None
 
 ```
-10.8. Verify
+10.7. Verify
 ```
 curl nginx-nginx-storage.apps-crc.testing
 ```
 ```
 Hi!
 ```
-10.9. Add persistent storage to the Deployment
+10.8. Add persistent storage to the Deployment
 ```
 oc set volume deployment.apps/nginx --add --type pvc --mount-path /var/www/html/data --name data --claim-class nfs-storage --claim-mode rwm --claim-size 1Gi --claim-name nginx-pvc
 ```
