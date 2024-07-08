@@ -38,7 +38,7 @@ crc console --credentials
 To login as a regular user, run 'oc login -u developer -p developer https://api.crc.testing:6443'.
 To login as an admin, run 'oc login -u kubeadmin -p THIS-VARIES https://api.crc.testing:6443'
 ```
-1.2. Create the project and deploy the app
+1.2. Create the Project (NAMESPACE) and deploy the app
 ```
 oc new-project nginx-versioned-project
 oc new-app --name nginx --image quay.io/redhattraining/hello-world-nginx:v1.0
@@ -267,7 +267,7 @@ Use a `machineconfig` or `mc` to set one Message of the Day (motd) on all `worke
   and set the `mc` name to `50-master-motd` 
 
 ### Task breakdown
-4.1. Get the template and modify it. From where ... the docs:  `post-install-machine-configuration`
+4.1. Get the template and modify it ... the docs:  `post-install-machine-configuration`
 ```
 vi 50-worker-motd.bu
 ```
@@ -289,7 +289,7 @@ storage:
         # Official worker Banner #
         ##########################
 ```
-4.2. Create the `machineconfig` or `mc` file for the worker nodes.
+4.2. Create the `machineconfig` or `mc` file for the worker nodes
 ```
 butane 50-worker-motd.bu -o 50-worker-motd.yaml
 ```
@@ -569,25 +569,25 @@ oc delete project hello-world
 ## 6. `cronjob` Automation
 
 ### Task
-Configure a cronjob to run a python one-liner.
+Configure a cronjob to run a python one-liner
 
 ### Requirements
 * Create a new-project: `cronjob-project`
-* Use the service account: `python-sa`
+* Use the ServiceAccount: `python-sa`
 * Use the image: `docker.io/library/python` to get the current timestamp using the one-liner: `python -c 'import datetime as d; print(d.datetime.now())'`
 * Run every 2nd minute
 * History rotating-log limit: `5`
 
 ### Task breakdown
-6.1. Create the project to make the namespace.
+6.1. Create the Project (NAMESPACE)
 ```
 oc new-project cronjob-project
 ```
-6.2. Create the service account.
+6.2. Create the ServiceAccount
 ```
 oc create serviceaccount python-sa -n cronjob-project
 ```
-6.3. Get a template... There isn't any clear documentation on the process to (manually) create the `command` section. Not every human being - even those above average - can parse `args` like BASH into "human-readable" YAML.
+6.3. Get a template... There isn't any clear documentation on the process to (manually) create the `command` section. Not every human being - even those above average - can parse `args` like BASH into "human-readable" YAML
 ```
 oc create cronjob --dry-run=client -o=yaml --image=docker.io/library/python --schedule='*/2 * * * *' python-date-test -- python -c 'import platform;print(platform.python_version())' 
 ```
@@ -619,7 +619,7 @@ spec:
   schedule: '*/2 * * * *'
 status: {}
 ```
-6.4. Edit `cronjob-python.yaml` Clean-up needed?
+6.4. Edit `cronjob-python.yaml`
 ```
 oc create cronjob --dry-run=client -o=yaml --image=docker.io/library/python --schedule='*/2 * * * *' python-date-test -- python -c 'import platform;print(platform.python_version())' > cronjob-python.yaml
 vi cronjob-python.yaml
@@ -690,7 +690,7 @@ oc delete project cronjob-project
 ## 7. Run a Kubernetes Application on OpenShift
 
 ### Task
-Given an image and Custom Resource Definition files from Kubernetes, make the image available on Quay and run the Deployment on OpenShift and manage changes to the application.
+Given an image and Custom Resource Definition files from Kubernetes, make the image available on Quay and run the Deployment on OpenShift and manage changes to the application
 
 ### Requirements
 * Put the tar file `versioned-hello.xyz` in a registry with the tag: `latest`
@@ -702,9 +702,9 @@ Given an image and Custom Resource Definition files from Kubernetes, make the im
 * Set a `trigger` on updates to the registry tag
 
 ### Task breakdown
-7.0. Create the Project
+7.0. Create the Project (NAMESPACE)
 ```
-oc new-project versioned-heelo
+oc new-project versioned-hello
 ```
 7.1. What do we have?
 ```
@@ -730,7 +730,7 @@ $ skopeo inspect docker-archive:versioned-hello-v1_0.xyz
 ```
 **Yes**
 
-7.3. Copy the tarball straight into the registry.
+7.3. Copy the tarball straight into the registry
 ```
 skopeo copy docker-archive:versioned-hello.xyz docker://registry.ocp4.example.com:8443/developer/versioned-hello:latest
 ```
@@ -749,7 +749,7 @@ oc login -u developer -p developer
 ```
 oc new-project versioned-hello
 ```
-7.6. Create the Deployment file name: `deployment-versioned-hello.yaml`. NOTE: The Deployment file emphasizes *availability over consistency*.
+7.6. Create the Deployment file name: `deployment-versioned-hello.yaml`. NOTE: The Deployment file emphasizes *availability over consistency*
 ```
 oc create deployment --dry-run=client -o=yaml --image=registry.ocp4.example.com:8443/developer/versioned-hello:latest --port=8080 versioned-hello
 ```
@@ -784,7 +784,7 @@ status: {}
 ```
 oc create deployment --dry-run=client -o=yaml --image=registry.ocp4.example.com:8443/developer/versioned-hello:latest --port=8080 versioned-hello | oc apply -f -
 ```
-7.7. Create the Service file: `service-versioned-hello.yaml`. 
+7.7. Create the Service file: `service-versioned-hello.yaml`
 ```
 oc create service clusterip --dry-run=client -o=yaml --tcp=8080:8080 versioned-hello
 ```
@@ -808,26 +808,10 @@ spec:
 status:
   loadBalancer: {}
 ```
-Cleanup - Needed?
-```
-apiVersion: v1
-kind: Service
-metadata:
-  name: hello
-  namespace: versioned-hello
-spec:
-  ports:
-    - port: 8080
-      protocol: TCP
-      targetPort: 8080
-  selector:
-    app: hello
-  type: ClusterIP
-```
 ```
 oc apply -f service-versioned-hello.yaml
 ```
-7.8. Exposed the route: `hello.apps.ocp4.example.com`
+7.8. Expose the route: `hello.apps.ocp4.example.com`
 ```
 oc expose service/hello --hostname hello.apps.ocp4.example.com
 ```
@@ -838,7 +822,7 @@ curl hello.apps.ocp4.example.com
 ```
 Hi!
 ```
-7.10. Import the image into the local OpenShift Registry as `latest` by creating an image-stream. NOTE implicit `NAMESAPCE`
+7.10. Import the image into the local OpenShift Registry as `latest` by creating an image-stream. NOTE implicit `NAMESPACE`
 
 7.10.1. For OCP v 4.10 - *Only ?*
 ```
@@ -870,7 +854,7 @@ Hi! v1.1
 7.15. Clean up script(s) to restore the previous settings
 ```
 skopeo delete docker://registry.apps.example.com/myorg/myrepo/versioned-hello:v1.0
-oc delete project versioned-heelo
+oc delete project versioned-hello
 ```
 ## 8. Operators and Cluster Logging
 
@@ -900,7 +884,7 @@ worker06   Ready    worker   652d   v1.23.5+3afdacb
 ```
 8.2. Configure me
 ```
-apiVersion:  logging.openshift.io/v1
+apiVersion: logging.openshift.io/v1
 kind: ClusterLogging
 metadata:
   name: instance
@@ -960,6 +944,21 @@ Fix me
 
 ### Task breakdown
 9.1. What do we have?
+```
+oc get nodes --show-labels
+```
+9.2. What hostname to use
+```
+oc get node -o wide
+```
+9.2. Label a node
+```
+```
+9.2. Make the node schedulable
+```
+```
+```
+9.2. Edit the deployment with a `nodeSelector`
 ```
 ```
 9.x Clean up script(s) to restore the previous settings
