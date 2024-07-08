@@ -957,7 +957,6 @@ oc get node -o wide
 9.2. Make the node schedulable
 ```
 ```
-```
 9.2. Edit the deployment with a `nodeSelector`
 ```
 ```
