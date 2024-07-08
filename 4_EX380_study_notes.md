@@ -960,9 +960,6 @@ oc get node -o wide
 9.2. Edit the deployment with a `nodeSelector`
 ```
 ```
-9.x Clean up script(s) to restore the previous settings
-```
-```
 ## 10. Storage
 ### Task
 Configure `nginx` to use a `pvc`
