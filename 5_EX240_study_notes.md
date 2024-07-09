@@ -1,8 +1,7 @@
 # EX240 v. 2.11 - Summary
 
 ## Prerequisites
-```
-```
+
 ## 1. Do this and do that
 ### Purpose (Optional)
 This is why we are doing this
