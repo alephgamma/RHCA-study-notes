@@ -27,7 +27,7 @@ This is what we will do
 1.x Get the resource
 ```
 ```
-## 2. Do this and do that
+## 2. Do that and do this
 ### Purpose (Optional)
 This is why we are doing this
 
